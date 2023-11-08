@@ -44,7 +44,7 @@ export const Navbar = () => {
 	);
 
 	return (
-		<nav className="bg-white sticky border-gray-200 py-2.5 dark:bg-gray-900">
+		<nav className="bg-white sticky top-0 border-gray-200 py-2.5 dark:bg-gray-900">
   <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
     <a href="#" className="flex items-center">
       <img
@@ -62,14 +62,13 @@ export const Navbar = () => {
       </div>
      <AiOutlineSearch fontSize={20} />
 	 
-	<div>
-	
-		<AiOutlineShoppingCart className="relative" color="#0770fc" fontSize={25}/>
-		<span className="inline-flex items-center justify-center gap-1 rounded-full bg-[#d43b49] px-1.5 text-sm text-white absolute top-2 right-[71px]">
-  		7
-		<span className="sr-only"> new emails</span>
-		</span>
-	</div>
+        <div style={{ position: 'relative' }}>
+      <AiOutlineShoppingCart className="relative" color="#0770fc" fontSize={25}/>
+      <span className="inline-flex items-center justify-center gap-1 rounded-full bg-[#d43b49] px-1.5 text-sm text-white absolute top-[-12px] right-[-6px]">
+        7
+        <span className="sr-only">new emails</span>
+      </span>
+    </div>
 	 
       <button
         data-collapse-toggle="mobile-menu-2"

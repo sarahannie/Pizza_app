@@ -7,7 +7,7 @@ import {Button} from "@nextui-org/button";
 const Footer = () => {
   return (
     <div className="bg-[#fffaee]">
-  <div className="max-w-screen-xl  px-4 sm:px-6  text-gray-800 flex flex-wrap justify-center flex justify-between">
+  <div className="max-w-screen-xl   px-4 sm:px-6  text-gray-800 flex flex-wrap justify-center flex justify-between">
     <div className="p-5">
       <div className="text-xl uppercase text-gray-700 font-medium">Information</div>
       <a className="my-3 block text-gray-400" href="/#">
@@ -82,7 +82,7 @@ const Footer = () => {
       </a>
       <a className="my-3 block text-gray-400" href="/#">
       <Button size="md" className="bg-[#f9b202] text-white shadow-lg">
-        Signup
+        SIGNUP
       </Button> 
       </a>
     </div>
