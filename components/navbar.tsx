@@ -10,6 +10,7 @@ import clsx from "clsx";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { SearchIcon } from "@/components/icons";
 import { useState } from "react";
+import Image from "next/image";
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -40,18 +41,20 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white sticky top-0 border-gray-200 py-2.5 dark:bg-gray-900">
+    <nav className="bg-white sticky  top-0 border-gray-200 py-2.5 dark:bg-gray-900 z-20">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
         <a href="#" className="flex items-center">
-          <img
-            src="https://www.svgrepo.com/show/499962/music.svg"
-            className="h-6 mr-3 sm:h-9"
+          <Image
+            src="/image/logo.png"
+            width={50}
+            height={40}
+            className=" ml-5 "
             alt="Landwind Logo"
           />
-          <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-            Landwind
-          </span>
+         
         </a>
+
+       
         <div className="flex items-center gap-4  lg:order-2">
           <div className="hidden mt-2 mr-1 sm:inline-block">
             <span />
