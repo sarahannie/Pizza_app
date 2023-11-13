@@ -1,4 +1,6 @@
 import "@/styles/globals.css";
+import 'node_modules/@glidejs/glide/dist/css/glide.core.min.css'
+import 'node_modules/@glidejs/glide/dist/css/glide.theme.min.css'
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";

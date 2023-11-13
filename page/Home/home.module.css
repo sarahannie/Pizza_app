@@ -125,6 +125,73 @@
   position: relative;
  }
 
+ .containOnion{
+  display: flex;
+  justify-content: space-between;
+ }
+
+ .headerOnion{
+  display: flex;
+  gap: 5rem;
+ }
+
+ .onionHeader{
+  margin-top: 40px;
+ }
+
+ .onionH2{
+   font-size: 2rem;
+   font-weight: bold;
+ }
+
+ .onionH4{
+  font-size: 1.2rem;
+  color: #777777;
+ }
+
+ .onionImg{
+ margin-right: 20%;
+ margin-top: 7%;
+ }
+
+ .caroHeader{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 5rem;
+  margin-left: 5rem;
+ }
+
+ .headH3{
+  font-size: 3rem;
+  font-weight: bold;
+ }
+
+ .cheese{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1rem; 
+  padding-right: 1rem;
+ }
+
+ .contCheese{
+  border: 1px solid #fbb200;
+  border-radius: 8px;
+
+ }
+
+ .cheeseImg{
+  display: flex;
+  justify-content: center;
+ }
+
+ .cheeseH2{
+  font-size: 2rem;
+  font-weight: bold;
+ }
+ .cheeseH4{
+  font-size: 2rem;
+  font-weight: bold;
+ }
 
 
 
