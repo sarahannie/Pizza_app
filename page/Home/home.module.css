@@ -9,7 +9,8 @@
 .btn{
   background-color: #fbb200;
   color: white;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 1rem;
   padding: 10px;
   padding-right: 20px;
   padding-left: 20px;
@@ -110,7 +111,7 @@
  .box {
   width: 50rem;
   height: 50rem;
-  background-color: yellow;
+  background-color: #fbb200;
   border-radius: 50% 50% 0 50%;
   position: absolute;
   top: 0;
@@ -159,24 +160,25 @@
   justify-content: space-between;
   margin-right: 5rem;
   margin-left: 5rem;
+  margin-bottom: 5%;
  }
 
  .headH3{
   font-size: 3rem;
-  font-weight: bold;
+  font-weight: 600;
  }
 
  .cheese{
   display: flex;
   justify-content: space-between;
-  padding-left: 1rem; 
-  padding-right: 1rem;
+  
+  
  }
 
  .contCheese{
-  border: 1px solid #fbb200;
-  border-radius: 8px;
-
+  border: 1px solid #eae6e2;
+  border-radius: 25px;
+  padding: 25px;
  }
 
  .cheeseImg{
@@ -185,13 +187,55 @@
  }
 
  .cheeseH2{
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 600;
  }
  .cheeseH4{
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f22e3e;
  }
+
+ .cheeseText{
+  color:#777777;
+  padding-top: 15px;
+ }
+
+ .cheeseImgMain{
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+  margin: auto;
+ }
+ 
+ .cheeseImgMain:hover{
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+ }
+
+
+ .cheeseheadH2{
+    font-size: 1.5rem;
+    padding-top: 5%;
+    margin-left: 5rem;
+    color: #f22e3e;
+    font-weight: 600;
+    position: relative;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+ }
+ .cheeseheadH2::before{
+  content: "";
+  position: absolute;
+  top: 83%;
+  left: calc(100% + 15px);
+  background: #f22e3e;
+  width: 90px;
+  height: 2px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+ }
+
 
 
 

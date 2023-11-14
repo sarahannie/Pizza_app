@@ -5,6 +5,7 @@ import style from './home.module.css';
 import { Button } from '@nextui-org/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { FaStar } from "react-icons/fa";
 
 const Home = () => {
 
@@ -93,11 +94,12 @@ const Home = () => {
             </div>
           </section>
         <section>
-          <h2>Popular Dish ---</h2>
           
-          <>
+          
+       <>
       {/*<!-- Component: Carousel with controls outside --> */}
       <div className="glide-04 relative w-full">
+      <h2 className={style.cheeseheadH2}>Popular Dishes </h2>
          {/*    <!-- Controls --> */}
          <div className={style.caroHeader}>
           <div>
@@ -108,7 +110,7 @@ const Home = () => {
           data-glide-el="controls"
         >
           <button
-            className="inline-flex h-8 w-64 items-center justify-center rounded-full border border-slate-700 bg-[#fbb200] text-slate-700 transition duration-300 hover:border-slate-900 hover:text-slate-900 focus-visible:outline-none lg:h-12 lg:w-12"
+            className="inline-flex p-5 h-8 w-64 items-center justify-center rounded-full border border-slate-700 bg-[#fbb200] text-slate-700 transition duration-300 hover:border-slate-900 hover:text-slate-900 focus-visible:outline-none lg:h-12 lg:w-12"
             data-glide-dir="<"
             aria-label="prev slide"
           >
@@ -118,7 +120,7 @@ const Home = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="h-10 w-10 "
+              className="h-5 w-5 text-white"
             >
               <title>prev slide</title>
               <path
@@ -129,7 +131,7 @@ const Home = () => {
             </svg>
           </button>
           <button
-            className="inline-flex h-8 w-32 items-center justify-center rounded-full border border-slate-700 bg-white/20 text-slate-700 transition duration-300 hover:border-slate-900 hover:text-slate-900 focus-visible:outline-none lg:h-12 lg:w-12"
+            className="inline-flex p-5 h-8 w-32 bg-[#fbb200] items-center justify-center rounded-full border border-slate-700  text-slate-700 transition duration-300 hover:border-[#fbb200] hover:text-slate-900 focus-visible:outline-none lg:h-32 lg:w-32"
             data-glide-dir=">"
             aria-label="next slide"
           >
@@ -139,7 +141,7 @@ const Home = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="h-10 w-10"
+              className="h-5 w-5 text-white"
             >
               <title>next slide</title>
               <path
@@ -158,14 +160,20 @@ const Home = () => {
             <li>
               <div className={style.contCheese}>
               <div className={style.cheeseImg}>
-                <Image src="/image/pizza-3.png" width={300} height={100} className="" alt="Vacter Image"/>
+                <Image src="/image/pizza-3.png" width={300} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
               </div>
               <div className={style.cheese}>
                 <h2 className={style.cheeseH2}>Cheese Pizza</h2>
                 <h2 className={style.cheeseH4}>$45.00</h2>
               </div>
-              <div></div>
-              <div>All the Lorem Ipsum generators on to Internet tend to repeat </div>
+              <div className="flex m-l-5 gap-1">
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+              </div>
+              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
               <div>
               <Link href="#" className={style.btn} >
             <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
@@ -176,37 +184,114 @@ const Home = () => {
 
             </li>
             <li>
-              <img
-                src="https://Tailwindmix.b-cdn.net/carousel/carousel-image-02.jpg"
-                className="m-auto max-h-full w-full max-w-full"
-              />
+            <div className={style.contCheese}>
+              <div className={style.cheeseImg}>
+                <Image src="/image/pizza-1.png" width={300} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
+              </div>
+              <div className={style.cheese}>
+                <h2 className={style.cheeseH2}>Shrime Pizza</h2>
+                <h2 className={style.cheeseH4}>$35.00</h2>
+              </div>
+              <div className="flex m-l-5 gap-1">
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+              </div>
+              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
+              <div>
+              <Link href="#" className={style.btn} >
+            <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
+              ORDER NOW
+            </Link>
+              </div>
+              </div>
             </li>
             <li>
-              <img
-                src="https://Tailwindmix.b-cdn.net/carousel/carousel-image-03.jpg"
-                className="m-auto max-h-full w-full max-w-full"
-              />
+            <div className={style.contCheese}>
+              <div className={style.cheeseImg}>
+                <Image src="/image/pizza-2.png" width={300} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
+              </div>
+              <div className={style.cheese}>
+                <h2 className={style.cheeseH2}>Seafood Pizza</h2>
+                <h2 className={style.cheeseH4}>$65.00</h2>
+              </div>
+              <div className="flex m-l-5 gap-1">
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+              </div>
+              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
+              <div>
+              <Link href="#" className={style.btn} >
+            <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
+              ORDER NOW
+            </Link>
+              </div>
+              </div>
             </li>
             <li>
-              <img
-                src="https://Tailwindmix.b-cdn.net/carousel/carousel-image-04.jpg"
-                className="m-auto max-h-full w-full max-w-full"
-              />
+            <div className={style.contCheese}>
+              <div className={style.cheeseImg}>
+                <Image src="/image/pizza-4.png" width={300} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
+              </div>
+              <div className={style.cheese}>
+                <h2 className={style.cheeseH2}>Cheese Pizza</h2>
+                <h2 className={style.cheeseH4}>$45.00</h2>
+              </div>
+              <div className="flex m-l-5 gap-1">
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+              </div>
+              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
+              <div>
+              <Link href="#" className={style.btn} >
+            <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
+              ORDER NOW
+            </Link>
+              </div>
+              </div>
             </li>
             <li>
-              <img
-                src="https://Tailwindmix.b-cdn.net/carousel/carousel-image-05.jpg"
-                className="m-auto max-h-full w-full max-w-full"
-              />
+            <div className={style.contCheese}>
+              <div className={style.cheeseImg}>
+                <Image src="/image/pizza-2.png" width={300} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
+              </div>
+              <div className={style.cheese}>
+                <h2 className={style.cheeseH2}>Saltcheese Pizza</h2>
+                <h2 className={style.cheeseH4}>$95.00</h2>
+              </div>
+              <div className="flex m-l-5 gap-1">
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+              </div>
+              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
+              <div>
+              <Link href="#" className={style.btn} >
+            <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
+              ORDER NOW
+            </Link>
+              </div>
+              </div>
             </li>
           </ul>
         </div>
        
       </div>
-      
-    </>
-          
-        </section>
+      </>
+
+      <>
+      </>
+      </section>
     </div>
   )
 }
