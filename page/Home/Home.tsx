@@ -6,6 +6,7 @@ import { Button } from '@nextui-org/button';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaAngleRight, FaStar } from "react-icons/fa";
+import Bestsell from '../../components/bestsell';
 
 const Home = () => {
   type GlideOptions = {
@@ -335,6 +336,7 @@ const Home = () => {
         </div>
       </div>
       </>
+      <Bestsell />
       </section>
     </div>
   )
