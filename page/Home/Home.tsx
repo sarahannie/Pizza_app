@@ -5,19 +5,37 @@ import style from './home.module.css';
 import { Button } from '@nextui-org/button';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaStar } from "react-icons/fa";
+import { FaAngleRight, FaStar } from "react-icons/fa";
 
 const Home = () => {
+  type GlideOptions = {
+    type: string;
+    focusAt: string;
+    perView: number;
+    autoplay: number;
+    animationDuration: number;
+    gap: number;
+    classNames: {
+      nav: {
+        active: string;
+      };
+    };
+    breakpoints: {
+      [key: number]: {
+        perView: number;
+      };
+    };
+  };
 
   useEffect(() => {
-    const slider = new Glide(".glide-04", {
+    const slider= new Glide(".glide-04", {
       type: "carousel",
       focusAt: "center",
       perView: 3,
       autoplay: 3500,
       animationDuration: 700,
       gap: 24,
-      classNames: {
+      classes: {
         nav: {
           active: "[&>*]:bg-wuiSlate-700",
         },
@@ -290,6 +308,32 @@ const Home = () => {
       </>
 
       <>
+      <div className={style.ourStory}>
+        <div className="flex">
+          <div >
+            <Image src="/image/black-jamun.png" className={style.ourStoryDot} width={100} height={100} alt="Black Jamun"/>
+          </div>
+          <div>
+            <Image src="/image/our-story.png" alt="Our Story" className={style.ourStoryImg} width={800} height={100} />
+          </div>
+          <div>
+          <Image src="/image/onion.png" className={style.onionStory} width={100} height={100} alt="Vacter Image" />
+          </div>
+          <br/>
+        </div>
+        <div>
+          <h5 className={style.ourStoryH5}>Our Story</h5>
+          <h2  className={style.ourStoryH2}> The Pizzon Has <br/> Excellent Of Quality <br/> Foods</h2>
+          <div className={style.ourStorytext}>
+          Lorem Ipsum is simply dummy text of the printing <br/> and typesetting industry. Lorem Ipsum has been the <br/>industry&apos;s standard dummy text ever since the 1500s, <br/> when an unknown printer took a galley of type and <br/> scrambled it to make a type specimen book. It has <br/> survived not only five centuries, but also the leap into <br/> electronic typesetting, remaining essentially  unchanged.
+          </div>
+          <Link href="#" className={style.btn2} >
+            
+              READ MORE
+              <FaAngleRight className={style.storyStar} />
+            </Link>
+        </div>
+      </div>
       </>
       </section>
     </div>

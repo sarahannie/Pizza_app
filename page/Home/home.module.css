@@ -20,6 +20,20 @@
   gap: 5px;
   margin-top: 20px;
 }
+.btn2{
+  background-color: #fbb200;
+  color: white;
+  font-weight: 500;
+  font-size: 2rem;
+  padding: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+  display: flex;
+  width: fit-content;
+  border-radius: 45px;
+  gap: 5px;
+  margin-top: 20px;
+}
 
 .containText{
   padding-left: 50px;
@@ -237,7 +251,73 @@
  }
 
 
+ .ourStory{
+  display: flex;
+  margin-top: 8%;
+  position: relative;
+ }
 
+ .onionStory{
+  position: absolute;
+  bottom: 0;
+  left: 8%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+ }
+
+ .ourStoryImg{
+  margin-right: 30%;
+ }
+
+ .ourStoryDot{
+  position: absolute;
+  top: 0;
+  left: 4%;
+  transform: translateX(-50%);
+  z-index: 1;
+ }
+
+ .ourStoryH5{
+  font-size: 1.5rem;
+    padding-top: 5%;
+    margin-left: 1rem;
+    color: #f22e3e;
+    font-weight: 600;
+    position: relative;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+ }
+
+ .ourStoryH5::before{
+  content: "";
+  position: absolute;
+  top: 83%;
+  left: calc(100% + 15px);
+  background: #f22e3e;
+  width: 90px;
+  height: 2px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+ }
+
+
+ .ourStoryH2{
+  font-size: 3rem;
+  font-weight: 700;
+ }
+
+ .ourStorytext{
+  font-size: 1.2rem;
+  color: #777777;
+  text-align:justify;
+ }
+
+ .storyStar{
+
+  margin-top: 10px;
+ }
 
 
 
