@@ -108,7 +108,7 @@ export const Navbar = () => {
           className={`items-center justify-between xs:w-1/2 border-l lg:ml-[50px] lg:flex lg:w-0 lg:order-1 ${open ? 'block' : 'hidden'}`}
           id="mobile-menu-2"
         >
-          <ul className=" bg-white flex flex-col xs:absolute top-10 left-0  mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+          <ul className=" bg-white flex flex-col sm:absolute top-10 left-0  mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
           {/* <ul className={`absolute top-0 left-0 z-[-1] h-[28.5rem] lg:w-full justify-center overflow-hidden  overflow-y-auto overscroll-contain  px-8 pb-12 pt-24 font-medium lg:transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0  lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0  lg:pt-0 lg:opacity-100 ${
                 open
                   ? `visible transform translate-r-full transition-transformn duration-300  opacity-1 bg-violent  w-[50%]  `
@@ -117,7 +117,7 @@ export const Navbar = () => {
             <li>
               <a
                 href="#"
-                className={`block py-2  pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0 dark:text-white ${style.list}`}
+                className={`block py-2  pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-[#ec1900] lg:p-0 dark:text-white ${style.list}`}
                 aria-current="page"
               >
                 Home
