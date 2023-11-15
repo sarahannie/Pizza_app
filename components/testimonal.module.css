@@ -1,0 +1,86 @@
+.caroHeader{
+        display: flex;
+        justify-content: space-between;
+        margin-right: 5rem;
+        margin-left: 5rem;
+        margin-bottom: 2%;
+       }
+      
+       .headH3{
+        font-size: 3rem;
+        font-weight: 600;
+       }
+
+.cheese{
+    display: flex;
+    justify-content: center;
+    
+    
+   }
+  
+   .contCheese{
+    border: 1px solid #eae6e2;
+    border-radius: 25px;
+    padding: 25px;
+   }
+  
+   .clientCont{
+    display: flex;
+    justify-content: center;
+   }
+   .clientContImg{
+        border-radius: 50%;
+
+   }
+   .cheeseH2{
+    font-size: 1.5rem;
+    font-weight: 600;
+   }
+   .cheeseH4{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #f22e3e;
+   }
+  
+   .cheeseText{
+    color:#777777;
+    padding-top: 15px;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+   }
+  
+   .cheeseImgMain{
+    -webkit-transition: all 400ms ease;
+    transition: all 400ms ease;
+    margin: auto;
+   }
+   
+   .cheeseImgMain:hover{
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+   }
+  
+  
+   .cheeseheadH2{
+      font-size: 1.5rem;
+      padding-top: 1%;
+      margin-left: 5rem;
+      color: #f22e3e;
+      font-weight: 600;
+      position: relative;
+      width: -webkit-fit-content;
+      width: -moz-fit-content;
+      width: fit-content;
+   }
+   .cheeseheadH2::before{
+    content: "";
+    position: absolute;
+    top: 83%;
+    left: calc(100% + 15px);
+    background: #f22e3e;
+    width: 90px;
+    height: 2px;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+   }
