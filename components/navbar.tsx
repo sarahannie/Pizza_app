@@ -11,6 +11,7 @@ import { ThemeSwitch } from "@/components/theme-switch";
 import { SearchIcon } from "@/components/icons";
 import { useState } from "react";
 import Image from "next/image";
+import style from './navbar.module.css'
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -46,7 +47,7 @@ export const Navbar = () => {
         <a href="#" className="flex items-center">
           <Image
             src="/image/logo.png"
-            width={50}
+            width={70}
             height={40}
             className=" ml-5 "
             alt="Landwind Logo"
@@ -56,13 +57,13 @@ export const Navbar = () => {
 
        
         <div className="flex items-center gap-4  lg:order-2">
-          <div className="hidden mt-2 mr-1 sm:inline-block">
+          <div className="hidden mt-2 mr-2 sm:inline-block">
             <span />
           </div>
-          <AiOutlineSearch fontSize={20} />
+          <AiOutlineSearch fontSize={30} />
 
           <div style={{ position: 'relative' }}>
-            <AiOutlineShoppingCart className="relative" color="#0770fc" fontSize={25} />
+            <AiOutlineShoppingCart className="relative" color="#0770fc" fontSize={30} />
             <span className="inline-flex items-center justify-center gap-1 rounded-full bg-[#d43b49] px-1.5 text-sm text-white absolute top-[-12px] right-[-6px]">
               7
               <span className="sr-only">new items in the cart</span>
@@ -104,7 +105,7 @@ export const Navbar = () => {
           </button>
         </div>
         <div
-          className={`items-center justify-between xs:w-1/2 border-l lg:ml-[250px] lg:flex lg:w-0 lg:order-1 ${open ? 'block' : 'hidden'}`}
+          className={`items-center justify-between xs:w-1/2 border-l lg:ml-[50px] lg:flex lg:w-0 lg:order-1 ${open ? 'block' : 'hidden'}`}
           id="mobile-menu-2"
         >
           <ul className=" bg-white flex flex-col xs:absolute top-10 left-0  mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
@@ -116,7 +117,7 @@ export const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0 dark:text-white"
+                className={`block py-2  pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0 dark:text-white ${style.list}`}
                 aria-current="page"
               >
                 Home
@@ -125,7 +126,7 @@ export const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover-bg-transparent lg:border-0 lg:hover-text-purple-700 lg:p-0 dark:text-gray-400 lg:dark-hover-text-white dark-hover-bg-gray-700 dark-hover-text-white lg:dark-hover-bg-transparent dark-border-gray-700"
+                className={`block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover-bg-transparent lg:border-0 lg:hover-text-purple-700 lg:p-0 dark:text-gray-400 lg:dark-hover-text-white dark-hover-bg-gray-700 dark-hover-text-white lg:dark-hover-bg-transparent dark-border-gray-700 ${style.list}`}
               >
                 Products
               </a>
@@ -133,7 +134,7 @@ export const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover-bg-gray-50 lg:hover-bg-transparent lg:border-0 lg:hover-text-purple-700 lg:p-0 dark:text-gray-400 lg:dark-hover-text-white dark-hover-bg-gray-700 dark-hover-text-white lg:dark-hover-bg-transparent dark-border-gray-700"
+                className={`block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover-bg-transparent lg:border-0 lg:hover-text-purple-700 lg:p-0 dark:text-gray-400 lg:dark-hover-text-white dark-hover-bg-gray-700 dark-hover-text-white lg:dark-hover-bg-transparent dark-border-gray-700 ${style.list}`}
               >
                 Pages
               </a>
@@ -141,7 +142,7 @@ export const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover-bg-gray-50 lg:hover-bg-transparent lg:border-0 lg:hover-text-purple-700 lg:p-0 dark:text-gray-400 lg:dark-hover-text-white dark-hover-bg-gray-700 dark-hover-text-white lg:dark-hover-bg-transparent dark-border-gray-700"
+                className={`block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover-bg-transparent lg:border-0 lg:hover-text-purple-700 lg:p-0 dark:text-gray-400 lg:dark-hover-text-white dark-hover-bg-gray-700 dark-hover-text-white lg:dark-hover-bg-transparent dark-border-gray-700 ${style.list}`}
               >
                 Blog
               </a>
@@ -149,7 +150,7 @@ export const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover-bg-gray-50 lg:hover-bg-transparent lg:border-0 lg:hover-text-purple-700 lg:p-0 dark:text-gray-400 lg:dark-hover-text-white dark-hover-bg-gray-700 dark-hover-text-white lg:dark-hover-bg-transparent dark-border-gray-700"
+                className={`block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover-bg-transparent lg:border-0 lg:hover-text-purple-700 lg:p-0 dark:text-gray-400 lg:dark-hover-text-white dark-hover-bg-gray-700 dark-hover-text-white lg:dark-hover-bg-transparent dark-border-gray-700 ${style.list}`}
               >
                 Contact
               </a>

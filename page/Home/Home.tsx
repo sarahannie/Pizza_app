@@ -5,6 +5,7 @@ import style from './home.module.css';
 import { Button } from '@nextui-org/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { IoCartOutline } from "react-icons/io5";
 import { FaAngleRight } from "react-icons/fa";
 import Testimonal from '../../components/testimonal';
 import Bestsell from '../../components/bestsell';
@@ -24,8 +25,8 @@ const Home = () => {
           <div className={style.containText}>
             <h1 className={style.header}>Handmade, <br/> With an Extra <br/> Pinch of <span className={style.headertxt}>Love</span></h1>
             <h3 className={style.headerH3}>Lorem Ipsum is simply dummy text of the <br/> printing and typesetting industry.</h3>
-            <Link href="#" className={style.btn} >
-            <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
+            <Link href="#" className={style.btn2} >
+            <IoCartOutline className="mt-2"/>
               ORDER NOW
             </Link>
           </div>

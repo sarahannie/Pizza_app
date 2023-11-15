@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import Glide, { Controls, Breakpoints } from '@glidejs/glide/dist/glide.modular.esm'
 import style from './CaroselProduct.module.css';
 import {  FaStar } from "react-icons/fa";
-
+import { IoCartOutline } from "react-icons/io5";
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -115,7 +115,7 @@ const CaroselProduct = () => {
               <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
               <div>
               <Link href="#" className={style.btn} >
-            <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
+             <IoCartOutline fontSize={22} className=""/>
               ORDER NOW
             </Link>
               </div>
@@ -141,7 +141,7 @@ const CaroselProduct = () => {
               <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
               <div>
               <Link href="#" className={style.btn} >
-            <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
+              <IoCartOutline fontSize={22} className=""/>
               ORDER NOW
             </Link>
               </div>
@@ -166,7 +166,7 @@ const CaroselProduct = () => {
               <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
               <div>
               <Link href="#" className={style.btn} >
-            <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
+              <IoCartOutline fontSize={22} className=""/>
               ORDER NOW
             </Link>
               </div>
@@ -191,7 +191,7 @@ const CaroselProduct = () => {
               <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
               <div>
               <Link href="#" className={style.btn} >
-            <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
+              <IoCartOutline fontSize={22} className=""/>
               ORDER NOW
             </Link>
               </div>
@@ -216,7 +216,7 @@ const CaroselProduct = () => {
               <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
               <div>
               <Link href="#" className={style.btn} >
-            <Image src="/image/cart-icon-white.png"width={20} height={20}  alt="Cart Icon" />
+              <IoCartOutline fontSize={22} className=""/>
               ORDER NOW
             </Link>
               </div>
