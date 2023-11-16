@@ -299,11 +299,11 @@
    }
 
    .header{
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     line-height: 3rem;
-    padding-left: 20px;
-    padding-right: 4rem;
+    padding-left: 1px;
+    padding-right: 1rem;
   }
 
   .btn2{
@@ -320,14 +320,15 @@
     border-radius: 45px;
     gap: 5px;
     margin-top: 20px;
-    margin-left: 30px;
+    margin-left: 50px;
+   
   }
 
   .headerH3{
     font-size: 1rem;
     padding-top: 10px;
-    padding-right: 4rem ;
-    padding-left: 1.5rem;
+    padding-right: 2rem ;
+    padding-left: 0rem;
     color:#777777;
   }
  
@@ -346,6 +347,11 @@
    .icon{
     margin-top: 4px;
    }
+
+   .containText{
+   margin-top: 1rem;
+   }
+ 
    
 
 
