@@ -1,4 +1,5 @@
 .bodyImg{
+  display: block;
   max-width: 235px;
   position: absolute;
   top: 0;
@@ -12,6 +13,7 @@
   right: 36%;
   transform: translateX(-50%);
   z-index: 1;
+  display: block;
 }
 .btn{
   background-color: #fbb200;
@@ -45,21 +47,28 @@
 .containText{
   padding-left: 50px;
 }
+
 .headerH3{
   font-size: 1.5rem;
   padding-top: 25px;
   color:#777777;
+  padding-right: 25rem;
 }
 
 .header{
     font-size: 4rem;
     font-weight: bold;
     line-height: 5rem;
+    padding-left: 0px;
+    padding-right: 20rem;
 }
 .headertxt{
   color: red;
 }
 
+.icon{
+  margin-top: 8px;
+ }
 
 
 .containImg {
@@ -90,6 +99,7 @@
     right: 0%;
     transform: translateX(-50%);
     z-index: 1;
+  
    }
    .leafImg {
     position: absolute;
@@ -97,6 +107,7 @@
     right: 8%;
     transform: translateX(-50%);
     z-index: 1;
+    display: block;
    }
 
 
@@ -121,6 +132,7 @@
   right: 2%;
   transform: translateX(-50%);
   z-index: 1;
+  display: block;
  }
  
  .box {
@@ -139,6 +151,7 @@
   height: 50rem;
   overflow: hidden;
   position: relative;
+  display: block;
  }
 
  .containOnion{
@@ -246,8 +259,97 @@
 
  
  @media (max-width: 768px) {
-  
- }
+  .bodyImg{
+    max-width: 135px;
+    position: absolute;
+    top: 0;
+    left: 25%;
+    right: 0;
+    z-index: 20;  
+  }
+  .containImg {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .contImg {
+    display: none;
+   }
+
+   .bannerImgBottom {
+    display: none;
+  }
+  .onionStory1{
+    display: none;
+  }
+
+  .leafImg {
+    display: none;
+   }
+
+   .bannerImg {
+    position: absolute;
+    top: 16%;
+    right: 0%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 120px;
+   }
+
+   .header{
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 3rem;
+    padding-left: 20px;
+    padding-right: 4rem;
+  }
+
+  .btn2{
+    background-color: #fbb200;
+    text-align: center;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    display: flex;
+    width: fit-content;
+    border-radius: 45px;
+    gap: 5px;
+    margin-top: 20px;
+    margin-left: 30px;
+  }
+
+  .headerH3{
+    font-size: 1rem;
+    padding-top: 10px;
+    padding-right: 4rem ;
+    padding-left: 1.5rem;
+    color:#777777;
+  }
+ 
+  .bannerImg {
+    position:inherit;
+    top: 0%;
+    right: 0%;
+    transform: translateX(18%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 17rem;
+    margin-top: 20px;
+   }
+
+   .icon{
+    margin-top: 4px;
+   }
+   
+
+
+}
 
 
 

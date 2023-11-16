@@ -23,10 +23,10 @@ const Home = () => {
 		</div>
       <section className={style.containImg}>
           <div className={style.containText}>
-            <h1 className={style.header}>Handmade, <br/> With an Extra <br/> Pinch of <span className={style.headertxt}>Love</span></h1>
-            <h3 className={style.headerH3}>Lorem Ipsum is simply dummy text of the <br/> printing and typesetting industry.</h3>
+            <h1 className={style.header}>Handmade,  With an Extra  Pinch of <span className={style.headertxt}>Love</span></h1>
+            <h3 className={style.headerH3}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h3>
             <Link href="#" className={style.btn2} >
-            <IoCartOutline className="mt-2"/>
+            <IoCartOutline className={`  ${style.icon}`}/>
               ORDER NOW
             </Link>
           </div>
