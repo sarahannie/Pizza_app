@@ -10,11 +10,10 @@
     font-size: 3rem;
     font-weight: 600;
    }
-.cheese{
+
+   .cheese{
     display: flex;
     justify-content: space-between;
-    
-    
    }
   
    .contCheese{
@@ -92,4 +91,28 @@
     border-radius: 25px;
     gap: 5px;
     margin-top: 20px;
+  }
+
+
+  @media (max-width: 768px) {
+   .headH3{
+      padding-top: 10px;
+      font-size: 1.5rem;
+      font-weight: 600;
+     }
+
+     .caroHeader{
+      display: flex;
+      justify-content: space-between;
+      margin-right: 1rem;
+      margin-left: 1rem;
+      margin-bottom: 5%;
+     }
+
+     .cheeseheadH2{
+      font-size: 1.5rem;
+      padding-top: 5%;
+      margin-left: 1rem;
+      
+   }
   }

@@ -34,6 +34,7 @@
 .bestsellh2{
     font-size: 3rem;
     font-weight: 700;
+    padding-right: 45rem;
 }
 
 .bestImageContainer{
@@ -44,6 +45,7 @@
     margin-left: 3%;
     margin-right: 3%;
 }
+
 .headH2{
     font-size: 1.5rem;
     font-weight: 600;
@@ -60,5 +62,51 @@
 }
 
 .last{
+
+}
+
+@media (max-width: 768px) {
+    .bestImageContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 5%;
+        gap: 5%;
+        margin-left: 3%;
+        margin-right: 10%;
+    }
+
+    .last{
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .bestsellh2{
+        font-size: 2rem;
+        font-weight: 700;
+        padding-right: 0rem;
+    }
+
+    .bestsellh5{
+        font-size: 1rem;
+        padding-top: 5%;
+        color: #f22e3e;
+        font-weight: 600;
+        position: relative;
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+    .bestsellh5::before{
+        content: "";
+        position: absolute;
+        top: 75%;
+        left: calc(100% + 15px);
+        background: #f22e3e;
+        width: 40px;
+        height: 2px;
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+       }
 
 }

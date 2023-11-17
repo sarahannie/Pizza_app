@@ -44,6 +44,22 @@
   margin-top: 20px;
 }
 
+
+.btn3{
+  background-color: #fbb200;
+  color: white;
+  font-weight: 500;
+  font-size: 2rem;
+  padding: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+  display: flex;
+  width: fit-content;
+  border-radius: 45px;
+  gap: 5px;
+  margin-top: 20px;
+}
+
 .containText{
   padding-left: 50px;
 }
@@ -52,7 +68,7 @@
   font-size: 1.5rem;
   padding-top: 25px;
   color:#777777;
-  padding-right: 25rem;
+  padding-right: 30rem;
 }
 
 .header{
@@ -60,7 +76,7 @@
     font-weight: bold;
     line-height: 5rem;
     padding-left: 0px;
-    padding-right: 20rem;
+    padding-right: 25rem;
 }
 .headertxt{
   color: red;
@@ -171,6 +187,7 @@
  .onionH2{
    font-size: 2rem;
    font-weight: bold;
+   padding-right: 20rem;
  }
 
  .onionH4{
@@ -245,6 +262,7 @@
  .ourStoryH2{
   font-size: 3rem;
   font-weight: 700;
+  
  }
 
  .ourStorytext{
@@ -351,9 +369,96 @@
    .containText{
    margin-top: 1rem;
    }
- 
    
+   .headerOnion{
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 5rem;
+   }
 
+   .onionImg{
+    position: absolute;
+  
+    top: 32%;
+    right: 0%;
+    width: 13%;
+      
+    }
+
+    .containOnion{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+     }
+
+    .onionH2{
+      font-size: 2rem;
+      font-weight: 500;
+      padding-right: 0rem;
+    }
+
+    .ourStory{
+      display: flex;
+      flex-direction: column-reverse;
+      margin-top: 8%;
+      position: relative;
+     }
+
+     
+    .ourStoryH2{
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .ourStorytext{
+      font-size: 1rem;
+      color: #777777;
+      text-align:justify;
+     }
+
+     .btn3{
+      background-color: #fbb200;
+      color: white;
+      font-weight: 500;
+      font-size: 2rem;
+      padding: 10px;
+      padding-right: 30px;
+      padding-left: 30px;
+      display: flex;
+      width: fit-content;
+      border-radius: 45px;
+      gap: 5px;
+      margin-top: 20px;
+      margin-left: 10%;
+      margin-bottom: 20px;
+    }
+
+    .ourStoryImg{
+      margin-right: 20%;
+      width: 50rem;
+     }
+
+     .onionStory{
+      position: absolute;
+      bottom: 0;
+      left: 8%;
+      transform: translateX(-50%);
+      z-index: 1;
+      width: 10%;
+     }
+
+     .ourStoryDot{
+      position: inherit;
+      top: 0;
+      left: 4%;
+      transform: translateX(50%);
+      z-index: 1;
+      width: 5rem;
+     }
+    
+    
+  
 
 }
 

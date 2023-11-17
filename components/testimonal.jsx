@@ -29,8 +29,8 @@ const Testimonal = () => {
          </div>
          
         {/*    <!-- Slides --> */}
-        <div className="overflow-hidden" data-glide-el="track">
-          <ul className="whitespace-no-wrap flex flex-no-wrap  gap-5 [backface-visibility: hidden] [transform-style: preserve-3d] [touch-action: pan-Y] [will-change: transform] relative flex w-full overflow-hidden p-2">
+        <div className={`overflow-hidden" data-glide-el="track ${style.container}`}>
+          <ul className={`whitespace-no-wrap flex flex-no-wrap  gap-5 [backface-visibility: hidden] [transform-style: preserve-3d] [touch-action: pan-Y] [will-change: transform] relative flex w-full overflow-hidden p-2 ${style.container}`}>
             <li>
               <div className={style.contCheese}>
               <div className={style.clientCont}>

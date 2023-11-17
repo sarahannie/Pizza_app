@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <div className="bg-[#fffaee]">
   <div className="max-w-screen-xl   px-4 sm:px-6  text-gray-800 flex flex-wrap justify-center flex justify-between">
-    <div className="p-5">
+    <div className="p-5 px-[50px] lg:px-0 ">
       <div className="text-xl uppercase text-gray-700 font-medium">Information</div>
       <a className="my-3 block text-gray-400" href="/#">
         Home 
@@ -26,7 +26,7 @@ const Footer = () => {
         contact us 
       </a>
     </div>
-    <div className="p-5 px-[50px]">
+    <div className="p-5 px-[50px] ">
       <div className="text-xl uppercase text-gray-700 font-medium">
         TOP ITEMS 
       </div>
