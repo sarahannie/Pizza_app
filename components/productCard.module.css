@@ -1,0 +1,137 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.caroHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 5rem;
+    margin-left: 5rem;
+    margin-bottom: 5%;
+   }
+  
+   .headH3{
+    font-size: 3rem;
+    font-weight: 600;
+   }
+
+   .cheese{
+    display: flex;
+    justify-content: space-between;
+   }
+  
+   .contCheese{
+    border: 1px solid #eae6e2;
+    border-radius: 25px;
+    padding: 25px;
+    width: fit-content;
+    margin-top: 1rem;
+    flex: 0 0 32.33%;
+   }
+  
+   .cheeseImg{
+    display: flex;
+    justify-content: center;
+   }
+  
+   .cheeseH2{
+    font-size: 1.5rem;
+    font-weight: 600;
+   }
+   .cheeseH4{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #f22e3e;
+   }
+  
+   .cheeseText{
+    color:#777777;
+    padding-top: 15px;
+   }
+  
+   .cheeseImgMain{
+    -webkit-transition: all 400ms ease;
+    transition: all 400ms ease;
+   margin: auto;
+   }
+   
+   .cheeseImgMain:hover{
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+   }
+  
+  
+   .cheeseheadH2{
+      font-size: 1.5rem;
+      padding-top: 5%;
+      margin-left: 5rem;
+      color: #f22e3e;
+      font-weight: 600;
+      position: relative;
+      width: -webkit-fit-content;
+      width: -moz-fit-content;
+      width: fit-content;
+   }
+   .cheeseheadH2::before{
+    content: "";
+    position: absolute;
+    top: 83%;
+    left: calc(100% + 15px);
+    background: #f22e3e;
+    width: 90px;
+    height: 2px;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+   }
+
+   .btn{
+    background-color: #fbb200;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    display: flex;
+    width: fit-content;
+    border-radius: 25px;
+    gap: 5px;
+    margin-top: 20px;
+  }
+   .btn:hover{
+    background-color: #d43b49;
+  }
+
+
+  @media (max-width: 768px) {
+   .headH3{
+      padding-top: 10px;
+      font-size: 1.5rem;
+      font-weight: 600;
+     }
+
+     .caroHeader{
+      display: flex;
+      justify-content: space-between;
+      margin-right: 1rem;
+      margin-left: 1rem;
+      margin-bottom: 5%;
+     }
+
+     .cheeseheadH2{
+      font-size: 1.5rem;
+      padding-top: 5%;
+      margin-left: 1rem;
+      
+   }
+
+   .contCheese{
+    border: 1px solid #eae6e2;
+    border-radius: 25px;
+    padding: 25px;
+    width:100%;
+    margin-top: 1rem;
+    flex: 0 0 93.33%;
+   }
+  }
