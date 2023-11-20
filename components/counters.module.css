@@ -1,0 +1,18 @@
+.contain{
+    display: flex;
+    background-color: white;
+    border: 1px solid #eae6e2;
+    border-radius: 2rem;
+    width: fit-content;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    gap: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+}
+
+.icon1{
+    margin-top: 4px;
+    font-size: 1rem;
+}
