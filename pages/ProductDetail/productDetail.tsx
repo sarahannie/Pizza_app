@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image'
 import style from './productDetail.module.css';
-import ProductDC from '../../components/ProductDC';
+
 import {  FaStar } from "react-icons/fa";
 import Counter from '../../components/Counters';
 import { MdFavoriteBorder } from "react-icons/md";
@@ -18,9 +18,7 @@ const ProductDetail = () => {
             <div>
                 <Image src="/image/pizza-1.png" width={600} height={100} alt='Vacter Image' />
             </div>
-            <div className={style.contain}>
-                <ProductDC />
-            </div>
+            
         </div>
         <div>
             <div className={style.header}>Shrimp Pizza</div>
@@ -35,7 +33,7 @@ const ProductDetail = () => {
             </div>
             <div>
                 <h2 className={style.sauceText}> Choose Pizza Size</h2>
-                <div className='flex gap-10'>
+                <div className='flex gap-[52px]'>
                 <div className={style.label}>
                     <Image src='/image/Pizza-icon.png' width={70} height={20} alt='Vacter Image' />
                     <span className={style.small}>Small</span>
