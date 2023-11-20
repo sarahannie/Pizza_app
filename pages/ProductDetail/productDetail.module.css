@@ -1,10 +1,25 @@
 .container{
     display: flex;
-    
+    gap: 1rem;
 }
 
 .header{
-    font-size: 2rem;
+    font-size: 3rem;
+}
+
+.headH3{
+    font-size: 1.5rem;
+    color: #d43b49;
+    font-weight: 400;
+
+}
+.headTxt{
+    padding-top: 0.3rem;
+    color: #b6b2af;
+}
+.headh3t{
+    font-size: 1.2rem;
+    padding: 5px 0;
 }
 .contain{
     width: 25rem;
@@ -45,4 +60,62 @@
     border-radius: 25px;
     gap: 5px;
 
+  }
+
+  .sauce{
+    margin-top: 3rem;
+  }
+
+  .sauceText{
+    font-size: 2rem;
+  }
+
+  .check{
+    padding-top: 1rem;
+  }
+
+  .small{
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #d43b49;
+    padding: 3px 1rem;
+    border-radius: 7px;
+    position: absolute;
+    top: 0;
+    left: 3rem;
+  }
+
+  .label{
+    position: relative; 
+    display: inline-block;
+    margin-top: 3rem;
+  }
+  .label1{
+    position: relative; 
+    display: inline-block;
+    margin-top: 1rem;
+  }
+  .label2{
+    position: relative; 
+    display: inline-block;
+  }
+  .medium{
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #d43b49;
+    padding: 3px 1rem;
+    border-radius: 7px;
+    position: absolute;
+    top: 0;
+    left: 5rem;
+  }
+  .large{
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #d43b49;
+    padding: 3px 1rem;
+    border-radius: 7px;
+    position: absolute;
+    top: 0;
+    left: 6rem;
   }

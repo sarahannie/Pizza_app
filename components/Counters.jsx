@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import { FaAngleDown, FaAngleLeft, FaAngleRight, FaAngleUp } from 'react-icons/fa';
 import style from './Counters.module.css'
 
 const Counter = () => {
@@ -16,9 +16,14 @@ const Counter = () => {
       }
   return (
     <div className={style.contain}>
-       <FaAngleLeft className={style.icon1} onClick={decrementCount} />
+      <div className='mt-2 text-xl'>
         {count}
-      <FaAngleRight className={style.icon1} onClick={incrementCount} />
+      </div>
+       
+       <div>
+        <FaAngleUp className={style.icon1} onClick={decrementCount} />
+        <FaAngleDown className={style.icon1} onClick={incrementCount} />
+       </div>
     </div>
   )
 }
