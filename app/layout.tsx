@@ -9,7 +9,7 @@ import { Navbar } from "@/components/navbar";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import Footer from '../components/Footer'
-import Home from "@/page/Home/Home";
+
 
 export const metadata: Metadata = {
 	title: {
@@ -36,19 +36,10 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head />
-			<body
-				className={clsx(
-					"min-h-screen bg-background font-sans antialiased",
-					fontSans.variable
-				)}
-			>
-				
-					<div className="relative flex flex-col h-screen">
+			<body>
 						<Navbar />
-						<Home />
+						{children}
 						<Footer/>
-					</div>
-				
 			</body>
 		</html>
 	);
