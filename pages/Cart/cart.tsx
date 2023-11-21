@@ -1,8 +1,8 @@
 import CartCounter from '@/components/cartCounter'
 import Image from 'next/image'
-import React from 'react'
 import { FaTrash } from 'react-icons/fa'
 import style from './cart.module.css'
+import Link from 'next/link'
 
 const Cart = () => {
   return (
@@ -150,7 +150,7 @@ const Cart = () => {
                  </div> 
                 </div>
                 <div>
-                    <button className={style.btn}>PROCEED TO CHECKOUT</button>
+                    <Link href="/checkout" className={style.btn}>PROCEED TO CHECKOUT</Link>
                 </div>
             </div>
         </div>
