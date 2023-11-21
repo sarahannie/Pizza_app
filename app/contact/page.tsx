@@ -1,9 +1,10 @@
 import { title } from "@/components/primitives";
+import Contact from "@/pages/Contact/contact";
 
 export default function PricingPage() {
 	return (
 		<div>
-			<h1 className={title()}>Pricing</h1>
+			<Contact/>
 		</div>
 	);
 }
