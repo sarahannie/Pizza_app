@@ -1,9 +1,10 @@
+import Cart from "@/pages/Cart/cart";
 import ProductDetail  from "@/pages/ProductDetail/productDetail";
 
-export default function ProductPage() {
+export default function CartPage() {
 	return (
 		<div>
-		    <ProductDetail />
+		    <Cart />
 		</div>
 	);
 }
