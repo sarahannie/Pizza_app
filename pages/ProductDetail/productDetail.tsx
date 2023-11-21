@@ -28,12 +28,12 @@ const ProductDetail = () => {
             </div>
             <div>
                 <h3 className={style.headh3t}>This is burga pizza</h3>
-                <div className={style.headh3t}>Category :Chicken, Launch, Pizza, Burger</div>
-                <div className={style.headh3t}>Tags :Healthy, Organic, Chicken, Sauce</div>
+                <div className={style.headh3t}>Category: Chicken, Launch, Pizza, Burger</div>
+                <div className={style.headh3t}>Tags: Healthy, Organic, Chicken, Sauce</div>
             </div>
             <div>
                 <h2 className={style.sauceText}> Choose Pizza Size</h2>
-                <div className='flex gap-[52px]'>
+                <div className={`flex gap-[52px] ${style.textbox}`}>
                 <div className={style.label}>
                     <Image src='/image/Pizza-icon.png' width={70} height={20} alt='Vacter Image' />
                     <span className={style.small}>Small</span>
@@ -43,7 +43,7 @@ const ProductDetail = () => {
                     <span className={style.medium}>Medium</span>
                 </div>
                 <div className={style.label2}>
-                    <Image src='/image/Pizza-icon.png' width={150} height={20} alt='Vacter Image' />
+                    <Image src='/image/Pizza-icon.png'  width={150} height={20} alt='Vacter Image' />
                     <span className={style.large}>Large</span>
                 </div>
                 </div>

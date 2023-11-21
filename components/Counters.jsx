@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { FaAngleDown, FaAngleLeft, FaAngleRight, FaAngleUp } from 'react-icons/fa';
-import style from './Counters.module.css'
+import style from './counters.module.css'
 
 const Counter = () => {
     const [count, setCount] = useState(1);

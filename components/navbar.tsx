@@ -116,7 +116,7 @@ export const Navbar = () => {
               }`}> */}
             <li>
               <a
-                href="#"
+                href="/"
                 className={`block py-2  pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-[#ec1900] lg:p-0 dark:text-white ${style.list}`}
                 aria-current="page"
               >

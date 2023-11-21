@@ -15,3 +15,17 @@
     margin-top: 4px;
     font-size: 1rem;
 }
+@media (max-width: 768px) {
+    .contain{
+        display: flex;
+        background-color: white;
+        border: 1px solid #eae6e2;
+        width: fit-content;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        gap: 2rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    
+    }
+}
