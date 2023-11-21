@@ -1,0 +1,27 @@
+.contain{
+    display: flex;
+    background-color: white;
+    width: fit-content;
+    gap: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+}
+
+.icon1{
+    font-size: 1rem;
+    margin-top: 0.9rem;
+}
+@media (max-width: 768px) {
+    .contain{
+        display: flex;
+        background-color: white;
+        border: 1px solid #eae6e2;
+        width: fit-content;
+       
+        gap: 2rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    
+    }
+}

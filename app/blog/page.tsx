@@ -1,9 +1,10 @@
 import { title } from "@/components/primitives";
+import Blog from "@/pages/Blog/blog";
 
 export default function BlogPage() {
 	return (
 		<div>
-			<h1 className={title()}>Blog</h1>
+			<Blog/>
 		</div>
 	);
 }
