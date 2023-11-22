@@ -1,11 +1,13 @@
+"use client"
 import CartCounter from '@/components/cartCounter'
 import Image from 'next/image'
 
 import { FaTrash } from 'react-icons/fa'
 import style from './checkout.module.css'
 import Link from 'next/link'
+import ModalBasic from '@/components/checkoutMedal'
 
-const CheckOut = () => {
+const CheckOut = ({setIsShowing,isShowing}) => {
   return (
     <>
     <div className={style.container}>
@@ -84,12 +86,13 @@ const CheckOut = () => {
                <h3>$40.00</h3>
              </div> 
             </div>
+            
+            <ModalBasic isShowing={isShowing} setIsShowing={setIsShowing}  />
             <div>
-                <Link href="/checkout" className={style.btn}>CASH ON DELIVERY</Link>
+                <Link href="/checkout" className={style.btn1}><Image src="/image/paypal.png" width={70} height={10} alt='Vacter Image' /></Link>
             </div>
-            <div>
-                <Link href="/checkout" className={style.btn1}><span className='text-purple-500'>Pay</span><span className='text-blue-500'>Pal</span></Link>
-            </div>
+            
+            
         </div>
     </div>
 </>

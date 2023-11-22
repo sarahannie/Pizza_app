@@ -10,7 +10,7 @@
   border: 1px  solid #777777;
   padding-left: 2rem;
   padding-right: 2rem;
-  height: 20rem;
+  height: 25rem;
   justify-content: flex-end;
   margin-right: 20px;
   background-color: black;
@@ -24,8 +24,7 @@
   font-weight: 500;
   font-size: 1rem;
   padding: 10px;
-  padding-right: 20px;
-  padding-left: 20px;
+ 
   display: flex;
   width: fit-content;
  
@@ -37,16 +36,12 @@
 }
 .btn1{
   background-color: #fbb200;
-  
   font-weight: 500;
   font-size: 1rem;
-  padding: 10px;
-  padding-right: 20px;
-  padding-left: 20px;
   display: flex;
   width: fit-content;
-  padding-left: 6.5rem;
-  padding-right: 6.5rem;
+  padding-left: 5.8rem;
+  padding-right: 5.8rem;
   gap: 5px;
   margin-top: 0.5rem;
   margin-left: 2rem;
@@ -58,8 +53,7 @@
       grid-template-columns: 1fr;
       gap: 16px; 
       margin-top: 2rem;
-      margin-bottom: 3rem;
-       
+      margin-bottom: 3rem;   
 }
 
 .table{

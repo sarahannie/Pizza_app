@@ -1,0 +1,16 @@
+.btn{
+    background-color: #fff;
+    color: rgb(15, 197, 70);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 10px;
+   
+    display: flex;
+    width: fit-content;
+   
+    gap: 5px;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
