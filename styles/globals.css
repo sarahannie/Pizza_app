@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.bodyImg{
+    display: block;
+    max-width: 235px;
+    position: absolute;
+    top: 0;
+    left: 25%;
+    right: 0;
+    z-index: 20;
+  }

@@ -18,9 +18,6 @@ const Home = () => {
 
   return (
     <div className={style.body}>
-    <div className={style.bodyImg}>
-			<img src="./image/header-img.png" alt="Vacter Image"/>
-		</div>
       <section className={style.containImg}>
           <div className={style.containText}>
             <h1 className={style.header}>Handmade,  With an Extra  Pinch of <span className={style.headertxt}>Love</span></h1>

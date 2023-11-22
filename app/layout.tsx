@@ -9,6 +9,8 @@ import { Navbar } from "@/components/navbar";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import Footer from '../components/Footer'
+import style from '@/pages/Home/home.module.css';
+import Image from "next/image";
 
 
 export const metadata: Metadata = {
@@ -37,6 +39,9 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head />
 			<body>
+			<div className={`${style.bodyImg} `}>
+				<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>
+			</div>
 						<Navbar />
 						{children}
 						<Footer/>
