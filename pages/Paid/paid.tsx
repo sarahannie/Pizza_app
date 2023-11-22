@@ -1,6 +1,10 @@
 
 import Image from 'next/image'
-
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import { RiSecurePaymentFill } from "react-icons/ri";
+import { AiOutlineDeliveredProcedure } from "react-icons/ai";
+import { GiCampCookingPot } from "react-icons/gi";
+import { RiEBike2Fill } from "react-icons/ri";
 import style from './paid.module.css'
 import Link from 'next/link'
 
@@ -42,8 +46,31 @@ const Paid = () => {
       </tr>
     </tbody>
   </table>
+  
 </div>
  </> 
+ <div className='flex justify-between mr-10 ml-10 mt-10 align-center'>
+    <div>
+    <div> <RiSecurePaymentFill fontSize={50}  /></div>
+    <h4>Payment</h4>
+    <div > <IoIosCheckmarkCircle color='green' fontSize={30} className='ml-4' /></div>
+    </div>
+    <div>
+    <div> <GiCampCookingPot  fontSize={50}/></div>
+    <h4>Preparing</h4>
+    <div > <IoIosCheckmarkCircle color='green' fontSize={30} className='ml-4' /></div>
+    </div>
+    <div>
+    <div> <RiEBike2Fill fontSize={50} /></div>
+    <h4>on the way</h4>
+    <div > <IoIosCheckmarkCircle color='green' fontSize={30} className='ml-4' /></div>
+    </div>
+    <div>
+    <div> <AiOutlineDeliveredProcedure fontSize={50} /></div>
+    <h4>Delivered</h4>
+    <div > <IoIosCheckmarkCircle color='green' fontSize={30} className='ml-4' /></div>
+    </div>
+ </div>
 </div>
             <div className={style.cartContainer}>
                <div>
