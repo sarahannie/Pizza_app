@@ -49,7 +49,7 @@ const Paid = () => {
   
 </div>
  </> 
- <div className='flex justify-between mr-10 ml-10 mt-10 align-center'>
+ <div className='flex flex-col gap-6 justify-between mr-10 ml-10 mt-10 align-center lg:flex lg:flex-row '>
     <div>
     <div> <RiSecurePaymentFill fontSize={50}  /></div>
     <h4>Payment</h4>
