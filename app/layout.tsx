@@ -8,14 +8,14 @@ import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
-import Footer from '../components/Footer'
+import Footer from '@/components/Footer'
 import style from '@/pages/Home/home.module.css';
 import Image from "next/image";
 
 
 export const metadata: Metadata = {
 	title: {
-		default: siteConfig.name,
+		default: 'Pizzon',
 		template: `%s - ${siteConfig.name}`,
 	},
 	description: siteConfig.description,
