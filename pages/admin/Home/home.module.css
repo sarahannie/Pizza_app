@@ -1,0 +1,27 @@
+
+.container{
+    display: flex;
+    gap: 1px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.div{
+  white-space: nowrap; 
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+   
+  
+  .table{
+    width: 55%;
+  }
+  .cartContainer{
+    width: 55%;
+    
+  }
+  }

@@ -130,7 +130,7 @@ const Cart = () => {
   </table>
 </div>
  </> 
-</div>
+            </div>
             <div className={style.cartContainer}>
                <div>
                 <h2 className='text-2xl px-6 mb-4 mt-4 text-white-900'>Cart Totals</h2>
