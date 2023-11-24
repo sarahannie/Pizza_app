@@ -15,13 +15,15 @@
 }
 
 @media (max-width: 768px) {
-   
+  .container{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    margin-right: 1px;
+    margin-left: 10px;
+}
   
-  .table{
-    width: 55%;
-  }
-  .cartContainer{
-    width: 55%;
-    
-  }
+  
   }
