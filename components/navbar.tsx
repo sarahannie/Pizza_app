@@ -11,10 +11,25 @@ import { ThemeSwitch } from "@/components/theme-switch";
 import { SearchIcon } from "@/components/icons";
 import { useState } from "react";
 import Image from "next/image";
-import style from './navbar.module.css'
-
+import style from './navbar.module.css';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 export const Navbar = () => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  
+
+  const logout = async() => {
+    try{
+       await axios.get('/api/user/logout');
+        toast.success("Logout successful");
+        router.push("/login");
+    }catch(error){
+      console.log(error)
+      toast.error("Something went wrong. Please try again.");
+    }
+  }
 
   const searchInput = (
     <Input
@@ -103,6 +118,7 @@ export const Navbar = () => {
               />
             </svg>
           </button>
+          <button onClick={logout}>Logout</button>
         </div>
         <div
           className={`items-center justify-between xs:w-1/2 border-l lg:ml-[50px] lg:flex lg:w-0 lg:order-1 ${open ? 'block' : 'hidden'}`}
