@@ -1,0 +1,19 @@
+.btn{
+    justify-content: flex-start;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #519eae;
+    gap: 0.5rem;
+      color: #fff;
+      width: 8rem;
+      height: 3rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+  }
+  
+  .btn:hover{
+      background-color: #8db5bd;
+  }

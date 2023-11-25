@@ -3,6 +3,7 @@ import style from './product.module.css';
 import Image from 'next/image';
 import { IoFilter } from 'react-icons/io5';
 import ProductCard from '@/components/productCard';
+import ModalForm from '../getpizza/getpizza';
 
 
 
@@ -11,10 +12,12 @@ const Product = () => {
     <div className={style.container}>
       <nav className={style.productContainer}>
         <div>
+            
                 <div className={style.btn}>
                 <IoFilter className={style.icon} />
                 <button className={style.btn1}>Filter</button>
                 </div>
+                <ModalForm />
         </div>
         
         
