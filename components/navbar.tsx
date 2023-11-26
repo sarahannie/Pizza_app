@@ -68,7 +68,7 @@ export const Navbar = () => {
             className=" ml-5 "
             alt="Landwind Logo"
           />
-         
+
         </a>
 
        
