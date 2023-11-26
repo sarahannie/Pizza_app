@@ -3,11 +3,11 @@
     margin-left: 1.5rem;
     margin-right: 1.5rem;
     margin-bottom: 2rem;
-    margin-top: 1rem;
+    margin-top: 6rem;
 }
 .productContainer{
     display: flex;
-   
+    margin-bottom: 4rem;
 }
 
 .productResult{

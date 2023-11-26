@@ -15,6 +15,7 @@ import style from './navbar.module.css';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import Link from "next/link";
 export const Navbar = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -71,18 +72,22 @@ export const Navbar = () => {
         </a>
 
        
-        <div className="flex items-center gap-4  lg:order-2">
+        <div className="flex items-center gap-10  lg:order-2">
           <div className="hidden mt-2  sm:inline-block">
             <span />
           </div>
+          
           <AiOutlineSearch fontSize={20} />
 
           <div style={{ position: 'relative' }}>
-            <AiOutlineShoppingCart className="relative" color="#0770fc" fontSize={20} />
+          <Link href='/cart'>
+          <AiOutlineShoppingCart className="relative" color="#0770fc" fontSize={20} />
             <span className="inline-flex items-center justify-center gap-1 rounded-full bg-[#d43b49] px-1.5 text-sm text-white absolute top-[-12px] right-[-6px]">
               7
               <span className="sr-only">new items in the cart</span>
             </span>
+          </Link>
+           
           </div>
 
           <button
@@ -118,13 +123,13 @@ export const Navbar = () => {
               />
             </svg>
           </button>
-          <Button onClick={logout} size="sm" className="hidden lg:block bg-[#fbb200] text-white">Logout</Button>
+          <Button onClick={logout} size="sm" className="hidden lg:block bg-[#fbb200] text-white m-x-3">Logout</Button>
         </div>
         <div
           className={`items-center justify-between xs:w-1/2 border-l lg:ml-[50px] lg:flex lg:w-0 lg:order-1 ${open ? 'block' : 'hidden'}`}
           id="mobile-menu-2"
         >
-          <ul className=" bg-white flex flex-col xs:absolute top-10 left-0  mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+          <ul className=" bg-white flex flex-col xs:absolute top-10 left-0  mt-4 font-medium lg:flex-row lg:space-x-8 lg:gap-5 lg:mt-0">
           {/* <ul className={`absolute top-0 left-0 z-[-1] h-[28.5rem] lg:w-full justify-center overflow-hidden  overflow-y-auto overscroll-contain  px-8 pb-12 pt-24 font-medium lg:transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0  lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0  lg:pt-0 lg:opacity-100 ${
                 open
                   ? `visible transform translate-r-full transition-transformn duration-300  opacity-1 bg-violent  w-[50%]  `
