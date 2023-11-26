@@ -62,7 +62,7 @@ export const Navbar = () => {
         <a href="#" className="flex items-center">
           <Image
             src="/image/logo.png"
-            width={70}
+            width={35}
             height={40}
             className=" ml-5 "
             alt="Landwind Logo"
@@ -72,13 +72,13 @@ export const Navbar = () => {
 
        
         <div className="flex items-center gap-4  lg:order-2">
-          <div className="hidden mt-2 mr-2 sm:inline-block">
+          <div className="hidden mt-2  sm:inline-block">
             <span />
           </div>
-          <AiOutlineSearch fontSize={30} />
+          <AiOutlineSearch fontSize={20} />
 
           <div style={{ position: 'relative' }}>
-            <AiOutlineShoppingCart className="relative" color="#0770fc" fontSize={30} />
+            <AiOutlineShoppingCart className="relative" color="#0770fc" fontSize={20} />
             <span className="inline-flex items-center justify-center gap-1 rounded-full bg-[#d43b49] px-1.5 text-sm text-white absolute top-[-12px] right-[-6px]">
               7
               <span className="sr-only">new items in the cart</span>
@@ -118,7 +118,7 @@ export const Navbar = () => {
               />
             </svg>
           </button>
-          <button onClick={logout}>Logout</button>
+          <Button onClick={logout} size="sm" className="hidden lg:block bg-[#fbb200] text-white">Logout</Button>
         </div>
         <div
           className={`items-center justify-between xs:w-1/2 border-l lg:ml-[50px] lg:flex lg:w-0 lg:order-1 ${open ? 'block' : 'hidden'}`}

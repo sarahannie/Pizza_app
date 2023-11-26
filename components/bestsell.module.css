@@ -34,7 +34,7 @@
 .bestsellh2{
     font-size: 3rem;
     font-weight: 700;
-    padding-right: 45rem;
+    
 }
 
 .bestImageContainer{
@@ -49,13 +49,14 @@
 .headH2{
     font-size: 1.5rem;
     font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .headH5{
     text-align: justify;
     color: #777777;
     font-size: 1.1rem;
-    
+    width: 80%;
 }
 .contsell{
     margin-left: 3%;
