@@ -11,6 +11,7 @@ import Footer from '@/components/Footer'
 import style from '@/pages/Home/home.module.css';
 import Image from "next/image";
 import { Navbar } from "@/components/admin/navbar";
+import { Toaster } from "react-hot-toast";
 
 
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ export default function RootLayout({
 				<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>
 			</div>
 						<Navbar/>
+						<Toaster position="top-center" />
 						{children}
 						<Footer/>
 			</body>

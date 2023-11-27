@@ -66,7 +66,7 @@
   font-size: 1.5rem;
   padding-top: 25px;
   color:#777777;
-  width: 50%;
+  width: 60%;
 }
 
 .header{
@@ -74,7 +74,7 @@
     font-weight: bold;
     line-height: 5rem;
     padding-left: 0px;
-    padding-right: 25rem;
+    width: 60%;
 }
 .headertxt{
   color: red;

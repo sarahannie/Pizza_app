@@ -1,17 +1,37 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import { Textarea } from "@nextui-org/input";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect,useReducer } from "react";
 import ReactDOM from "react-dom";
 import style from './getpizza.module.css'
+import { toast } from "react-hot-toast";
 
 interface ModalFormProps {
-  // Add any props if needed
+  
+}
+
+const formReducer = (state: any, event: any) => {
+  return {
+    ...state,
+    [event.target.name]: event.target.value,
+  };
 }
 
 const ModalForm: React.FC<ModalFormProps> = () => {
   const [isShowing, setIsShowing] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const [formState, setFormState] = useReducer(formReducer, {})
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if(Object.keys(formState).length == 0){
+      console.log("You dont have to do anything in your form")
+    }else{
+      console.log(formState);
+      toast.success("Form submitted successfully!");
+    }
+  }
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -137,7 +157,9 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                   </button>
                 </header>
                 {/* Modal body */}
+                <form onSubmit={ handleSubmit} >
                 <div id="content-4a" className="flex-1">
+                  
                   <div className="flex flex-col gap-6">
                     {/* Input field */}
                     <div className="relative">
@@ -150,10 +172,11 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                       <input
                         id="id-b03"
                         type="file"
-                        name="id-b03"
+                        name="image"
                         placeholder="your name"
                         className="h-8 w-full border border-slate-200 rounded-md "
-                        // peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400
+                        onChange={(event) => setFormState(event)}
+                        
                       />
                      
                     </div>
@@ -165,9 +188,10 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                         Pizza Title
                       </label>
                       <input
+                       onChange={(event) => setFormState(event)}
                         id="id-b03"
                         type="text"
-                        name="id-b03"
+                        name="title"
                         placeholder="your name"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                         
@@ -182,11 +206,12 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                         Pizza Description
                       </label>
                       <textarea
+                        onChange={(event) => setFormState(event)}
                         id="id-b03"
                         rows={5}
                         cols={30}
                         
-                        name="id-b03"
+                        name="description"
                         placeholder="your name"
                         className=" peer relative h-30 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                         
@@ -201,28 +226,30 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                         Pizza Prices
                       </label>
                       <input
+                      onChange={(event) => setFormState(event)}
                         id="id-b03"
                         type="text"
-                        name="id-b03"
+                        name="small"
                         placeholder="Small"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mt-2"
                         
                       />
                       <input
+                      onChange={(event) => setFormState(event)}
                         id="id-b03"
                         type="text"
-                        name="id-b03"
+                        name="medium"
                         placeholder="Medium"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mt-2 text-black"
                         
                       />
                       <input
+                       onChange={(event) => setFormState(event)}
                         id="id-b03"
                         type="text"
-                        name="id-b03"
+                        name="large"
                         placeholder="large"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mb-6 mt-2"
-                        
                       />
                      
                     </div>
@@ -235,25 +262,28 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                         Extra
                       </label>
                       <input
+                       onChange={(event) => setFormState(event)}
                         id="id-b03"
                         type="text"
-                        name="id-b03"
+                        name="salt"
                         placeholder="Item"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mt-2"
                         
                       />
                       <input
+                      onChange={(event) => setFormState(event)}
                         id="id-b03"
                         type="text"
-                        name="id-b03"
+                        name="source"
                         placeholder="Price"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mt-2 text-black"
                         
                       />
                       <input
+                       onChange={(event) => setFormState(event)}
                         id="id-b03"
                         type="text"
-                        name="id-b03"
+                        name="saurce"
                         placeholder="Add"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mb-6 mt-2"
                         
@@ -262,13 +292,16 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                     </div>
                     
                   </div>
+                  
                 </div>
                 {/* Modal actions */}
                 <div className="flex justify-end gap-2">
                     <Button size="md"  className='bg-gray-500 border-none hover:bg-gray-200 text-white' >Close</Button>
-                    <Button size="md" className='bg-blue-500 border-none hover:bg-blue-200 text-white'>Create Pizza</Button>
+                    <Button size="md" className='bg-blue-500 border-none hover:bg-blue-200 text-white' type="submit">Create Pizza</Button>
                 </div>
+                </form>
               </div>
+              
             </div>,
             document.body
           )

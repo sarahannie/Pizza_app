@@ -9,7 +9,7 @@ import clsx from "clsx";
 import Footer from '@/components/Footer'
 import style from '@/pages/Home/home.module.css';
 import Image from "next/image";
-
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
 	title: {
@@ -40,7 +40,9 @@ export default function RootLayout({
 			<div className={`${style.bodyImg} `}>
 				<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>
 			</div>
+			
 						<Navbar />
+						<Toaster position="top-center" />
 						{children}
 						<Footer/>
 			</body>
