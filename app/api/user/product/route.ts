@@ -28,7 +28,54 @@ export async function POST(request: NextRequest) {
       const savedProduct = await newProduct.save();
       return NextResponse.json(savedProduct, { status: 200 });
     } catch (error: any) {
-      console.log(error.message); // Move this line before the return statement
+      console.log(error.message); 
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
   }
+
+  export async function PUT(request: NextRequest) {
+    try {
+      const product = await request.json();
+      if (!product || !product._id) {
+        return NextResponse.json({ error: 'Invalid product data' }, { status: 400 });
+      }
+
+      const updatedProduct = await Product.findByIdAndUpdate(
+        product._id,
+        product,
+        { new: true }
+      );
+
+      if (!updatedProduct) {
+        return NextResponse.json({ error: 'Product not found' }, { status: 404 });
+      }
+
+      return NextResponse.json(updatedProduct, { status: 200 });
+    } catch (error: any) {
+      console.log(error.message); 
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+  }
+
+
+  export async function DELETE(request: NextRequest) {
+    try {
+      const { _id }:any = request.body;
+  
+      if (!_id) {
+        return NextResponse.json({ error: 'Invalid product data' }, { status: 400 });
+      }
+  
+      const deletedProduct = await Product.findByIdAndDelete(_id);
+  
+      if (!deletedProduct) {
+        return NextResponse.json({ error: 'Product not found' }, { status: 404 });
+      }
+  
+      return NextResponse.json(deletedProduct);
+    } catch (error: any) {
+      console.log(error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+  }
+  

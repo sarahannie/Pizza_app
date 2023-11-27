@@ -1,10 +1,39 @@
+"use client"
 import { Button } from '@nextui-org/button'
 import Image from 'next/image'
 import React from 'react'
 import style from './home.module.css'
-import ModalForm from '../editpizza/editpizza'
+import ModalForm from '../editpizza/editpizza';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useState, useEffect } from 'react';
+
+
 
 const Home = () => {
+  const [pizzaData, setPizzaData] = useState<Pizza[]>([]);
+
+  interface Pizza {
+    id: string;
+    title: string;
+    image: string;
+  }
+ 
+  const getPizza = async() =>{
+    try{
+      const response = await axios.get('/api/user/product');
+      setPizzaData(response.data);
+      console.log(response.data)
+    }catch(error){
+      console.log(error)
+      toast.error("Cant fetch  product data. Please try again.");
+    }
+  }
+
+  useEffect(() => {
+    getPizza();
+  }, []);
+
   return (
     <div className={style.container}>
       <div>
@@ -25,7 +54,9 @@ const Home = () => {
       </tr>
       </thead>
       <tbody>
-      {Trpizza()}
+      {pizzaData.map((pizza) => (
+                    <Trpizza key={pizza.id} pizza={pizza} />
+                  ))}
     </tbody>
   </table>
 </div>
@@ -63,37 +94,38 @@ const Home = () => {
 
 export default Home
 
-function Trpizza() {
+function Trpizza({ pizza }:any) {
   return(
     <tr className="border-b border-slate-200">
-        <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
-          <div className="flex items-center gap-4">
-            <div className="w-30 h-19  rounded-sm">
-                <Image src="/image/pizza-1.png" width={300} height={100} alt='Vacter Image' />
-            </div>
-            
-            </div>
-        </td>
-        <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
-            <div>
-              <h3 className="text-sm font-medium">655512345as452.....</h3>
-            </div>
-        </td>
-        <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
-            <div>
-              <h3 className={`text-sm font-medium ${style.div}`}>  Burga pizza  </h3>
-            </div>
-        </td>
-        <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
-          <div>{}{}{}</div>
-        </td>
-        <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
-            <div className="flex gap-4">
-              <ModalForm />
-              <Button size="sm"  className='bg-red-700 border-none hover:bg-red-400 text-white'>Delete</Button>
-            </div>
-        </td>
-      </tr>
+      <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
+        <div className="flex items-center gap-4">
+          <div className="w-30 h-19  rounded-sm">
+            <Image src={pizza.Image} width={300} height={100} alt='Pizza Image' />
+          </div>
+        </div>
+      </td>
+      <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
+        <div>
+          <h3 className="text-sm font-medium">{pizza._id}</h3>
+        </div>
+      </td>
+      <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
+        <div>
+          <h3 className={`text-sm font-medium ${style.div}`}>{pizza.title}</h3>
+        </div>
+      </td>
+      <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
+        <div>$ {pizza.price.large}</div>
+      </td>
+      <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
+        <div className="flex gap-4">
+          <ModalForm />
+          <Button size="sm" className='bg-red-700 border-none hover:bg-red-400 text-white'>
+            Delete
+          </Button>
+        </div>
+      </td>
+    </tr>
   )
 }
 

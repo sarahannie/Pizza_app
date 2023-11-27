@@ -5,6 +5,9 @@ import React, { useState, useRef, useEffect,useReducer } from "react";
 import ReactDOM from "react-dom";
 import style from './getpizza.module.css'
 import { toast } from "react-hot-toast";
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+
 
 interface ModalFormProps {
   
@@ -18,6 +21,8 @@ const formReducer = (state: any, event: any) => {
 }
 
 const ModalForm: React.FC<ModalFormProps> = () => {
+  const router = useRouter();
+  
   const [isShowing, setIsShowing] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -30,8 +35,27 @@ const ModalForm: React.FC<ModalFormProps> = () => {
     }else{
       console.log(formState);
       toast.success("Form submitted successfully!");
+      router.push("/adminproduct");
     }
   }
+
+  const postPizza = async() =>{
+    try{
+      const response = await axios.post('/api/user/product', formState);
+      setFormState({});
+      console.log(response.data)
+    }catch(error){
+      console.log(error)
+      toast.error("Something went wrong. Please try again.");
+    }
+  }
+
+  useEffect(() => {
+    // Adjust the conditions based on your use case
+    if (Object.keys(formState).length > 0) {
+      postPizza();
+    }
+  }, []); 
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
