@@ -22,7 +22,7 @@ const Home = () => {
           <div className={style.containText}>
             <h1 className={style.header}>Handmade,  With an Extra  Pinch of <span className={style.headertxt}>Love</span></h1>
             <h3 className={style.headerH3}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h3>
-            <Button size="lg" className={` ${style.btn2} bg-[#fbb200] text-white px-5 text-[1rem] text-white-800 hover:bg-[#f22e3e]`}>
+            <Button size="lg" className={` flex bg-[#fbb200] text-white px-[30px] mt-[1.5rem] text-[1rem] align-center text-white hover:bg-[#f22e3e]`}>
             <Link href="/signup" className="flex gap-2 " >
             <IoCartOutline className={`  ${style.icon}`}/>
               <span className={style.btnText}>ORDER NOW</span>
@@ -100,10 +100,12 @@ const Home = () => {
           <div className={style.ourStorytext}>
           Lorem Ipsum is simply dummy text of the printing  and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s,  when an unknown printer took a galley of type and  scrambled it to make a type specimen book. It has  survived not only five centuries, but also the leap into  electronic typesetting, remaining essentially  unchanged.
           </div>
-          <Link href="#" className={style.btn3} >
+          <Button size="lg"className="px-[30px] mt-[2rem] bg-[#fbb200] text-white">
+          <Link href="/blog" className="flex gap-3" >
               READ MORE
               <FaAngleRight className={style.storyStar} />
           </Link>
+          </Button>
         </div>
       </div>
       </>

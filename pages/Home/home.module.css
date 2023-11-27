@@ -15,9 +15,7 @@
   z-index: 1;
   display: block;
 }
-.btnText{
-  padding-top: 6px;
-}
+
 .btn{
   background-color: #fbb200;
   color: white;
@@ -83,9 +81,12 @@
 }
 
 .icon{
-  margin-top: 8px;
+  padding-top: 6px;
   font-size: 1.4rem;
  }
+ .btnText{
+  padding-top: 2px;
+}
 
 
 .containImg {
@@ -274,7 +275,7 @@
  }
 
  .storyStar{
-  margin-top: 5px;
+  margin-top: 4px;
  }
 
  
@@ -365,7 +366,7 @@
    }
 
    .icon{
-    margin-top: 4px;
+    margin-top: 10px;
    }
 
    .containText{
@@ -430,7 +431,6 @@
       padding-left: 30px;
       display: flex;
       width: fit-content;
-      border-radius: 45px;
       gap: 5px;
       margin-top: 20px;
       margin-left: 10%;
