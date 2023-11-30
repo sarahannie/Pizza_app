@@ -14,6 +14,7 @@ import { Navbar } from "@/components/admin/navbar";
 import { Toaster } from "react-hot-toast";
 
 
+
 export const metadata: Metadata = {
 	title: {
 		default: 'Pizzon',
@@ -31,15 +32,19 @@ export const metadata: Metadata = {
 	},
 };
 
+
+
 export default function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
 	return (
+	
 		<html lang="en" suppressHydrationWarning>
 			<head />
 			<body>
+			
 			<div className={`${style.bodyImg} `}>
 				<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>
 			</div>
@@ -49,5 +54,6 @@ export default function RootLayout({
 						<Footer/>
 			</body>
 		</html>
+		
 	);
 }

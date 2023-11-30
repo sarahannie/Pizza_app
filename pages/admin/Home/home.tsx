@@ -4,35 +4,12 @@ import Image from 'next/image'
 import React from 'react'
 import style from './home.module.css'
 import ModalForm from '../editpizza/editpizza';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { useState, useEffect } from 'react';
+import  useClient  from '@/helper/getProduct';
 
 
 
 const Home = () => {
-  const [pizzaData, setPizzaData] = useState<Pizza[]>([]);
-
-  interface Pizza {
-    id: string;
-    title: string;
-    image: string;
-  }
- 
-  const getPizza = async() =>{
-    try{
-      const response = await axios.get('/api/user/product');
-      setPizzaData(response.data);
-      console.log(response.data)
-    }catch(error){
-      console.log(error)
-      toast.error("Cant fetch  product data. Please try again.");
-    }
-  }
-
-  useEffect(() => {
-    getPizza();
-  }, []);
+  const pizzaData = useClient();
 
   return (
     <div className={style.container}>
@@ -55,8 +32,8 @@ const Home = () => {
       </thead>
       <tbody>
       {pizzaData.map((pizza) => (
-                    <Trpizza key={pizza.id} pizza={pizza} />
-                  ))}
+          <Trpizza key={pizza.id} pizza={pizza} />
+       ))}
     </tbody>
   </table>
 </div>

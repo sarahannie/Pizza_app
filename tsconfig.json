@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/checkoutMedal.jsx", "pages/Checkout/CheckOut.jsx", "app/frontpage/checkout/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/checkoutMedal.jsx", "pages/Checkout/CheckOut.jsx", "app/frontpage/checkout/page.jsx", "pages/admin/Home/home.tsx"],
   "exclude": ["node_modules"]
 }
