@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
+import Image from 'next/image';
 
 const Login = () => {
   const router = useRouter();
@@ -89,6 +90,11 @@ const Login = () => {
         </div>
         <button type='submit' className="inline-block w-full py-4 px-6 mb-6 text-center text-lg leading-6 text-white font-extrabold bg-[#519eae]  border-3 border-[#519eae] shadow rounded transition duration-200">
           Sign in
+        </button>
+        
+        <button type="button" onClick={() => signIn('google', {callbackUrl: '/'})} className="flex gap-4 justify-center inline-block w-full py-4 px-6 mb-6 text-center text-lg leading-6 text-[#519eae] font-extrabold bg-white  border-3 border-[#519eae] shadow rounded transition duration-200">
+          <Image src='/image/google.png' alt={''} width={24} height={24} />
+          Login with google
         </button>
       </form>
         <p className="text-center font-extrabold">
