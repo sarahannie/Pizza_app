@@ -14,39 +14,25 @@ const Login = () => {
   
   async function handleFormSubmit(ev) {
     ev.preventDefault();
-    await signIn('credentials', {email, password, callbackUrl: '/'});
+    try{
+      if(!email || !password){
+        toast.error("Please fill in all fields");
+        return;
+      }
+      else{
+        await signIn('credentials', {email, password, callbackUrl: '/'});
+        toast.success("Login successful");
+      }
+      
+    }catch(error){
+      console.log(error)
+      toast.error("Something went wrong. Please try again.");
+    }
+   
   }
 
 
-    // const[user, setUser] = useState({
-    //     email: "",
-    //     password: ""
-    // })
-    // const [buttonDisabled, setButtonDisabled] = useState(false)
 
-    // const onLogin = async () => {
-    //   console.log("Login button clicked");
-      
-    //   try {
-    //     const response = await axios.post("/api/user/login", user );
-    //     toast.success("Login successful");
-    //     router.push("/");
-    //   } catch (error:any) {
-    //     console.error(error.message);
-    //     toast.error("Something went wrong. Please try again.");
-    //   }
-    // };
-
-    // console.log(onLogin)
-    // console.log(user)
-
-
-    // useEffect(() => {
-    // const isValid =
-    // user.email.length > 0 &&
-    // user.password.length > 0 ; 
-    // setButtonDisabled(!isValid);
-    // }, [user])
 
 
   return (

@@ -16,7 +16,7 @@ export const Authlink = ({status}) =>{
   console.log(status)
   if(status === 'authenticated'){
     return (
-      <Button onClick={() =>signOut()} size="sm" className="hidden lg:block bg-[#fbb200] text-white m-x-3">Logout</Button>
+      <Button onClick={() =>signOut({ callbackUrl: '/login' })} size="sm" className="hidden lg:block bg-[#fbb200] text-white m-x-3">Logout</Button>
     )
   }
   if(status === 'unauthenticated'){

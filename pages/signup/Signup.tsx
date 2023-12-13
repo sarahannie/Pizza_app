@@ -22,6 +22,10 @@ const Signup = () => {
       
       try {
         const response = await axios.post("/api/user/signup", user );
+        if(response.status !== 201) {
+          toast.error("Something went wrong. Please try again.");
+          return;
+        }
         toast.success("Signup successful");
         router.push("/login");
       } catch (error:any) {
