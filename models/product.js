@@ -23,18 +23,21 @@ const productSchema = new mongoose.Schema({
           required: [true, 'Price is required for large pizza']
         },
       },
-      extras: [
-        {
+      extra: {
           item: {
             type: String,
             
           },
+          item2: {
+            type: String,
+          },
+
           price: {
-            type: Number,
+            type: String,
            
           },
         },
-      ],
+      
 Image: {
         type: String,
         // required: [true, 'Image is required'],

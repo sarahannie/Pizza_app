@@ -3,7 +3,7 @@ import 'node_modules/@glidejs/glide/dist/css/glide.core.min.css'
 import 'node_modules/@glidejs/glide/dist/css/glide.theme.min.css'
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
-
+import AppContext from "@/components/AppContext";
 
 import { Navbar } from "@/components/navbar";
 import { Link } from "@nextui-org/link";
@@ -40,12 +40,14 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head />
 			<body>
-			<div className={`${style.bodyImg} `}>
+				<AppContext>
+				<div className={`${style.bodyImg} `}>
 				<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>
-			</div>
+				</div>
 						<Navbar />
 						<Toaster position="top-center" />
 						{children}
+				</AppContext>
 			</body>
 		</html>
 	);

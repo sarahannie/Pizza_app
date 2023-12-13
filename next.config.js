@@ -1,13 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['images.unsplash.com', "www.freepnglogos.com",  "images.pexels.com" ],
+        domains: ['images.unsplash.com', "www.freepnglogos.com",  "images.pexels.com","res.cloudinary.com" ],
       },
       async rewrites() {
         return [
           {
-            source: "/api/todos",
-            destination: "http://localhost:3000/api/todos",
+            source: "/api/user/product",
+            destination:  process.env.DOMAIN ||"http://localhost:3000/api/user/product",
           },
         ];
       }

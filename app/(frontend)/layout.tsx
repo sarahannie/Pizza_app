@@ -10,6 +10,8 @@ import Footer from '@/components/Footer'
 import style from '@/pages/Home/home.module.css';
 import Image from "next/image";
 import { Toaster } from "react-hot-toast";
+import AppContext from "@/components/AppContext";
+
 
 export const metadata: Metadata = {
 	title: {
@@ -37,14 +39,15 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head />
 			<body>
-			<div className={`${style.bodyImg} `}>
-				<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>
-			</div>
-			
-						<Navbar />
-						<Toaster position="top-center" />
-						{children}
-						<Footer/>
+				<AppContext>
+						<div className={`${style.bodyImg} `}>
+						<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>
+						</div>
+								<Navbar />
+								<Toaster position="top-center" />
+								{children}
+								<Footer/>
+				</AppContext>
 			</body>
 		</html>
 	);

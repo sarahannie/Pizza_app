@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/checkoutMedal.jsx", "pages/Checkout/CheckOut.jsx", "app/frontpage/checkout/page.jsx", "pages/admin/Home/home.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/checkoutMedal.jsx", "pages/Checkout/CheckOut.jsx", "app/frontpage/checkout/page.jsx", "pages/admin/Home/home.tsx", "pages/login/Login.jsx", "app/login/page.jsx", "app/api/auth/[...nextauth]/route.js", "components/AppContext.jsx", "components/navbar.jsx"],
   "exclude": ["node_modules"]
 }

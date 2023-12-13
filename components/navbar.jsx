@@ -1,14 +1,8 @@
 "use client"
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
 import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
-import { Input } from "@nextui-org/input";
-import { link as linkStyles } from "@nextui-org/theme";
-import { siteConfig } from "@/config/site";
-import NextLink from "next/link";
-import clsx from "clsx";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { SearchIcon } from "@/components/icons";
+import { signOut, useSession } from "next-auth/react";
+
 import { useState } from "react";
 import Image from "next/image";
 import style from './navbar.module.css';
@@ -16,9 +10,33 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
+
+
+export const Authlink = ({status}) =>{
+  console.log(status)
+  if(status === 'authenticated'){
+    return (
+      <Button onClick={() =>signOut()} size="sm" className="hidden lg:block bg-[#fbb200] text-white m-x-3">Logout</Button>
+    )
+  }
+  if(status === 'unauthenticated'){
+    return (
+      <Link href="/login">
+        <Button size="sm" className="hidden lg:block bg-[#fbb202] text-white m-x-3">Login</Button>
+      </Link>
+    )
+  }
+}
+
+
+
 export const Navbar = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const session = useSession();
+  console.log('Session:', session);
+  const status = session?.status;
+  console.log('Session:', status);
   
 
   const logout = async() => {
@@ -32,26 +50,8 @@ export const Navbar = () => {
     }
   }
 
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
-      }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
+
+
 
   const toggleMenu = () => {
     setOpen(!open);
@@ -70,8 +70,6 @@ export const Navbar = () => {
           />
 
         </a>
-
-       
         <div className="flex items-center gap-10  lg:order-2">
           <div className="hidden mt-2  sm:inline-block">
             <span />
@@ -123,7 +121,7 @@ export const Navbar = () => {
               />
             </svg>
           </button>
-          <Button onClick={logout} size="sm" className="hidden lg:block bg-[#fbb200] text-white m-x-3">Logout</Button>
+          <Authlink status={status} />
         </div>
         <div
           className={`items-center justify-between xs:w-1/2 border-l lg:ml-[50px] lg:flex lg:w-0 lg:order-1 ${open ? 'block' : 'hidden'}`}
