@@ -71,13 +71,13 @@ const Home = () => {
 
 export default Home
 
-function Trpizza({ pizza }:any) {
+function Trpizza({ pizza }) {
   return(
     <tr className="border-b border-slate-200">
       <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
         <div className="flex items-center gap-4">
           <div className="w-30 h-19  rounded-sm">
-            <Image src={pizza.Image} width={300} height={100} alt='Pizza Image' />
+            <Image src={pizza.image} width={100} height={100} alt='Pizza Image' />
           </div>
         </div>
       </td>

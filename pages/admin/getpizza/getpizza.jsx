@@ -6,51 +6,21 @@ import { Textarea } from '@nextui-org/input';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { writeFile } from 'fs/promises';
+
 import {join} from 'path'
 
 import style from './getpizza.module.css';
 import { pid } from 'process';
+import Image from 'next/image';
 
-interface ModalFormProps {}
-
-const formReducer = (state: any, event: any) => {
-  return {
-    ...state,
-    [event.target.field]: event.target.value,
-  };
-};
-
-// const formReducer = (state, action) => {
-//   switch (action.type) {
-//     case 'UPDATE_FIELD':
-//       return { ...state, [action.field]: action.value };
-//     // Handle other actions if needed
-//     default:
-//       return state;
-//   }
-// };
-
-
-type PriceType = {
-  small: number;
-  medium: number;
-  large: number;
-};
-type ExtraType = {
-  item: string;
-  item2: string;
-  price: number;
-}
-
-const ModalForm: React.FC<ModalFormProps> = () => {
+const ModalForm = () => {
   const router = useRouter();
   const [isShowing, setIsShowing] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef(null);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState<PriceType>({
+  const [price, setPrice] = useState({
     small: 0,
     medium: 0,
     large: 0,
@@ -60,9 +30,11 @@ const ModalForm: React.FC<ModalFormProps> = () => {
     item2: "",
     price: "",
   })
-  const [image, setImage] = useState<File | undefined>(undefined);
+  const [image, setImage] = useState("");
+
+
  
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, size: keyof PriceType) => {
+  const handleInputChange = (e, size) => {
     
     const value = e.target.value;
     setPrice((prevPrice) => ({
@@ -71,7 +43,7 @@ const ModalForm: React.FC<ModalFormProps> = () => {
     }));
   };
 
-  const handleExtraChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof ExtraType) => {
+  const handleExtraChange = (e, name) => {
     const {  value } = e.target;
     setExtra((prevExtra) => ({
       ...prevExtra,
@@ -79,54 +51,85 @@ const ModalForm: React.FC<ModalFormProps> = () => {
     }));
   }
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e) => {
     const selectedFile = e.target.files?.[0];
     setImage(selectedFile);
   };
 
 
-  const postPizza = async (e:any) => {
-    e.preventDefault();
-    console.log(image);
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("price.small", String(price.small));
-    formData.append("price.medium", String(price.medium));
-    formData.append("price.large", String(price.large));
-    formData.append("extra.item", extra.item);
-    formData.append("extra.item2", extra.item2);
-    formData.append("extra.price", extra.price);
-    formData.append("image", image as File);
+  
+  
 
-    const api = "api/user/product";
-    console.log(formData)
-    try{
-      const response = await axios.post(api, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+  async function handleProduct(ev){
+    ev.preventDefault();
+  
+    const data = {
+      title,
+      description,
+      price: {
+        small: Number(price.small),
+        medium: Number(price.medium),
+        large: Number(price.large),
+      },
+      extra,
+      image:image,
+    };
+
+    const formData = new FormData();
+    formData.set('file', image);
+  
+    try {
+      const response = await fetch('/api/user/product', {
+        method: 'POST',
+        headers: { 'Content-Type': 'multipart/form-data' },
+        body: JSON.stringify(data)
       });
-      console.log(response.data);
-      toast.success("Product added successfully");
-      // router.push("/adminproduct");
-    }catch(error:any){
-      if (error.response) {
-        alert(error);
-        console.log(error.response.data);
-        console.log(error.response.status);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.log(error.request);
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log("Error", error.message);
-        toast.error("Something went wrong. Please try again");
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+  
+      const imageData = await response.json();
+      console.log('Image Data:', imageData);
+      setImage(imageData);
+  
+      await toast.promise(response, {
+        loading: 'Saving...',
+        success: 'Profile saved!',
+        error: 'Error',
+      });
+    } catch (error) {
+      console.error(`Fetch error: ${error.message}`);
     }
   }
-
+  
  
+
+  async function handleFileChange(ev) {
+    const files = ev.target.files;
+    if (files?.length === 1) {
+      const data = new FormData;
+      data.set('file', files[0]);
+
+      const uploadPromise = fetch('/api/upload', {
+        method: 'POST',
+        body: data,
+      }).then(response => {
+        if (response.ok) {
+          return response.json().then(link => {
+            setImage(link);
+          })
+        }
+        throw new Error('Something went wrong');
+      });
+
+      await toast.promise(uploadPromise, {
+        loading: 'Uploading...',
+        success: 'Upload complete',
+        error: 'Upload error',
+      });
+    }
+  }
  
 
 
@@ -134,19 +137,11 @@ const ModalForm: React.FC<ModalFormProps> = () => {
   
 
 
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   if (Object.keys(formState).length === 0) {
-  //     console.log("You don't have to do anything in your form");
-  //   } else {
-  //     console.log(formState);
-  //     postPizza();
-  //   }
-  // };
+
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target )) {
         setIsShowing(false);
       }
     }
@@ -159,7 +154,7 @@ const ModalForm: React.FC<ModalFormProps> = () => {
   }, [wrapperRef]);
 
   useEffect(() => {
-    let html = document.querySelector('html') as HTMLHtmlElement;
+    let html = document.querySelector('html') 
 
     if (html) {
       if (isShowing && html) {
@@ -220,22 +215,22 @@ const ModalForm: React.FC<ModalFormProps> = () => {
               </header>
               {/* Modal body */}
               <form    
-                onSubmit={postPizza}
-                encType="multipart/form-data">
+                onSubmit={handleProduct}
+                >
                 <div id="content-4a" className="flex-1">
                   <div className="flex flex-col gap-6">
                     {/* Input field */}
                     <div className="relative">
                       <label htmlFor="id-b03" className="mb-3">
-                        Choose Pizza Image
+                        Choose Pizza Image<Image src={image} alt='image_product' width={20} height={20}/>
                       </label>
                       <input
                         id="id-b03"
                         type="file"
-                        name="Image"
+                        name="image"
                         placeholder="your name"
                         className="h-8 w-full border border-slate-200 rounded-md text-black"
-                        onChange={handleImageChange} 
+                        onChange={handleFileChange} 
                       />
                     </div>
                     <div className="relative">
