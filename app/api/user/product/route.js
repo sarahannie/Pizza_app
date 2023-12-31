@@ -9,7 +9,6 @@ connect()
 
 export async function POST(req) {
   try {
-    
     const data = await req.json();
     const menuItemDoc = await Product.create(data);
     return new Response(JSON.stringify(menuItemDoc), { status: 200 });
@@ -29,15 +28,18 @@ export async function PUT(req) {
   return Response.json(true);
 }
 
+
+
 export async function GET() {
-  
   return Response.json(
     await Product.find()
   );
 }
 
+
+
+
 export async function DELETE(req) {
-  
   const url = new URL(req.url);
   const _id = url.searchParams.get('_id');
   await Product.deleteOne({_id});

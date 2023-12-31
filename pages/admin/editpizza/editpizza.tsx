@@ -1,16 +1,171 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import { Textarea } from "@nextui-org/input";
+import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { toast } from 'react-hot-toast';
 
 interface ModalFormProps {
   // Add any props if needed
 }
 
-const ModalForm: React.FC<ModalFormProps> = () => {
+const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
   const [isShowing, setIsShowing] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const [title, setTitle] = useState("");
+ 
+  const [description, setDescription] = useState( "");
+  const [price, setPrice] = useState({
+    small:  0,
+    medium: 0,
+    large: 0,
+  });
+  const [extra, setExtra] = useState({
+    item: "",
+    item2: "",
+    price: "",
+  })
+  const [image, setImage] = useState("");
+  const [product, setProduct] = useState({
+    title: '',
+    description: '',
+    image:'',
+    price: {
+      small: Number(price.small),
+      medium: Number(price.medium),
+      large: Number(price.large),
+    },
+    extra: {
+    item: "",
+    item2: "",
+    price: "",
+    },
+   });
+
+  
+
+  console.log(pizza)
+
+   const handleEditProduct = async (pizza:any) => {
+    try {
+     const response = await fetch(`/api/user/product/${pizza}`);
+     if (!response.ok) {
+       throw new Error(`HTTP error! status: ${response.status}`);
+     }
+     const productData = await response.json();
+     setProduct(productData);
+    } catch (error) {
+     console.error(`Error: ${error}`);
+    }
+   };
+
+  //  useEffect(() => {
+  //   console.log("image", handleEditProduct(pizza));
+  //   handleEditProduct(pizza)
+  //  }, [pizza]);
+
+  
+   
+   
+
+  async function handleFileChange(ev:any) {
+    const files = ev.target.files;
+    if (files?.length === 1) {
+      const data = new FormData;
+      data.set('file', files[0]);
+      const uploadPromise = fetch('/api/upload', {
+        method: 'POST',
+        body: data,
+      }).then(response => {
+        if (response.ok) {
+          return response.json().then(link => {
+            setImage(link);
+          })
+        }
+        throw new Error('Something went wrong');
+      });
+
+      await toast.promise(uploadPromise, {
+        loading: 'Uploading...',
+        success: 'Upload complete',
+        error: 'Upload error',
+      });
+    }
+  }
+
+  const handleInputChange = (e:any, size:any) => {
+    const {value} = e.target;
+    setPrice((prevPrice) => ({
+      ...prevPrice,
+      [size]: value,
+    }));
+  };
+
+  const handleExtraChange = (e:any, name:any) => {
+    const {  value } = e.target;
+    setExtra((prevExtra) => ({
+      ...prevExtra,
+      [name]: value,
+    }));
+  }
+
+  
+
+  useEffect(() => {
+    console.log("image", image);
+    console.log("Title after setting:", title);
+   }, [image, title]);
+  
+  
+//
+
+  async function handleProduct(ev:any){
+    ev.preventDefault();
+    const data = {
+      title,
+      description,
+      price: {
+        small: Number(price.small),
+        medium: Number(price.medium),
+        large: Number(price.large),
+      },
+      extra,
+      image:image,
+    };
+ 
+    const formData = new FormData();
+    formData.set('file', image);
+  
+    try {
+      const productId = pizza
+      const responsePromise = fetch(`/api/user/product/${productId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'multipart/form-data' },
+        body: JSON.stringify(data)
+      });
+ 
+      await toast.promise(responsePromise, {
+        loading: 'Updating...',
+        success: 'Profile updated!',
+        error: 'Error',
+      });
+ 
+      const response = await responsePromise;
+ 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+ 
+      const imageData = await response.json();
+      console.log('Image Data:', imageData);
+      setImage(imageData);
+    } catch (error:any) {
+      console.error(`Fetch error: ${error.message}`);
+    }
+ }
+ 
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -79,10 +234,14 @@ const ModalForm: React.FC<ModalFormProps> = () => {
       }
     }
   }, [isShowing]);
+  console.log("product image:", product.image);
 
   return (
     <>
-    <Button onClick={() => setIsShowing(true)} size="sm" className='bg-green-700 border-none hover:bg-green-400 text-white'>Edit</Button>
+    <Button onClick={() =>{ 
+      setIsShowing(true) 
+      handleEditProduct(pizza)
+      }} size="sm" className='bg-green-700 border-none hover:bg-green-400 text-white'>Edit</Button>
      
 
       {isShowing && typeof document !== "undefined"
@@ -136,43 +295,44 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                   </button>
                 </header>
                 {/* Modal body */}
+                <form    
+                onSubmit={handleProduct}
+                >
                 <div id="content-4a" className="flex-1">
                   <div className="flex flex-col gap-6">
                     {/* Input field */}
                     <div className="relative">
-                    <label
-                        htmlFor="id-b03"
-                        className="mb-3"
-                      >
+                      <label htmlFor="id-b03" className="mb-3">
                         Choose Pizza Image
                       </label>
+                      <Image src={product.image} alt='product_image' width={30} height={30}/>
                       <input
                         id="id-b03"
                         type="file"
-                        name="id-b03"
+                        name="image"
                         placeholder="your name"
-                        className="h-8 w-full border border-slate-200 rounded-md "
-                        // peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400
+                        className="h-8 w-full border border-slate-200 rounded-md text-black"
+                        onChange={e => setProduct({...product, image: e.target.value})}
+                        // value={product.image}
                       />
-                     
                     </div>
                     <div className="relative">
-                    <label
-                        htmlFor="id-b03"
-                        className="pb-3"
-                      >
+                      <label htmlFor="id-b03" className="pb-3">
                         Pizza Title
                       </label>
                       <input
                         id="id-b03"
                         type="text"
-                        name="id-b03"
-                        placeholder="your name"
-                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                        
-                      />
-                     
+                        name="title"
+                        placeholder="Enter Pizza Title"
+                        className="peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 "
+                        // onChange={(e) => setTitle(e.target.value)}
+                        onChange={e => setProduct({...product, title: e.target.value})}
+                        value={product.title}  
+/>
+
                     </div>
+                   
                     <div className="relative">
                     <label
                         htmlFor="id-b03"
@@ -181,14 +341,16 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                         Pizza Description
                       </label>
                       <textarea
+                       
                         id="id-b03"
                         rows={5}
                         cols={30}
-                        
-                        name="id-b03"
-                        placeholder="your name"
-                        className=" peer relative h-30 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                        
+                        name="description"
+                        placeholder="Enter Pizza Description"
+                        className=" peer relative h-30 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50"
+                        // onChange={(e) => setDescription(e.target.value)}
+                        onChange={e => setProduct({...product, description: e.target.value})}
+                        value={product.description}
                       />
                      
                     </div>
@@ -200,28 +362,31 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                         Pizza Prices
                       </label>
                       <input
+                       
                         id="id-b03"
                         type="text"
-                        name="id-b03"
-                        placeholder="Small"
-                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mt-2"
-                        
+                        name="price.small"
+                        placeholder="Enter Small Price"
+                        className="peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
+                        value={product.price.small} onChange={(e) => handleInputChange(e, 'small')}
                       />
                       <input
+                      
                         id="id-b03"
                         type="text"
-                        name="id-b03"
-                        placeholder="Medium"
-                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mt-2 text-black"
-                        
+                        name="price.medium"
+                        placeholder="Enter Medium Price"
+                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
+                        value={product.price.medium} onChange={(e) => handleInputChange(e, 'medium')}
                       />
                       <input
+                      
                         id="id-b03"
                         type="text"
-                        name="id-b03"
-                        placeholder="large"
-                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mb-6 mt-2"
-                        
+                        name="price.large"
+                        placeholder=" Enter Large Price"
+                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
+                        value={product.price.large} onChange={(e) => handleInputChange(e, 'large')}
                       />
                      
                     </div>
@@ -234,39 +399,47 @@ const ModalForm: React.FC<ModalFormProps> = () => {
                         Extra
                       </label>
                       <input
+                     
                         id="id-b03"
                         type="text"
-                        name="id-b03"
-                        placeholder="Item"
-                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mt-2"
-                        
+                        name="extra.item"
+                        placeholder="Enter extra item one"
+                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
+                        value={product.extra.item} onChange={(e) => handleExtraChange(e, 'item')}
                       />
                       <input
+                    
                         id="id-b03"
                         type="text"
-                        name="id-b03"
-                        placeholder="Price"
-                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mt-2 text-black"
-                        
+                        name="extra.item2"
+                        placeholder="Enter extra item two"
+                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
+                        value={product.extra.item2} onChange={(e) => handleExtraChange(e, 'item2')}
                       />
                       <input
+                       
                         id="id-b03"
                         type="text"
-                        name="id-b03"
-                        placeholder="Add"
-                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 mb-6 mt-2"
-                        
+                        name="extra.price"
+                        placeholder="Enter extra price"
+                        className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3 mb-5"
+                        value={product.extra.price} onChange={(e) => handleExtraChange(e, 'price')}
                       />
                      
                     </div>
-                    
+                    {/* Add other input fields as needed */}
                   </div>
                 </div>
                 {/* Modal actions */}
                 <div className="flex justify-end gap-2">
-                    <Button size="md"  className='bg-gray-500 border-none hover:bg-gray-200 text-white' >Close</Button>
-                    <Button size="md" className='bg-blue-500 border-none hover:bg-blue-200 text-white'>Create Pizza</Button>
+                  <Button size="md" className="bg-gray-500 border-none hover:bg-gray-200 text-white">
+                    Close
+                  </Button>
+                  <Button size="md" className="bg-blue-500 border-none hover:bg-blue-200 text-white" type="submit">
+                    Update Pizza
+                  </Button>
                 </div>
+              </form>
               </div>
             </div>,
             document.body

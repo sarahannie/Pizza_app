@@ -2,22 +2,15 @@
 import React, { useState, useRef, useEffect, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from '@nextui-org/button';
-import { Textarea } from '@nextui-org/input';
 import { toast } from 'react-hot-toast';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
-
-import {join} from 'path'
-
 import style from './getpizza.module.css';
-import { pid } from 'process';
 import Image from 'next/image';
 
 const ModalForm = () => {
   const router = useRouter();
   const [isShowing, setIsShowing] = useState(false);
   const wrapperRef = useRef(null);
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState({
@@ -35,8 +28,7 @@ const ModalForm = () => {
 
  
   const handleInputChange = (e, size) => {
-    
-    const value = e.target.value;
+    const {value} = e.target;
     setPrice((prevPrice) => ({
       ...prevPrice,
       [size]: value,
@@ -51,18 +43,8 @@ const ModalForm = () => {
     }));
   }
 
-  const handleImageChange = (e) => {
-    const selectedFile = e.target.files?.[0];
-    setImage(selectedFile);
-  };
-
-
-  
-  
-
   async function handleProduct(ev){
     ev.preventDefault();
-  
     const data = {
       title,
       description,
@@ -79,28 +61,31 @@ const ModalForm = () => {
     formData.set('file', image);
   
     try {
-      const response = await fetch('/api/user/product', {
+      const responsePromise = fetch('/api/user/product', {
         method: 'POST',
         headers: { 'Content-Type': 'multipart/form-data' },
         body: JSON.stringify(data)
       });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-  
-      const imageData = await response.json();
-      console.log('Image Data:', imageData);
-      setImage(imageData);
-  
-      await toast.promise(response, {
+     
+      await toast.promise(responsePromise, {
         loading: 'Saving...',
         success: 'Profile saved!',
         error: 'Error',
       });
-    } catch (error) {
+     
+      const response = await responsePromise;
+     
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+     
+      const imageData = await response.json();
+      console.log('Image Data:', imageData);
+      setImage(imageData);
+     } catch (error) {
       console.error(`Fetch error: ${error.message}`);
-    }
+     }
+     
   }
   
  
@@ -110,7 +95,6 @@ const ModalForm = () => {
     if (files?.length === 1) {
       const data = new FormData;
       data.set('file', files[0]);
-
       const uploadPromise = fetch('/api/upload', {
         method: 'POST',
         body: data,
@@ -222,7 +206,7 @@ const ModalForm = () => {
                     {/* Input field */}
                     <div className="relative">
                       <label htmlFor="id-b03" className="mb-3">
-                        Choose Pizza Image<Image src={image} alt='image_product' width={20} height={20}/>
+                        Choose Pizza Image
                       </label>
                       <input
                         id="id-b03"

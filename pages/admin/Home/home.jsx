@@ -96,7 +96,7 @@ function Trpizza({ pizza }) {
       </td>
       <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
         <div className="flex gap-4">
-          <ModalForm />
+          <ModalForm pizza={pizza._id} />
           <Button size="sm" className='bg-red-700 border-none hover:bg-red-400 text-white'>
             Delete
           </Button>
