@@ -5,11 +5,29 @@ import React from 'react'
 import style from './home.module.css'
 import ModalForm from '../editpizza/editpizza';
 import  useClient  from '@/helper/getProduct';
+import axios from 'axios'
+import { toast } from 'react-hot-toast'
+import { useState, useEffect } from 'react'
 
 
 
 const Home = () => {
-  const pizzaData = useClient();
+  const [pizzaData, setPizzaData] = useState([]);
+
+  const getPizza = async () => {
+    try {
+      const response = await axios.get('/api/user/product');
+      setPizzaData(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+      toast.error("Can't fetch product data. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    getPizza();
+  }, []);
 
   return (
     <div className={style.container}>
@@ -72,6 +90,7 @@ const Home = () => {
 export default Home
 
 function Trpizza({ pizza }) {
+  const largePrice = pizza.price?.large|| 'Price not available';
   return(
     <tr className="border-b border-slate-200">
       <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
@@ -92,7 +111,7 @@ function Trpizza({ pizza }) {
         </div>
       </td>
       <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
-        <div>$ {pizza.price.large}</div>
+        <div>$ {largePrice}</div>
       </td>
       <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
         <div className="flex gap-4">
