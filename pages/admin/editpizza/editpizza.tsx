@@ -61,10 +61,10 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
     }
    };
 
-   useEffect(() => {
-    console.log("image", handleEditProduct(pizza));
-    handleEditProduct(pizza)
-   }, [pizza]);
+  //  useEffect(() => {
+  //   console.log("image", handleEditProduct(pizza));
+  //   handleEditProduct(pizza)
+  //  }, [pizza]);
 
   
    
@@ -124,34 +124,17 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
 
   async function handleProduct(ev:any){
     ev.preventDefault();
-    const data = {
-      title,
-      description,
-      price: {
-        small: Number(price?.small), 
-        medium: Number(price?.medium),
-        large: Number(price?.large),
-      },
-      extra,
-      image:image,
-    };
- 
+    const productId = pizza
+
     const formData = new FormData();
-    formData.append('title', data.title);
-    formData.append('description', data.description);
-    formData.append('price[small]', String(data.price.small));
-    formData.append('price[medium]', String(data.price.medium));
-    formData.append('price[large]', String(data.price.large));
-    // formData.append('extra', data.extra);
-    formData.append('file', image);
-   
-    
-  
+    formData.set('file', image);
+
     try {
-      const productId = pizza
+      
       const responsePromise = fetch(`/api/user/product/${productId}`, {
         method: 'PUT',
-        body: formData
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(product)
       });
  
       await toast.promise(responsePromise, {
@@ -159,6 +142,9 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
         success: 'Profile updated!',
         error: 'Error',
       });
+
+      console.log('Product ID:', productId);
+      console.log('Request Data:', JSON.stringify(product));
  
       const response = await responsePromise;
       console.log("response", response);
@@ -166,7 +152,6 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
- 
       const imageData = await response.json();
       console.log('Image Data:', imageData);
       setProduct(imageData);
