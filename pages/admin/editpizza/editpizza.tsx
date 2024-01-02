@@ -27,7 +27,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
     item2: "",
     price: "",
   })
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(" ");
   const [product, setProduct] = useState({
     title: '',
     description: '',
@@ -61,10 +61,10 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
     }
    };
 
-  //  useEffect(() => {
-  //   console.log("image", handleEditProduct(pizza));
-  //   handleEditProduct(pizza)
-  //  }, [pizza]);
+   useEffect(() => {
+    console.log("image", handleEditProduct(pizza));
+    handleEditProduct(pizza)
+   }, [pizza]);
 
   
    
@@ -97,26 +97,27 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
 
   const handleInputChange = (e:any, size:any) => {
     const {value} = e.target;
-    setPrice((prevPrice) => ({
+    setProduct((prevPrice) => ({
       ...prevPrice,
-      [size]: value,
+      price: {
+        ...prevPrice?.price,
+        [size]: value,
+      }
     }));
   };
 
   const handleExtraChange = (e:any, name:any) => {
-    const {  value } = e.target;
-    setExtra((prevExtra) => ({
-      ...prevExtra,
-      [name]: value,
+    const { value } = e.target;
+    setProduct(prevProduct => ({
+      ...prevProduct,
+      extra: {
+        ...prevProduct?.extra,
+        [name]: value
+      }
     }));
-  }
-
+  };
   
 
-  useEffect(() => {
-    console.log("image", image);
-    console.log("Title after setting:", title);
-   }, [image, title]);
   
   
 //
@@ -127,23 +128,30 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
       title,
       description,
       price: {
-        small: Number(price.small),
-        medium: Number(price.medium),
-        large: Number(price.large),
+        small: Number(price?.small), 
+        medium: Number(price?.medium),
+        large: Number(price?.large),
       },
       extra,
       image:image,
     };
  
     const formData = new FormData();
-    formData.set('file', image);
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+    formData.append('price[small]', String(data.price.small));
+    formData.append('price[medium]', String(data.price.medium));
+    formData.append('price[large]', String(data.price.large));
+    // formData.append('extra', data.extra);
+    formData.append('file', image);
+   
+    
   
     try {
       const productId = pizza
       const responsePromise = fetch(`/api/user/product/${productId}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'multipart/form-data' },
-        body: JSON.stringify(data)
+        body: formData
       });
  
       await toast.promise(responsePromise, {
@@ -153,6 +161,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
       });
  
       const response = await responsePromise;
+      console.log("response", response);
  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -160,7 +169,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
  
       const imageData = await response.json();
       console.log('Image Data:', imageData);
-      setImage(imageData);
+      setProduct(imageData);
     } catch (error:any) {
       console.error(`Fetch error: ${error.message}`);
     }
@@ -180,6 +189,8 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [wrapperRef]);
+
+  
 
   useEffect(() => {
     let html = document.querySelector("html") as HTMLHtmlElement;
@@ -312,7 +323,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         name="image"
                         placeholder="your name"
                         className="h-8 w-full border border-slate-200 rounded-md text-black"
-                        onChange={e => setProduct({...product, image: e.target.value})}
+                        // onChange={e => setProduct({...product, image: URL.createObjectURL(e.target.files[0])})}
                         // value={product.image}
                       />
                     </div>
@@ -328,7 +339,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         className="peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 "
                         // onChange={(e) => setTitle(e.target.value)}
                         onChange={e => setProduct({...product, title: e.target.value})}
-                        value={product.title}  
+                        value={product.title || ''}  
 />
 
                     </div>
@@ -350,7 +361,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         className=" peer relative h-30 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50"
                         // onChange={(e) => setDescription(e.target.value)}
                         onChange={e => setProduct({...product, description: e.target.value})}
-                        value={product.description}
+                        value={product.description  || '' }
                       />
                      
                     </div>
@@ -368,7 +379,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         name="price.small"
                         placeholder="Enter Small Price"
                         className="peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
-                        value={product.price.small} onChange={(e) => handleInputChange(e, 'small')}
+                        value={product.price.small  || ''} onChange={(e) => handleInputChange(e, 'small')}
                       />
                       <input
                       
@@ -377,7 +388,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         name="price.medium"
                         placeholder="Enter Medium Price"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
-                        value={product.price.medium} onChange={(e) => handleInputChange(e, 'medium')}
+                        value={product.price.medium  || ''} onChange={(e) => handleInputChange(e, 'medium')}
                       />
                       <input
                       
@@ -386,7 +397,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         name="price.large"
                         placeholder=" Enter Large Price"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
-                        value={product.price.large} onChange={(e) => handleInputChange(e, 'large')}
+                        value={product.price.large || ''} onChange={(e) => handleInputChange(e, 'large')}
                       />
                      
                     </div>
@@ -405,7 +416,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         name="extra.item"
                         placeholder="Enter extra item one"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
-                        value={product.extra.item} onChange={(e) => handleExtraChange(e, 'item')}
+                        value={product.extra.item || ''} onChange={(e) => handleExtraChange(e, 'item')}
                       />
                       <input
                     
@@ -414,7 +425,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         name="extra.item2"
                         placeholder="Enter extra item two"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
-                        value={product.extra.item2} onChange={(e) => handleExtraChange(e, 'item2')}
+                        value={product.extra.item2 || ''} onChange={(e) => handleExtraChange(e, 'item2')}
                       />
                       <input
                        
@@ -423,7 +434,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         name="extra.price"
                         placeholder="Enter extra price"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3 mb-5"
-                        value={product.extra.price} onChange={(e) => handleExtraChange(e, 'price')}
+                        value={product.extra.price || ''} onChange={(e) => handleExtraChange(e, 'price')}
                       />
                      
                     </div>
