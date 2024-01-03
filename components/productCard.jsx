@@ -1,20 +1,44 @@
-import React from 'react'
+"use client"
+import React, { useState, useEffect } from 'react'
 import {  FaStar } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import Link from 'next/link';
 import Image from 'next/image';
-import style from './productCard.module.css'
+import style from './productCard.module.css';
+import axios from 'axios';
 
 const ProductCard = () => {
+
+  const[pizza, setPizza] = useState([]);
+
+ 
+
+  const getPizza = async () => {
+    try {
+      const response = await axios.get('/api/user/product');
+      setPizza(response.data);
+      console.log(response.data);
+    } catch (error) {
+
+      toast.error("Can't fetch product data. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    getPizza();
+  }, []);
+
   return (
     <div className={style.container}>
-        <div className={style.contCheese}>
+      {
+        pizza.map((item, index) => ( 
+          <div key={index} className={style.contCheese}>
               <div className={style.cheeseImg}>
-                <Image src="/image/pizza-1.png" width={250} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
+                <Image src={item.image} width={250} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
               </div>
               <div className={style.cheese}>
-                <h2 className={style.cheeseH2}>Shrime Pizza</h2>
-                <h2 className={style.cheeseH4}>$35.00</h2>
+                <h2 className={style.cheeseH2}>{item.title}</h2>
+                <h2 className={style.cheeseH4}>${item?.price?.small}</h2>
               </div>
               <div className="flex m-l-5 gap-1">
                 <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
@@ -23,7 +47,7 @@ const ProductCard = () => {
                 <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
                 <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
               </div>
-              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
+              <div className={style.cheeseText}>{item.description} </div>
               <div>
               <Link href="#" className={style.btn} >
               <IoCartOutline fontSize={22} className=""/>
@@ -31,6 +55,9 @@ const ProductCard = () => {
             </Link>
               </div>
         </div>
+        ))
+      }
+        
         <div className={style.contCheese}>
               <div className={style.cheeseImg}>
                 <Image src="/image/pizza-1.png" width={250} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>

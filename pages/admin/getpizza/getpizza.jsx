@@ -80,7 +80,7 @@ const ModalForm = () => {
       }
      
       const imageData = await response.json();
-      console.log('Image Data:', imageData);
+     
       setImage(imageData);
      } catch (error) {
       console.error(`Fetch error: ${error.message}`);
