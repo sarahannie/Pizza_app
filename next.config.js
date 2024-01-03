@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['images.unsplash.com', "www.freepnglogos.com",  "images.pexels.com","res.cloudinary.com" ],
+        domains: ['images.unsplash.com', "www.freepnglogos.com",  "images.pexels.com","res.cloudinary.com","api.cloudinary.com" ],
       },
       async rewrites() {
         return [

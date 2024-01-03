@@ -5,12 +5,13 @@ import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { toast } from 'react-hot-toast';
-
+import { useRouter } from 'next/navigation';
 interface ModalFormProps {
   // Add any props if needed
 }
 
 const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
+  const router = useRouter()
   const [isShowing, setIsShowing] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -61,39 +62,31 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
     }
    };
 
-  //  useEffect(() => {
-  //   console.log("image", handleEditProduct(pizza));
-  //   handleEditProduct(pizza)
-  //  }, [pizza]);
-
-  
-   
-   
 
   async function handleFileChange(ev:any) {
     const files = ev.target.files;
     if (files?.length === 1) {
-      const data = new FormData;
+      const data = new FormData();
       data.set('file', files[0]);
-      const uploadPromise = fetch('/api/upload', {
-        method: 'POST',
-        body: data,
-      }).then(response => {
+  
+      try {
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: data,
+        });
+  
         if (response.ok) {
-          return response.json().then(link => {
-            setImage(link);
-          })
+          const link = await response.json();
+          setProduct({ ...product, image: link });
+          toast.success('Image uploaded successfully');
+        } else {
+          throw new Error('Something went wrong');
         }
-        throw new Error('Something went wrong');
-      });
-
-      await toast.promise(uploadPromise, {
-        loading: 'Uploading...',
-        success: 'Upload complete',
-        error: 'Upload error',
-      });
+      
+      } catch (error) {
+        console.error('Error during file upload:', error);
     }
-  }
+  }}
 
   const handleInputChange = (e:any, size:any) => {
     const {value} = e.target;
@@ -120,7 +113,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
 
   
   
-//
+
 
   async function handleProduct(ev:any){
     ev.preventDefault();
@@ -130,10 +123,9 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
     formData.set('file', image);
 
     try {
-      
       const responsePromise = fetch(`/api/user/product/${productId}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'multipart/form-data' },
         body: JSON.stringify(product)
       });
  
@@ -142,19 +134,15 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
         success: 'Profile updated!',
         error: 'Error',
       });
-
-      console.log('Product ID:', productId);
-      console.log('Request Data:', JSON.stringify(product));
  
       const response = await responsePromise;
-      console.log("response", response);
  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const imageData = await response.json();
-      console.log('Image Data:', imageData);
       setProduct(imageData);
+      router.push('/adminlanding')
     } catch (error:any) {
       console.error(`Fetch error: ${error.message}`);
     }
@@ -230,7 +218,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
       }
     }
   }, [isShowing]);
-  console.log("product image:", product.image);
+
 
   return (
     <>
@@ -308,8 +296,8 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         name="image"
                         placeholder="your name"
                         className="h-8 w-full border border-slate-200 rounded-md text-black"
-                        // onChange={e => setProduct({...product, image: URL.createObjectURL(e.target.files[0])})}
-                        // value={product.image}
+                        onChange={e => handleFileChange(e)}
+                     
                       />
                     </div>
                     <div className="relative">
@@ -322,10 +310,9 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
                         name="title"
                         placeholder="Enter Pizza Title"
                         className="peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 "
-                        // onChange={(e) => setTitle(e.target.value)}
                         onChange={e => setProduct({...product, title: e.target.value})}
                         value={product.title || ''}  
-/>
+                        />
 
                     </div>
                    
