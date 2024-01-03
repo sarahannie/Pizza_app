@@ -1,3 +1,4 @@
+
 import React from 'react';
 import style from './product.module.css';
 import Image from 'next/image';
@@ -8,6 +9,8 @@ import ModalForm from '../getpizza/getpizza';
 
 
 const Product = () => {
+
+
   return (
     <div className={style.container}>
       <nav className={style.productContainer}>
@@ -38,6 +41,7 @@ const Product = () => {
       <div>
         <ProductCard />
       </div>
+      
     </div>
   )
 }
