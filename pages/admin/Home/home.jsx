@@ -15,7 +15,6 @@ import { FaPizzaSlice } from 'react-icons/fa'
 
 const Home = () => {
   const [pizzaData, setPizzaData] = useState([]);
-  const [redirectToItems, setRedirectToItems] = useState(false);
   const [deletePizzaId, setDeletePizzaId] = useState(null);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
 
@@ -50,9 +49,8 @@ const Home = () => {
     try {
       const response = await axios.get('/api/user/product');
       setPizzaData(response.data);
-      console.log(response.data);
     } catch (error) {
-      console.log(error);
+
       toast.error("Can't fetch product data. Please try again.");
     }
   };
@@ -64,31 +62,9 @@ const Home = () => {
 
   
 
-  async function deletePizza(_id) {
-    const promise = new Promise(async (resolve, reject) => {
-      const res = await fetch('/api/user/product?_id='+id, {
-        method: 'DELETE',
-      });
-      if (res.ok)
-        resolve();
-      else
-        reject();
-    });
 
-    console.log("res", res)
 
-    await toast.promise(promise, {
-      loading: 'Deleting...',
-      success: 'Deleted',
-      error: 'Error',
-    });
-
-    setRedirectToItems(true);
-  }
-
-  if (redirectToItems) {
-    return redirect('/adminlanding');
-  }
+  
 
   return (
     <>

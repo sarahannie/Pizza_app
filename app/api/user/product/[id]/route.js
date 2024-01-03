@@ -46,11 +46,9 @@ export async function PUT(req) {
     // Update product information
     await Product.updateOne(filter, { title, description, price, extras, image, ...otherProductInfo });
 
-    console.log('Product updated successfully:', product);
-
     return Response.json(product);
   } catch (error) {
-    console.error('Error updating product:', error);
+
     return Response.json({ error: 'Internal Server Error', status: 500 });
   }
 }
@@ -58,9 +56,9 @@ export async function PUT(req) {
 
 export async function DELETE(req) {
   const url = new URL(req.url);
-  const _id = url.searchParams.get('_id');
-  await Product.deleteOne({_id});
-  return Response.json(true);
+  const _id = url.pathname.split('/').pop();
+  const product = await Product.findByIdAndDelete({_id});
+  return Response.json(product);
 }
 
 
