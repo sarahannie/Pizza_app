@@ -8,11 +8,43 @@ import  useClient  from '@/helper/getProduct';
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import { useState, useEffect } from 'react'
+import {  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { FaPizzaSlice } from 'react-icons/fa'
 
 
 
 const Home = () => {
   const [pizzaData, setPizzaData] = useState([]);
+  const [redirectToItems, setRedirectToItems] = useState(false);
+  const [deletePizzaId, setDeletePizzaId] = useState(null);
+  const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
+
+  const handleDelete = (id) => {
+    // Set the facilitator ID to be deleted and open the confirmation modal
+    setDeletePizzaId(id);
+    setOpenConfirmationModal(true);
+  };
+
+  const handleCloseConfirmationModal = () => {
+    // Close the confirmation modal
+    setOpenConfirmationModal(false);
+  };
+
+  const confirmDelete = async () => {
+    if (deletePizzaId) {
+      try {
+        // Send a DELETE request to your API to delete the facilitator
+        await axios.delete(`api/user/product/${deletePizzaId}`);
+        // Update the list of facilitators (you might want to handle this more gracefully)
+        setPizzaData(pizzaData.filter((pizza) => pizza._id !== deletePizzaId));
+        setDeletePizzaId(null);
+        setOpenConfirmationModal(false);
+        toast.success('Data deleted successfully');
+      } catch (error) {
+        console.error('Error deleting Product:', error);
+      }
+    }
+  };
 
   const getPizza = async () => {
     try {
@@ -29,7 +61,37 @@ const Home = () => {
     getPizza();
   }, []);
 
+
+  
+
+  async function deletePizza(_id) {
+    const promise = new Promise(async (resolve, reject) => {
+      const res = await fetch('/api/user/product?_id='+id, {
+        method: 'DELETE',
+      });
+      if (res.ok)
+        resolve();
+      else
+        reject();
+    });
+
+    console.log("res", res)
+
+    await toast.promise(promise, {
+      loading: 'Deleting...',
+      success: 'Deleted',
+      error: 'Error',
+    });
+
+    setRedirectToItems(true);
+  }
+
+  if (redirectToItems) {
+    return redirect('/adminlanding');
+  }
+
   return (
+    <>
     <div className={style.container}>
       <div>
          <div>
@@ -50,7 +112,7 @@ const Home = () => {
       </thead>
       <tbody>
       {pizzaData.map((pizza) => (
-          <Trpizza key={pizza.id} pizza={pizza} />
+          <Trpizza key={pizza.id} pizza={pizza} handleDelete={handleDelete} />
        ))}
     </tbody>
   </table>
@@ -84,12 +146,31 @@ const Home = () => {
       </div>
       </div>
     </div>
+
+      {/* Confirmation Modal */}
+      <Dialog open={openConfirmationModal} onClose={handleCloseConfirmationModal}>
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Are you sure you want to delete this Product?</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseConfirmationModal} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={confirmDelete} color="danger">
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* Confirmation Modal */}
+
+    </>
   )
 }
 
 export default Home
 
-function Trpizza({ pizza }) {
+function Trpizza({ pizza, handleDelete }) {
   const largePrice = pizza.price?.large|| 'Price not available';
   return(
     <tr className="border-b border-slate-200">
@@ -116,7 +197,7 @@ function Trpizza({ pizza }) {
       <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
         <div className="flex gap-4">
           <ModalForm pizza={pizza._id} />
-          <Button size="sm" className='bg-red-700 border-none hover:bg-red-400 text-white'>
+          <Button size="sm" className='bg-red-700 border-none hover:bg-red-400 text-white' onClick={() => handleDelete(pizza._id)}>
             Delete
           </Button>
         </div>

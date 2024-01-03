@@ -142,7 +142,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
       }
       const imageData = await response.json();
       setProduct(imageData);
-      router.push('/adminlanding')
+      router.push('/adminproduct')
     } catch (error:any) {
       console.error(`Fetch error: ${error.message}`);
     }
