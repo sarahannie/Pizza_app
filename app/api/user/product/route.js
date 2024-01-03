@@ -88,8 +88,6 @@ export async function PUT(req) {
     // Update product information
     await Product.updateOne(filter, { title, description, price, extras, image, ...otherProductInfo });
 
-    console.log('Product updated successfully:', product);
-
     return Response.json(product);
   } catch (error) {
     console.error('Error updating product:', error);
@@ -100,14 +98,10 @@ export async function PUT(req) {
 
 
 
-
-
-
-
-export async function GET() {
-  return Response.json(
-    await Product.find()
-  );
+export async function GET(req) {
+  console.log('title, req.query.title', req.query);
+  let product = await Product.find()
+  return Response.json(product);
 }
 
 

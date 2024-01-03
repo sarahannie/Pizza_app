@@ -1,33 +1,16 @@
-"use client"
+
 import React, { useState, useEffect } from 'react'
 import {  FaStar } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import Link from 'next/link';
 import Image from 'next/image';
 import style from './productCard.module.css';
-import axios from 'axios';
-import { Pagination } from '@mui/material';
 
-const ProductCard = () => {
 
-  const[pizza, setPizza] = useState([]);
-  const [page, setPage] = useState(1);
-  const itemsPerPage = 6;
-  const itemsToShow = pizza.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
-  const getPizza = async () => {
-    try {
-      const response = await axios.get('/api/user/product');
-      setPizza(response.data);
-      console.log(response.data);
-    } catch (error) {
-      toast.error("Can't fetch product data. Please try again.");
-    }
-  };
+const ProductCard = ({itemsToShow}) => {
 
-  useEffect(() => {
-    getPizza();
-  }, []);
+ 
 
 
 
@@ -86,15 +69,7 @@ const ProductCard = () => {
               </div>
         </div> */}
     </div>
-    <div className='pt-10 pb-8 flex justify-center' >
-        <Pagination 
-        variant="outlined"
-         color="secondary"
-        count={Math.ceil(pizza.length / itemsPerPage)} 
-        page={page} 
-        onChange={(event, value) => setPage(value)}
-        />
-      </div>
+    
     </>
   )
 }

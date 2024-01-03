@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/checkoutMedal.jsx", "pages/Checkout/CheckOut.jsx", "app/frontpage/checkout/page.jsx", "pages/admin/Home/home.jsx", "pages/login/Login.jsx", "app/login/page.jsx", "app/api/auth/[...nextauth]/route.js", "components/AppContext.jsx", "components/navbar.jsx", "pages/admin/getpizza/getpizza.jsx", "app/api/user/product/route.js", "app/(admin)/adminlanding/page.jsx", "app/(admin)/adminlanding/layout.tsx", "pages/admin/editpizza/editpizza.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/checkoutMedal.jsx", "pages/Checkout/CheckOut.jsx", "app/frontpage/checkout/page.jsx", "pages/admin/Home/home.jsx", "pages/login/Login.jsx", "app/login/page.jsx", "app/api/auth/[...nextauth]/route.js", "components/AppContext.jsx", "components/navbar.jsx", "pages/admin/getpizza/getpizza.jsx", "app/api/user/product/route.js", "app/(admin)/adminlanding/page.jsx", "app/(admin)/adminlanding/layout.tsx", "pages/admin/editpizza/editpizza.tsx", "pages/admin/Product/product.jsx"],
   "exclude": ["node_modules"]
 }
