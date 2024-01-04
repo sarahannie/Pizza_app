@@ -1,0 +1,18 @@
+.btn{
+    justify-content: flex-start;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fbb200;
+    gap: 0.5rem;
+      color: #fff;
+      width: 8rem;
+      height: 3rem;
+      border-radius: 2rem;
+      font-size: 1.3rem;
+  }
+  
+  .btn:hover{
+      background-color: #d43b49;
+  }

@@ -2,7 +2,7 @@
 import React from 'react';
 import style from './product.module.css';
 import Image from 'next/image';
-import { IoFilter } from 'react-icons/io5';
+
 import ProductCard from '@/components/productCard';
 import ModalForm from '../getpizza/getpizza';
 import  { useState, useEffect } from 'react'
@@ -13,6 +13,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+import Filter from '@/components/layout/filter';
 
 
 
@@ -35,15 +37,33 @@ const Product = () => {
     handleFilter(value)
   };
 
-
-  const handleFilter  = async(query) => {
-  //  let pizzas = await pizza.filter(product => product.title == query);
-  let newFilteredPizzas = originalPizzas.filter((product) =>
-  product.title.includes(query)
-);
-setFilteredPizzas(newFilteredPizzas);
-  
+  const handleTotalFilter = (value) =>{
+    setCategory(value);
+    handleAllFilter(value)
   }
+
+  const handleFilter  = async(title) => {
+    const lowercasedTitle = title.toLowerCase();
+  let newFilteredPizzas = originalPizzas.filter((product) =>
+  product.title.toLowerCase().includes(lowercasedTitle)
+  );
+  setFilteredPizzas(newFilteredPizzas);
+  }
+
+  const handleAllFilter = async (price, title, description) => {
+    
+    const lowercasedTitle = title.toLowerCase();
+    const lowercasedDescription = description.toLowerCase();
+  
+    let newFilteredPizzas = originalPizzas.filter((product) => 
+      product.price.small <= price &&  
+      product.title.toLowerCase().includes(lowercasedTitle) &&
+      product.description.toLowerCase().includes(lowercasedDescription)
+    );
+    setFilteredPizzas(newFilteredPizzas);
+  };
+  
+  
 
   const itemsToShow = filteredPizzas.slice(
     (page - 1) * itemsPerPage,
@@ -70,11 +90,7 @@ setFilteredPizzas(newFilteredPizzas);
     <div className={style.container}>
       <nav className={style.productContainer}>
         <div>
-            
-                <div className={style.btn}>
-                <IoFilter className={style.icon} />
-                <button className={style.btn1}>Filter</button>
-                </div>
+                <Filter handleAllFilter={handleAllFilter}  />
                 <ModalForm />
         </div>
         
