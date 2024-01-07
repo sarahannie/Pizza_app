@@ -13,74 +13,85 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { handleTotalFilter } from '@/utils/filterUtil';
 
 import Filter from '@/components/layout/filter';
-
+import useProduct  from '@/helper/filterProduct';
 
 
 const Product = () => {
-  const [pizza, setPizza] = useState([]);
-  const [page, setPage] = useState(1);
-  const [category, setCategory] = useState('');
-  const itemsPerPage = 6;
-  const originalPizzas = [...pizza];
-  const [filteredPizzas, setFilteredPizzas] = useState([]);
-  // let itemsToShow = pizza.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+  const {
+    pizza,
+    page,
+    category,
+    itemsPerPage,
+    filteredPizzas,
+    itemsToShow,
+    handleChange,
+    handleAllFilter,
+    getPizza,
+  } = useProduct();
+  // const [pizza, setPizza] = useState([]);
+  // const [page, setPage] = useState(1);
+  // const [category, setCategory] = useState('');
+  // const itemsPerPage = 6;
+  // const originalPizzas = [...pizza];
+  // const [filteredPizzas, setFilteredPizzas] = useState([]);
+  
 
-  useEffect(() => {
-    getPizza();
-  }, []);
+  // useEffect(() => {
+  //   getPizza();
+  // }, []);
 
 
-  const handleChange = (value) => {
-    setCategory(value);
-    handleFilter(value)
-  };
+  // const handleChange = (value) => {
+  //   setCategory(value);
+  //   handleFilter(value)
+  // };
 
-  const handleTotalFilter = (value) =>{
-    setCategory(value);
-    handleAllFilter(value)
-  }
+  
 
-  const handleFilter  = async(title) => {
-    const lowercasedTitle = title.toLowerCase();
-  let newFilteredPizzas = originalPizzas.filter((product) =>
-  product.title.toLowerCase().includes(lowercasedTitle)
-  );
-  setFilteredPizzas(newFilteredPizzas);
-  }
+  // const handleFilter  = async(title) => {
+  //   const lowercasedTitle = title.toLowerCase();
+  // let newFilteredPizzas = originalPizzas.filter((product) =>
+  // product.title.toLowerCase().includes(lowercasedTitle)
+  // );
+  // setFilteredPizzas(newFilteredPizzas);
+  // }
 
-  const handleAllFilter = async (price, title, description) => {
+ 
+
+  // const handleAllFilter = async (price, title, description) => {
     
-    const lowercasedTitle = title.toLowerCase();
-    const lowercasedDescription = description.toLowerCase();
+  //   const lowercasedTitle = title.toLowerCase();
+  //   const lowercasedDescription = description.toLowerCase();
   
-    let newFilteredPizzas = originalPizzas.filter((product) => 
-      product.price.small <= price &&  
-      product.title.toLowerCase().includes(lowercasedTitle) &&
-      product.description.toLowerCase().includes(lowercasedDescription)
-    );
-    setFilteredPizzas(newFilteredPizzas);
-  };
+  //   let newFilteredPizzas = originalPizzas.filter((product) => 
+  //     product.price.small <= price &&  
+  //     product.title.toLowerCase().includes(lowercasedTitle) &&
+  //     product.description.toLowerCase().includes(lowercasedDescription)
+  //   );
+  //   setFilteredPizzas(newFilteredPizzas);
+  // };
   
-  
-
-  const itemsToShow = filteredPizzas.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
-  )
   
 
-  const getPizza = async () => {
-    try {
-      const response = await axios.get(`/api/user/product`);
-      setPizza(response.data);
-      setFilteredPizzas(response.data);
-      console.log(response.data);
-    } catch (error) {
-      toast.error("Can't fetch product data. Please try again.");
-    }
-  };
+  // const itemsToShow = filteredPizzas.slice(
+  //   (page - 1) * itemsPerPage,
+  //   page * itemsPerPage
+  // )
+  
+
+  // const getPizza = async () => {
+  //   try {
+  //     const response = await axios.get(`/api/user/product`);
+  //     setPizza(response.data);
+  //     setFilteredPizzas(response.data);
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     toast.error("Can't fetch product data. Please try again.");
+  //   }
+  // };
 
 
   
