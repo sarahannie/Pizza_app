@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import ProductCard from '@/components/productCard';
 import ModalForm from '../getpizza/getpizza';
-import  { useState, useEffect } from 'react'
+import  { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Pagination } from '@mui/material';
@@ -16,7 +16,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { handleTotalFilter } from '@/utils/filterUtil';
 
 import Filter from '@/components/layout/filter';
-import useProduct  from '@/helper/filterProduct';
+import { ProductContext} from "@/app/context/store";
 
 
 const Product = () => {
@@ -29,69 +29,12 @@ const Product = () => {
     itemsToShow,
     handleChange,
     handleAllFilter,
+    handleInputChange,
+    searchTerm,
     getPizza,
-  } = useProduct();
-  // const [pizza, setPizza] = useState([]);
-  // const [page, setPage] = useState(1);
-  // const [category, setCategory] = useState('');
-  // const itemsPerPage = 6;
-  // const originalPizzas = [...pizza];
-  // const [filteredPizzas, setFilteredPizzas] = useState([]);
-  
-
-  // useEffect(() => {
-  //   getPizza();
-  // }, []);
-
-
-  // const handleChange = (value) => {
-  //   setCategory(value);
-  //   handleFilter(value)
-  // };
-
-  
-
-  // const handleFilter  = async(title) => {
-  //   const lowercasedTitle = title.toLowerCase();
-  // let newFilteredPizzas = originalPizzas.filter((product) =>
-  // product.title.toLowerCase().includes(lowercasedTitle)
-  // );
-  // setFilteredPizzas(newFilteredPizzas);
-  // }
-
+    show
+  } = useContext(ProductContext);
  
-
-  // const handleAllFilter = async (price, title, description) => {
-    
-  //   const lowercasedTitle = title.toLowerCase();
-  //   const lowercasedDescription = description.toLowerCase();
-  
-  //   let newFilteredPizzas = originalPizzas.filter((product) => 
-  //     product.price.small <= price &&  
-  //     product.title.toLowerCase().includes(lowercasedTitle) &&
-  //     product.description.toLowerCase().includes(lowercasedDescription)
-  //   );
-  //   setFilteredPizzas(newFilteredPizzas);
-  // };
-  
-  
-
-  // const itemsToShow = filteredPizzas.slice(
-  //   (page - 1) * itemsPerPage,
-  //   page * itemsPerPage
-  // )
-  
-
-  // const getPizza = async () => {
-  //   try {
-  //     const response = await axios.get(`/api/user/product`);
-  //     setPizza(response.data);
-  //     setFilteredPizzas(response.data);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     toast.error("Can't fetch product data. Please try again.");
-  //   }
-  // };
 
 
   
@@ -99,6 +42,7 @@ const Product = () => {
 
   return (
     <div className={style.container}>
+        
       <nav className={style.productContainer}>
         <div>
                 <Filter handleAllFilter={handleAllFilter}  />

@@ -1,11 +1,13 @@
 "use client"
 import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
+import { ProductContext } from '@/app/context/store';
 
-const useProduct = () => {
+export const ProductProvider = ({ children }) => {
   const [pizza, setPizza] = useState([]);
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState('');
+  const [show, setShow] = useState(false);
   const [filteredPizzas, setFilteredPizzas] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const originalPizzas = useMemo(() => [...pizza], [pizza]);
@@ -86,7 +88,9 @@ console.log("itemsToShow", itemsToShow);
   // Create a memoized copy of the original pizzas array to prevent unnecessary renders
   
 
-  return {
+  return (
+    <ProductContext.Provider
+    value={{
     pizza,
     page,
     category,
@@ -100,8 +104,15 @@ console.log("itemsToShow", itemsToShow);
     handlenavbarFilter,
     searchTerm,
     setSearchTerm,
-    handleInputChange
-  };
+    handleInputChange,
+    setFilteredPizzas,
+    show,
+    setShow
+  }}
+  >
+    {children}
+  </ProductContext.Provider>
+);
 };
 
-export default useProduct;
+

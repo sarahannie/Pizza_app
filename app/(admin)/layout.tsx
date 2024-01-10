@@ -12,7 +12,7 @@ import style from '@/pages/Home/home.module.css';
 import Image from "next/image";
 import { Navbar } from "@/components/admin/navbar";
 import { Toaster } from "react-hot-toast";
-
+import { ProductProvider } from "@/helper/filterProduct";
 
 
 export const metadata: Metadata = {
@@ -39,19 +39,21 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
+	
 	return (
 	
 		<html lang="en" suppressHydrationWarning>
 			<head />
 			<body>
-			
-			<div className={`${style.bodyImg} `}>
+				<ProductProvider>
+				<div className={`${style.bodyImg} `}>
 				<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>
 			</div>
 						<Navbar/>
 						<Toaster position="top-center" />
 						{children}
 						<Footer/>
+				</ProductProvider>
 			</body>
 		</html>
 		
