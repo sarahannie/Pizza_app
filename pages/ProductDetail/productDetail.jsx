@@ -6,11 +6,11 @@ import {  FaStar } from "react-icons/fa";
 import Counter from '../../components/Counters';
 import { MdFavoriteBorder } from "react-icons/md";
 import { Checkbox } from '@nextui-org/checkbox';
-
+import { ProductContext} from "@/app/context/store";
+import  { useContext } from 'react'
 
 const ProductDetail = ({product}) => {
-
-console.log("pro", product._id)
+const {cartProducts, addToCart} = useContext(ProductContext);
 
   return (
     <div className={style.container}>
@@ -57,7 +57,7 @@ console.log("pro", product._id)
                     <Counter/>
                 </div>
                 <div>
-                    <button className={style.btn}>Add to Cart</button>
+                    <button className={style.btn} onClick={() => addToCart(product)}>Add to Cart</button>
                 </div>
                 <div>
                     <MdFavoriteBorder className={style.heart} />

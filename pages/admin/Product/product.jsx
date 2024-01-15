@@ -14,7 +14,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { handleTotalFilter } from '@/utils/filterUtil';
-
 import Filter from '@/components/layout/filter';
 import { ProductContext} from "@/app/context/store";
 
@@ -29,7 +28,8 @@ const Product = () => {
     itemsToShow,
     handleChange,
     handleAllFilter,
-    cartProducts
+    cartProducts,
+    addToCart
   } = useContext(ProductContext);
  
 
