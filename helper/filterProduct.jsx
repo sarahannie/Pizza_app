@@ -3,6 +3,20 @@ import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { ProductContext } from '@/app/context/store';
 
+
+export function cartProductPrice(cartProduct) {
+  let price = cartProduct.basePrice;
+  if (cartProduct.size) {
+    price += cartProduct.size.price;
+  }
+  if (cartProduct.extras?.length > 0) {
+    for (const extra of cartProduct.extras) {
+      price += extra.price;
+    }
+  }
+  return price;
+}
+
 export const ProductProvider = ({ children }) => {
   const [pizza, setPizza] = useState([]);
   const [page, setPage] = useState(1);
@@ -12,6 +26,8 @@ export const ProductProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const originalPizzas = useMemo(() => [...pizza], [pizza]);
   const itemsPerPage = 6;
+
+  const [cartProducts,setCartProducts] = useState([]);
 
   useEffect(() => {
     getPizza();
@@ -70,7 +86,7 @@ console.log(" original",originalPizzas)
     page * itemsPerPage
   );
 
-  console.log("filteredPizzas", filteredPizzas);
+console.log("filteredPizzas", filteredPizzas);
 console.log("itemsToShow", itemsToShow);
 
   const getPizza = async () => {
@@ -85,7 +101,45 @@ console.log("itemsToShow", itemsToShow);
     }
   };
 
-  // Create a memoized copy of the original pizzas array to prevent unnecessary renders
+  const ls = typeof window !== 'undefined' ? window.localStorage : null;
+
+  useEffect(() => {
+    if (ls && ls.getItem('cart')) {
+      setCartProducts( JSON.parse( ls.getItem('cart') ) );
+    }
+  }, []);
+
+  function clearCart() {
+    setCartProducts([]);
+    saveCartProductsToLocalStorage([]);
+  }
+
+  function removeCartProduct(indexToRemove) {
+    setCartProducts(prevCartProducts => {
+      const newCartProducts = prevCartProducts
+        .filter((v,index) => index !== indexToRemove);
+      saveCartProductsToLocalStorage(newCartProducts);
+      return newCartProducts;
+    });
+    toast.success('Product removed');
+  }
+
+  function saveCartProductsToLocalStorage(cartProducts) {
+    if (ls) {
+      ls.setItem('cart', JSON.stringify(cartProducts));
+    }
+  }
+
+  function addToCart(product, size=null, extras=[]) {
+    setCartProducts(prevProducts => {
+      const cartProduct = {...product, size, extras};
+      const newProducts = [...prevProducts, cartProduct];
+      saveCartProductsToLocalStorage(newProducts);
+      return newProducts;
+    });
+  }
+
+  
   
 
   return (
@@ -107,7 +161,12 @@ console.log("itemsToShow", itemsToShow);
     handleInputChange,
     setFilteredPizzas,
     show,
-    setShow
+    setShow,
+    cartProducts, 
+    setCartProducts,
+    addToCart, 
+    removeCartProduct, 
+    clearCart,
   }}
   >
     {children}

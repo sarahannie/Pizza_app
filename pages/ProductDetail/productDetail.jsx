@@ -8,31 +8,30 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { Checkbox } from '@nextui-org/checkbox';
 
 
-const ProductDetail = () => {
+const ProductDetail = ({product}) => {
 
-
+console.log("pro", product._id)
 
   return (
     <div className={style.container}>
         <div>
             <div>
-                <Image src="/image/pizza-1.png" width={600} height={100} alt='Vacter Image' />
+                <Image src={product?.image} width={600} height={100} alt='Vacter Image' />
             </div>
             
         </div>
         <div>
-            <div className={style.header}>Shrimp Pizza</div>
+            <div className={style.header}>{product?.title}</div>
             <div className={style.star}>
-                <h3 className={style.headH3}>$35.00</h3>
+                <h3 className={style.headH3}>${product?.price?.small}</h3>
               <div className={style.headTxt}>8 Reviews</div>
             </div>
             <div>
-                <h4 className={style.headh3t}>This is burga pizza</h4 >
-                <div className='text-gray-900  pt-2 pb-2'><span className='font-semibold'>Category:</span>    <span className='text-sm'> Chicken, Launch, Pizza, Burger</span> </div>
-                <div ><span className='font-semibold'>Tags:</span> <span className='text-sm'> Healthy, Organic, Chicken, Sauce</span> </div>
+                <h4 className={style.headh3t}>{product?.description}</h4 >
+                <div className='text-gray-900  pt-2 pb-2'><span className='font-semibold'>Description:</span>    <span className='text-sm'>{product?.description} </span> </div>
+                <div ><span className='font-semibold'>Tags:</span> <span className='text-sm'> Chicken, Launch, Pizza, Burger</span> </div>
             </div>
             <div>
-                <h2 className={style.sauceText}> Choose Pizza Size</h2>
                 <div className={`flex gap-[52px] ${style.textbox}`}>
                 <div className={style.label}>
                     <Image src='/image/Pizza-icon.png' width={40} height={20} alt='Vacter Image' />
@@ -50,7 +49,8 @@ const ProductDetail = () => {
             </div>
             <div className={style.sauce}>
                 <h2 className={style.sauceText}>Choose additional ingredients</h2>
-                <Checkbox className={style.check}>Sauce</Checkbox>
+                <Checkbox className={style.check}>{product?.extra?.item}</Checkbox> &nbsp;
+                <Checkbox className={style.check}>{product?.extra?.item2}</Checkbox>
             </div>
             <div className={style.cart}>
                 <div>

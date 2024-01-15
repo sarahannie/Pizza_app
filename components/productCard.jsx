@@ -13,7 +13,7 @@ import Stack from '@mui/material/Stack';
 const ProductCard = ({itemsToShow}) => {
 
  
-
+// href={{pathname: `/adminproduct`, query: {_id: item?._id}}}
 
 
   return (
@@ -21,7 +21,7 @@ const ProductCard = ({itemsToShow}) => {
     <div className={style.container}>
       {
         itemsToShow.map((item, index) => ( 
-          <div key={index} className={style.contCheese}>
+          <div  key={index} className={style.contCheese}>
               <div className={style.cheeseImg}>
                 <Image src={item.image} width={250} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
               </div>
@@ -36,7 +36,7 @@ const ProductCard = ({itemsToShow}) => {
               </div>
               <div className={style.cheeseText}>{item.description} </div>
               <div>
-              <Link href="#" className={style.btn} >
+              <Link href={`/adminproduct/${item?._id}`} className={style.btn} >
               <IoCartOutline fontSize={22} className=""/>
               ORDER NOW
             </Link>
@@ -45,29 +45,7 @@ const ProductCard = ({itemsToShow}) => {
         ))
       }
         
-        {/* <div className={style.contCheese}>
-              <div className={style.cheeseImg}>
-                <Image src="/image/pizza-1.png" width={250} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
-              </div>
-              <div className={style.cheese}>
-                <h2 className={style.cheeseH2}>Shrime Pizza</h2>
-                <h2 className={style.cheeseH4}>$35.00</h2>
-              </div>
-              <div className="flex m-l-5 gap-1">
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-              </div>
-              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
-              <div>
-              <Link href="#" className={style.btn} >
-              <IoCartOutline fontSize={22} className=""/>
-              ORDER NOW
-            </Link>
-              </div>
-        </div> */}
+       
     </div>
     
     </>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect, useReducer } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from '@nextui-org/button';
 import { toast } from 'react-hot-toast';
@@ -7,10 +7,12 @@ import { useRouter } from 'next/navigation';
 import style from './getpizza.module.css';
 import Image from 'next/image';
 
+
 const ModalForm = () => {
   const router = useRouter();
   const [isShowing, setIsShowing] = useState(false);
   const wrapperRef = useRef(null);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState({
@@ -265,7 +267,7 @@ const ModalForm = () => {
                         name="price.small"
                         placeholder="Enter Small Price"
                         className="peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
-                        value={price.small} onChange={(e) => handleInputChange(e, 'small')}
+                        value={price?.small} onChange={(e) => handleInputChange(e, 'small')}
                       />
                       <input
                       
@@ -274,7 +276,7 @@ const ModalForm = () => {
                         name="price.medium"
                         placeholder="Enter Medium Price"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
-                        value={price.medium} onChange={(e) => handleInputChange(e, 'medium')}
+                        value={price?.medium} onChange={(e) => handleInputChange(e, 'medium')}
                       />
                       <input
                       
@@ -283,7 +285,7 @@ const ModalForm = () => {
                         name="price.large"
                         placeholder=" Enter Large Price"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
-                        value={price.large} onChange={(e) => handleInputChange(e, 'large')}
+                        value={price?.large} onChange={(e) => handleInputChange(e, 'large')}
                       />
                      
                     </div>
@@ -302,7 +304,7 @@ const ModalForm = () => {
                         name="extra.item"
                         placeholder="Enter extra item one"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
-                        value={extra.item} onChange={(e) => handleExtraChange(e, 'item')}
+                        value={extra?.item} onChange={(e) => handleExtraChange(e, 'item')}
                       />
                       <input
                     
@@ -311,7 +313,7 @@ const ModalForm = () => {
                         name="extra.item2"
                         placeholder="Enter extra item two"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3"
-                        value={extra.item2} onChange={(e) => handleExtraChange(e, 'item2')}
+                        value={extra?.item2} onChange={(e) => handleExtraChange(e, 'item2')}
                       />
                       <input
                        
@@ -320,7 +322,7 @@ const ModalForm = () => {
                         name="extra.price"
                         placeholder="Enter extra price"
                         className=" peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-black  outline-none transition-all autofill:bg-white invalid:border-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 mt-3 mb-5"
-                        value={extra.price} onChange={(e) => handleExtraChange(e, 'price')}
+                        value={extra?.price} onChange={(e) => handleExtraChange(e, 'price')}
                       />
                      
                     </div>

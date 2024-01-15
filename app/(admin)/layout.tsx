@@ -15,6 +15,7 @@ import { Toaster } from "react-hot-toast";
 import { ProductProvider } from "@/helper/filterProduct";
 
 
+
 export const metadata: Metadata = {
 	title: {
 		default: 'Pizzon',
@@ -45,6 +46,7 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head />
 			<body>
+			
 				<ProductProvider>
 				<div className={`${style.bodyImg} `}>
 				<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>

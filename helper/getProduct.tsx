@@ -15,12 +15,15 @@ const useClient = () => {
     try {
       const response = await axios.get('/api/user/product');
       setPizzaData(response.data);
-      console.log(response.data);
+     
     } catch (error) {
-      console.log(error);
+     
       toast.error("Can't fetch product data. Please try again.");
     }
   };
+
+ 
+  
 
   useEffect(() => {
     getPizza();

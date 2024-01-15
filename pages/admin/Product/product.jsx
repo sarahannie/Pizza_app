@@ -29,10 +29,7 @@ const Product = () => {
     itemsToShow,
     handleChange,
     handleAllFilter,
-    handleInputChange,
-    searchTerm,
-    getPizza,
-    show
+    cartProducts
   } = useContext(ProductContext);
  
 
