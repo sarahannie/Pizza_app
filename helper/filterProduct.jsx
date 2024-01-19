@@ -27,7 +27,7 @@ export const ProductProvider = ({ children }) => {
   const originalPizzas = useMemo(() => [...pizza], [pizza]);
   const itemsPerPage = 6;
 
-  const [cartProducts,setCartProducts] = useState([]);
+  const [cart,setCart] = useState([]);
 
   useEffect(() => {
     getPizza();
@@ -75,12 +75,6 @@ const handlenavbarFilter = (title) => {
 
 console.log(" original",originalPizzas)
 
-
- 
-
-
-
-
   const itemsToShow = filteredPizzas.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
@@ -103,41 +97,100 @@ console.log("itemsToShow", itemsToShow);
 
   const ls = typeof window !== 'undefined' ? window.localStorage : null;
 
+  // useEffect(() => {
+  //   if (ls && ls.getItem('cart')) {
+  //     setCartProducts( JSON.parse( ls.getItem('cart') ) );
+  //   }
+  // }, []);
+
+  // function clearCart() {
+  //   setCartProducts([]);
+  //   saveCartProductsToLocalStorage([]);
+  // }
+
+  // function removeCartProduct(indexToRemove) {
+  //   setCartProducts(prevCartProducts => {
+  //     const newCartProducts = prevCartProducts
+  //       .filter((v,index) => index !== indexToRemove);
+  //     saveCartProductsToLocalStorage(newCartProducts);
+  //     return newCartProducts;
+  //   });
+  //   toast.success('Product removed');
+  // }
+
+  // function saveCartProductsToLocalStorage(cartProducts) {
+  //   if (ls) {
+  //     ls.setItem('cart', JSON.stringify(cartProducts));
+  //   }
+  // }
+
+  // function addToCart(product, size=null, extras=[]) {
+  //   setCartProducts(prevProducts => {
+  //     const cartProduct = {...product, size, extras};
+  //     const newProducts = [...prevProducts, cartProduct];
+  //     saveCartProductsToLocalStorage(newProducts);
+  //     return newProducts;
+  //   });
+  // }
+
+
   useEffect(() => {
-    if (ls && ls.getItem('cart')) {
-      setCartProducts( JSON.parse( ls.getItem('cart') ) );
-    }
+    setCartToState();
   }, []);
 
-  function clearCart() {
-    setCartProducts([]);
-    saveCartProductsToLocalStorage([]);
-  }
+  const setCartToState = () => {
+    setCart(
+      localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : []
+    );
+  };
 
-  function removeCartProduct(indexToRemove) {
-    setCartProducts(prevCartProducts => {
-      const newCartProducts = prevCartProducts
-        .filter((v,index) => index !== indexToRemove);
-      saveCartProductsToLocalStorage(newCartProducts);
-      return newCartProducts;
-    });
-    toast.success('Product removed');
-  }
+  const addItemToCart = async ({
+    product,
+    name,
+    price,
+    image,
+    extra,
+    title,
+    description,
+    quantity = 1,
+  }) => {
+    const item = {
+      product,
+      name,
+      price,
+      image,
+      extra,
+      title,
+      description,
+      quantity,
+    };
 
-  function saveCartProductsToLocalStorage(cartProducts) {
-    if (ls) {
-      ls.setItem('cart', JSON.stringify(cartProducts));
+    const isItemExist = cart?.cartItems?.find(
+      (i) => i.product === item.product
+    );
+
+    let newCartItems;
+
+    if (isItemExist) {
+      newCartItems = cart?.cartItems?.map((i) =>
+        i.product === isItemExist.product ? item : i
+      );
+    } else {
+      newCartItems = [...(cart?.cartItems || []), item];
     }
-  }
 
-  function addToCart(product, size=null, extras=[]) {
-    setCartProducts(prevProducts => {
-      const cartProduct = {...product, size, extras};
-      const newProducts = [...prevProducts, cartProduct];
-      saveCartProductsToLocalStorage(newProducts);
-      return newProducts;
-    });
-  }
+    localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
+    setCartToState();
+  };
+
+  const deleteItemFromCart = (id) => {
+    const newCartItems = cart?.cartItems?.filter((i) => i.product !== id);
+
+    localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
+    setCartToState();
+  };
 
   
   
@@ -162,11 +215,9 @@ console.log("itemsToShow", itemsToShow);
     setFilteredPizzas,
     show,
     setShow,
-    cartProducts, 
-    setCartProducts,
-    addToCart, 
-    removeCartProduct, 
-    clearCart,
+    cart,
+    addItemToCart,
+    deleteItemFromCart,
   }}
   >
     {children}

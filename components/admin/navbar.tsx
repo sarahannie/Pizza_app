@@ -24,7 +24,7 @@ import { ProductContext} from "@/app/context/store";
 export const Navbar = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const {searchTerm,handleInputChange, show,setShow,  cartProducts} = useContext(ProductContext);
+  const {searchTerm,handleInputChange, show,setShow,  cart} = useContext(ProductContext);
 
   const logout = async() => {
     try{
@@ -88,9 +88,9 @@ export const Navbar = () => {
           <div style={{ position: 'relative' }}>
           <Link href={'/cart'}>
           <AiOutlineShoppingCart className="relative" color="#0770fc" fontSize={20} />
-          {cartProducts?.length > 0 &&(
+          {cart?.cartItems?.length > 0 &&(
             <span className="inline-flex items-center justify-center gap-1 rounded-full bg-[#d43b49] px-1.5 text-sm text-white absolute top-[-12px] right-[-6px]">
-            {cartProducts?.length}
+            {cart?.cartItems?.length}
             <span className="sr-only">new items in the cart</span>
           </span>
           )}

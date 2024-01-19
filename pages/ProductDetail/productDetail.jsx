@@ -10,7 +10,19 @@ import { ProductContext} from "@/app/context/store";
 import  { useContext } from 'react'
 
 const ProductDetail = ({product}) => {
-const {cartProducts, addToCart} = useContext(ProductContext);
+const { cart,addItemToCart,} = useContext(ProductContext);
+
+const addToCartHandler = () => {
+    addItemToCart({
+      product: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      extra: product.extra,
+      title:product.title,
+      description:product.description,
+    });
+  };
 
   return (
     <div className={style.container}>
@@ -57,7 +69,7 @@ const {cartProducts, addToCart} = useContext(ProductContext);
                     <Counter/>
                 </div>
                 <div>
-                    <button className={style.btn} onClick={() => addToCart(product)}>Add to Cart</button>
+                    <button className={style.btn} onClick={addToCartHandler}>Add to Cart</button>
                 </div>
                 <div>
                     <MdFavoriteBorder className={style.heart} />
