@@ -15,7 +15,6 @@
   margin-right: 20px;
   background-color: black;
   color: #fff;
-  
 }
 
 .btn{
@@ -35,13 +34,10 @@
   padding-right: 3.5rem;
 }
 .btn1{
-  background-color: #fbb200;
   font-weight: 500;
   font-size: 1rem;
-  display: flex;
-  width: fit-content;
-  padding-left: 5.8rem;
-  padding-right: 5.8rem;
+  padding-top: 5px;
+  padding-right: 7px;
   gap: 5px;
   margin-top: 0.5rem;
   margin-left: 2rem;
@@ -63,4 +59,34 @@
   width: 55%;
   
 }
+}
+
+/* countercount */
+
+.contain{
+  display: flex;
+  background-color: white;
+  width: fit-content;
+  gap: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+}
+
+.icon1{
+  font-size: 1rem;
+  margin-top: 0.9rem;
+}
+@media (max-width: 768px) {
+  .contain{
+      display: flex;
+      background-color: white;
+      border: 1px solid #eae6e2;
+      width: fit-content;
+     
+      gap: 2rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+  
+  }
 }

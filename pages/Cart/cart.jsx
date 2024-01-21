@@ -5,8 +5,8 @@ import { FaTrash } from 'react-icons/fa'
 import style from './cart.module.css'
 import Link from 'next/link'
 import { ProductContext} from "@/app/context/store";
-import  { useContext, useState } from 'react'
-import { FaAngleDown, FaAngleLeft, FaAngleRight, FaAngleUp } from 'react-icons/fa';
+import  { useContext } from 'react'
+import {  FaAngleLeft, FaAngleRight} from 'react-icons/fa';
 const Cart = () => {
   const {cart, addItemToCart,deleteItemFromCart,} = useContext(ProductContext);
 
