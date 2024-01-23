@@ -1,7 +1,6 @@
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import User from "@/models/userModel";
 import {UserInfo} from "@/models/userInfo";
-import mongoose from "mongoose";
 import {getServerSession} from "next-auth";
 import {connect} from '@/dbconfig/dbconfig';
 
