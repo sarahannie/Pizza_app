@@ -179,25 +179,7 @@ const onError = (data,actions)=>{
  setPaypalErrorMessage("Something went wrong with your payment");
 }
 
-// const createOrder = async (data, actions) => {
-//   try {
-//     // Prepare the order data to be sent to the server
-//     const orderData = {
-//       purchase_units: [
-//         {
-    
-//           amount: {
-//             value: totalAmount, 
-//           },
-//         },
-//       ],
-//     };
-//     const response = await axios.post("api/paypal", orderData);
-//     return response.data.orderId; 
-//   } catch (error) {
-//     console.log('Error creating PayPal order:', error);
-//   }
-// }
+
 
 // const onApproveOrder = (data,actions) => {
 //   // return actions.order.capture().then((details) => {
