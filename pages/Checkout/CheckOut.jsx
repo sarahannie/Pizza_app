@@ -1,10 +1,8 @@
 "use client"
-import CartCounter from '@/components/cartCounter'
 import Image from 'next/image'
-import {  useEffect, useState} from 'react'
+import {  useState} from 'react'
 import { FaTrash } from 'react-icons/fa'
 import style from './checkout.module.css'
-import Link from 'next/link'
 import ModalBasic from '@/components/checkoutMedal'
 import {  FaAngleLeft, FaAngleRight} from 'react-icons/fa';
 import  { useContext } from 'react'
@@ -12,15 +10,12 @@ import { ProductContext} from "@/app/context/store";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import axios from 'axios'
+
 
 const CheckOut = ({setIsShowing,isShowing}) => {
-  const router = useRouter();
-  const {cart, addItemToCart,deleteItemFromCart} = useContext(ProductContext);
-  const [load, setLoad] = useState(false);
-
+const router = useRouter();
+const {cart, addItemToCart,deleteItemFromCart} = useContext(ProductContext)
 const [succeeded, setSucceeded] = useState(false);
-const [paypalErrorMessage, setPaypalErrorMessage] = useState("");
 const [orderID, setOrderID] = useState(false);
 const [billingDetails, setBillingDetails] = useState("");
 const [purchases, setPurchases] = useState("");
@@ -48,54 +43,11 @@ const [purchases, setPurchases] = useState("");
   const totalAmount = (Number(subtotal) + Number(shipping)).toFixed(2);
 
 
-
-  // const addPaypal = () => {
-  //   if(window.paypal){
-  //     setLoad(true)
-  //     return
-  //   }
-  //   const script = document.createElement('script');
-  //   script.src="https://www.paypal.com/sdk/js?client-id=AYcsBayGZQ9pZlm5NSTvu8PXdsi9SkKrYoKKhX6pt8XjBx9sX1Adcll2mtjKYSRobw--dePhL7PImd9Z";
-  //   script.type="text/javascript";
-  //   script.async = true;
-  //   script.onload = () => setLoad(true)
-  //   document.body.appendChild(script);
-  // }
-
-  // useEffect(() => {
-  //   addPaypal()
-  // })
-
   const initialOptions = {
-   
     clientId: "AYcsBayGZQ9pZlm5NSTvu8PXdsi9SkKrYoKKhX6pt8XjBx9sX1Adcll2mtjKYSRobw--dePhL7PImd9Z",
     currency: "USD",
     intent: "capture",
-    
 };
-
-// const createOrder = (data, actions) => {
-//   const orderDetails = {
-//     address: '123 Main St',
-//     quantity: 2,
-//     product_name: 'Example Product',
-//     number: 'ABC123',
-//   };
-// return actions.order.create({
-//   purchase_units: [
-//     {
-//       amount: {
-//         value: totalAmount, // Replace this with the actual amount you want to charge
-//       },
-//     },
-//   ],
-//   application_context: {
-  
-//     ...orderDetails, 
-//   },
-  
-// })
-// }
 
 const createOrder = (data, actions) => {
   return actions.order
@@ -116,26 +68,8 @@ const createOrder = (data, actions) => {
 };
 
 
-// const onApprove = (data, actions) => {
-//   return actions.order.capture().then(function (details) {
-//     const payer = details.payer;
-//     const rest = { ...details };
-//     setBillingDetails(payer, rest);
-//     setSucceeded(true);
-//   })
-//   return fetch('/api/paypal', {
-//         method: 'post',
-//          body: JSON.stringify({
-//            orderID,
-//            totalAmount,
-//            billingDetails
-//          })
-//       })
-//       .then(response => response.json())
-// };
 
-
-const onApprove = (data, actions, totalAmount) => {
+const onApprove = (data, actions) => {
  
   return actions.order.capture().then(function (details) {
     const payer = details.payer;
@@ -148,22 +82,16 @@ const onApprove = (data, actions, totalAmount) => {
     setPurchases(purchase);
     setSucceeded(true);
     setOrderID(data.orderID);
-
-   let totalamt = totalAmount
-    
-
     return fetch('/api/paypal', {
       method: 'post',
       body: JSON.stringify({
         orderID: data.orderID,
-        totalamt: totalAmount,
         billingDetails: payer,
         purchases: purchase
       })
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Data posted successfully:', data)
       toast.success(`Transaction completed by ${payer?.name?.given_name} ,  orderID ${data.orderID}`);
       router.push('/paid');
     })
@@ -174,47 +102,8 @@ const onApprove = (data, actions, totalAmount) => {
   });
 };
 
-// handles payment errors
-const onError = (data,actions)=>{
- setPaypalErrorMessage("Something went wrong with your payment");
-}
 
 
-
-// const onApproveOrder = (data,actions) => {
-//   // return actions.order.capture().then((details) => {
-//   //     const name = details.payer.name.given_name;
-//   //     toast.success(`Transaction completed by ${name} , ${details.payer.name}`);
-//   //     console.log(details.payer.name)
-//   //     router.push('/paid');
-
-//   // });
-//   const orderDetails = {
-//     orderID: data.orderID,
-//     address: data?.purchase_units?.[0]?.shipping?.address,
-//     quantity: data?.purchase_units?.[0]?.items?.[0]?.quantity,
-//     product_name: data?.purchase_units?.[0]?.items?.[0]?.name,
-//     totalAmount: data?.purchase_units?.[0]?.amount?.value,
-//     ...data,
-//   };
-//   console.log('Spread operation on data:', orderDetails);
-//   return fetch('/api/paypal', {
-//     method: 'post',
-//     body: JSON.stringify({
-//     orderDetails
-//     })
-//  })
-//  .then(response => response.json())
-//  .then((authorizePayload) => {
-//     // Get the authorization id from your payload
-//     const authorizationID = authorizePayload.authorizationID;
-//     // Optional message given to purchaser
-//     alert(`You have authorized this transaction. Order ID: ${data.orderID} , Authorization ID: ${authorizationID}`);
-//     // Later you can use your server to validate and capture the transaction
-//  });
-// }
-console.log("billing", billingDetails)
-console.log("purchase", purchases)
   return (
     <>
     <div className={style.container}>
