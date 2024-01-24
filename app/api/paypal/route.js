@@ -9,9 +9,7 @@ export async function POST (req){
     try{
         const resBody = await req.json()
         const{orderID, totalAmount, billingDetails,  purchases} = resBody
-        console.log(resBody)
-        
-
+    
         const order = new Order({
         orderId: orderID || uniqid(),
         quantity: billingDetails.quantity || 1,

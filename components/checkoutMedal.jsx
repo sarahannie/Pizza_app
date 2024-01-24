@@ -4,14 +4,66 @@ import ReactDOM from "react-dom"
 import useTheme from "react"
 import Link from "next/link"
 import style from "./checkoutmedal.module.css"
+import axios from "axios"
+import toast from "react-hot-toast"
+import { useRouter } from 'next/navigation';
+import  { useContext } from 'react'
+import { ProductContext} from "@/app/context/store";
 
 export default function ModalBasic() {
+  const {cart, addItemToCart,deleteItemFromCart} = useContext(ProductContext)
+  const [isShowing, setIsShowing] = useState(false)
+  const wrapperRef = useRef(null)
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [address, setAddress] = useState("")
 
   
-      
-  const [isShowing, setIsShowing] = useState(false)
+  const subtotal = cart?.cartItems?.reduce(
+    (acc, item) => acc + item.quantity * item.price.small,
+    0
+  );
+  const quantity = cart?.cartItems?.reduce(
+    (acc, item) => acc + item.quantity ,
+    0
+  );
 
-  const wrapperRef = useRef(null)
+  
+  console.log('quantity', quantity)
+  const shipping = 5
+
+  const totalPrice = (Number(subtotal) + Number(shipping)).toFixed(2);
+
+  async function handleCheckout (ev){
+    ev.preventDefault();
+    const data ={
+      name,
+      email,
+      phone,
+      address,
+      quantity,
+      totalPrice
+    }
+    try{
+      const response = await axios.post("api/order", data)
+      await new Promise((resolve, reject) => {
+        if (response.status === 200) {
+          
+          resolve(toast.success('Order saved!'));
+          router.push('/paid')
+        } else {
+         
+          reject(toast.error('Error'));
+        }
+      });
+     
+     return response.data
+    }catch(error){
+      console.log('error occur while posting', error.message)
+    }
+  }
 
   
 
@@ -37,7 +89,7 @@ export default function ModalBasic() {
         html.style.overflowY = "hidden"
 
         const focusableElements =
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'button, [href], input, select, textarea, [tabIndex]:not([tabIndex="-1"])'
 
         const modal = document.querySelector("#modal") // select the modal by it's id
 
@@ -98,7 +150,7 @@ export default function ModalBasic() {
               className="fixed top-0 left-0 z-20 flex h-screen w-screen items-center justify-center bg-slate-300/20 backdrop-blur-sm"
               aria-labelledby="header-3a content-3a"
               aria-modal="true"
-              tabindex="-1"
+              tabIndex="-1"
               role="dialog"
             >
               {/*    <!-- Modal --> */}
@@ -111,7 +163,7 @@ export default function ModalBasic() {
                 {/*        <!-- Modal header --> */}
                 <header id="header-3a" className="flex items-center gap-4">
                   <h3 className="flex-1 text-3xl font-medium text-slate-700">
-                    You will pay $12 on delivery.
+                    You will pay $5 on delivery.
                   </h3>
                   <button
                     onClick={() => setIsShowing(false)}
@@ -151,18 +203,19 @@ export default function ModalBasic() {
           {/* Contact Form */}
           <form
             className="mx-auto mb-4 max-w-sm text-left"
-            name="wf-form-password"
-            method="get"
+            onSubmit={handleCheckout}
           >
             <div className="mb-4 flex flex-col gap-y-2">
               <label htmlFor="name-2" className="mb-1 font-medium">
-                Name Surname
+                Full Name
               </label>
               <input
                 type="text"
                 className="h-9 w-full bg-white px-3 py-6 text-sm text-[#333333] border-t-[#e4e4e4]  border-b-[#777777] border-l-[#f2f2f7] border-r-[#777777] border-[2px]"
                 placeholder="John Doe"
-                required=""
+                required="Pls fill"
+                name="name"
+                onChange={(e)=>setName(e.target.value)}
               />
             </div>
             <div className="mb-4 flex flex-col gap-y-2">
@@ -173,7 +226,22 @@ export default function ModalBasic() {
                 type="text"
                 className="h-9 w-full bg-white px-3 py-6 text-sm text-[#333333] border-t-[#e4e4e4]  border-b-[#777777] border-l-[#f2f2f7] border-r-[#777777] border-[2px]"
                 placeholder="08034739605"
-                required=""
+                required="Pls enter your phone number"
+                name="phone"
+                onChange={(e)=>setPhone(e.target.value)}
+              />
+            </div>
+            <div className="mb-4 flex flex-col gap-y-2">
+              <label htmlFor="name-2" className="mb-1 font-medium">
+               Email address
+              </label>
+              <input
+                type="text"
+                className="h-9 w-full bg-white px-3 py-6 text-sm text-[#333333] border-t-[#e4e4e4]  border-b-[#777777] border-l-[#f2f2f7] border-r-[#777777] border-[2px]"
+                placeholder="jhon@me.com"
+                required="Please fill your email"
+                name='email'
+                onChange={(e)=>setEmail(e.target.value)}
               />
             </div>
             <div className="mb-2 flex flex-col gap-y-2">
@@ -184,6 +252,9 @@ export default function ModalBasic() {
                 placeholder="enter your address"
                 className="h-auto min-h-[186px] w-full overflow-auto bg-white px-3 py-2 text-sm text-[#333333] border-[#777777] border-[2px]"
                 defaultValue={" "}
+                required='Enter your Address'
+                name="address"
+                onChange={(e)=>setAddress(e.target.value)}
               />
             </div>
             <input

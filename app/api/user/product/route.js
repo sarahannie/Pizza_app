@@ -21,49 +21,8 @@ export async function POST(req) {
 }
 
 
-// export async function GET(req, res) {
-//   try {
-//    const url = new URL(req.url);
-//    const _id = url.pathname.split('/').pop();
-//     if (!_id) {
-//       return Response.json({ error: 'Product ID is missing in the request', status: 400 });
-//     }
-//     const product = await Product.findById(_id);
-//     if (!product) {
-//       return Response.json({ error: 'Product not found', status: 404 });
-//     }
-//     return Response.json(product);
-//   } catch (error) {
-//     console.error(error);
-//     return Response.json({ error: 'Internal Server Error', status: 500 });
-//   }
-// }
 
 
-// export async function PUT(req) {
-//   try {
-//     const url = new URL(req.url);
-//     const parts = url.pathname.split('/');
-//     const _id = parts.pop();
-   
-//     if (!_id || !mongoose.Types.ObjectId.isValid(_id)) {
-//       return Response.json({ error: 'Invalid request. Missing or invalid _id.', status: 400 });
-//     }
-
-//     const updatedProduct = await Product.findByIdAndUpdate(_id, data);
-//     if (!updatedProduct) {
-//       return Response.json({ error: 'Product not found', status: 404 });
-//     }
-
-//     console.log('Product updated successfully:', updatedProduct);
-
-//     return Response.json(updatedProduct);
-
-//   } catch (error) {
-//     console.error('Error updating product:', error);
-//     return Response.json({ error: 'Internal Server Error', status: 500 });
-//   }
-// }
 
 
 export async function PUT(req) {

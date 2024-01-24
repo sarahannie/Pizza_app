@@ -6,23 +6,9 @@ connect()
 
 export async function POST (req){
     try{
-        const resBody = req.json()
-        const{...data} = resBody
-        console.log(resBody)
-
-        const order = new Order({
-            ...data
-        })
-
-        const savedOrder = await order.save();
-        if (!savedOrder) {
-            return NextResponse.json({ error: 'Order does not exist', status: 400 });
-          }
-        return NextResponse.json({
-            message:'Order created successfully',
-            sucess:true, 
-            savedOrder}, 
-            {status:200})
+        const resBody = await req.json()
+        const menuItem = await Order.create(resBody)
+        return new Response(JSON.stringify(menuItem), {status:200})
 
     }catch(error){
         return NextResponse.json({error:error.message},{status:500})

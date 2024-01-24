@@ -197,19 +197,12 @@ const onApprove = (data, actions) => {
               style={{ layout: "horizontal" }}
               createOrder={createOrder}
               onApprove={onApprove}
-              className={style.btn1}
+              className={`${style.btn1} z-3`}
                />
             </PayPalScriptProvider>
-               {
-                orderID && <p className='text-white-500 py-2'>Order ID: {orderID}</p>
-               }
-               {
-                billingDetails && <p className='text-white-500 py-2'>Billing Details: {JSON.stringify(billingDetails)}</p>
-               }
+               
             </div>
-            {
-                billingDetails && <p className='text-black py-2'>Billing Details: {JSON.stringify(billingDetails)}</p>
-               }
+      
             
         </div>
     </div>
