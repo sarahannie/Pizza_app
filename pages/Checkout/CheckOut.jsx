@@ -6,7 +6,7 @@ import style from './checkout.module.css'
 import ModalBasic from '@/components/checkoutMedal'
 import {  FaAngleLeft, FaAngleRight} from 'react-icons/fa';
 import  { useContext } from 'react'
-import { ProductContext} from "@/app/context/store";
+import { CartContext} from "@/app/context/store";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 
 const CheckOut = ({setIsShowing,isShowing}) => {
 const router = useRouter();
-const {cart, addItemToCart,deleteItemFromCart} = useContext(ProductContext)
+const {cart, addItemToCart,deleteItemFromCart} = useContext(CartContext)
 const [succeeded, setSucceeded] = useState(false);
 const [orderID, setOrderID] = useState(false);
 const [billingDetails, setBillingDetails] = useState("");
@@ -34,7 +34,7 @@ const [purchases, setPurchases] = useState("");
   };
 
   const subtotal = cart?.cartItems?.reduce(
-    (acc, item) => acc + item.quantity * item.price.small,
+    (acc, item) => acc + item.quantity * item.price,
     0
   );
 
@@ -140,11 +140,11 @@ const onApprove = (data, actions) => {
         </td>
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
             <div>
-              <h3 className="text-sm font-medium">{product?.extra?.item || product?.extra?.item1}</h3>
+              <h3 className="text-sm font-medium">{product?.extra}</h3>
             </div>
         </td>
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
-          <div>${product?.price?.small|| product?.price?.medium || product?.price?.large}</div>
+          <div>${product?.price}</div>
         </td>
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
         <div className={style.contain}>
@@ -156,7 +156,7 @@ const onApprove = (data, actions) => {
        </div>
         </td>
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
-        <div>${ product?.price?.small * product.quantity.toFixed(2)}</div>
+        <div>${ product?.price * product.quantity.toFixed(2)}</div>
         </td>
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
           <div className="text-red-500 cursor-pointer">
