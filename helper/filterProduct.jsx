@@ -43,7 +43,6 @@ export const ProductProvider = ({ children }) => {
     const newFilteredPizzas = originalPizzas.filter((product) =>
       product.title.toLowerCase().includes(lowercasedTitle)
     );
-    console.log("selectfilter", newFilteredPizzas)
     setFilteredPizzas(newFilteredPizzas);
   };
 
@@ -62,26 +61,22 @@ export const ProductProvider = ({ children }) => {
 const handleInputChange = (value) => {
   setSearchTerm(value);
   handlenavbarFilter(value);
-  console.log("value", value)
 };
 const handlenavbarFilter = (title) => {
   const lowercasedTitle = title.toLowerCase();
     const newFilteredPizzas = originalPizzas.filter((product) =>
       product.title.toLowerCase().includes(lowercasedTitle)
     );
-    console.log('navbarfiltrer',newFilteredPizzas);
     setFilteredPizzas(newFilteredPizzas);
   };
 
-console.log(" original",originalPizzas)
 
   const itemsToShow = filteredPizzas.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
 
-console.log("filteredPizzas", filteredPizzas);
-console.log("itemsToShow", itemsToShow);
+
 
   const getPizza = async () => {
     try {

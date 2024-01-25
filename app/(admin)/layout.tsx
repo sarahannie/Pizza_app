@@ -12,7 +12,8 @@ import style from '@/pages/Home/home.module.css';
 import Image from "next/image";
 import { Navbar } from "@/components/admin/navbar";
 import { Toaster } from "react-hot-toast";
-import { ProductProvider } from "@/helper/filterProduct";
+import GeneralProvider from "../context/store";
+
 
 
 
@@ -47,7 +48,7 @@ export default function RootLayout({
 			<head />
 			<body>
 			
-				<ProductProvider>
+				<GeneralProvider>
 				<div className={`${style.bodyImg} `}>
 				<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>
 			</div>
@@ -55,7 +56,7 @@ export default function RootLayout({
 						<Toaster position="top-center" />
 						{children}
 						<Footer/>
-				</ProductProvider>
+				</GeneralProvider>
 			</body>
 		</html>
 		
