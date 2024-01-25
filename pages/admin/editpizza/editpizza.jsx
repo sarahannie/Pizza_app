@@ -1,33 +1,23 @@
 "use client";
 import { Button } from "@nextui-org/button";
-import { Textarea } from "@nextui-org/input";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-interface ModalFormProps {
-  // Add any props if needed
-}
 
-const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
+
+const ModalForm = ({pizza}) => {
   const router = useRouter()
   const [isShowing, setIsShowing] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef(null);
 
-  const [title, setTitle] = useState("");
- 
-  const [description, setDescription] = useState( "");
   const [price, setPrice] = useState({
     small:  0,
     medium: 0,
     large: 0,
   });
-  const [extra, setExtra] = useState({
-    item: "",
-    item2: "",
-    price: "",
-  })
+ 
   const [image, setImage] = useState(" ");
   const [product, setProduct] = useState({
     title: '',
@@ -47,9 +37,9 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
 
   
 
-  console.log(pizza)
+ 
 
-   const handleEditProduct = async (pizza:any) => {
+   const handleEditProduct = async (pizza) => {
     try {
      const response = await fetch(`/api/user/product/${pizza}`);
      if (!response.ok) {
@@ -63,7 +53,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
    };
 
 
-  async function handleFileChange(ev:any) {
+  async function handleFileChange(ev) {
     const files = ev.target.files;
     if (files?.length === 1) {
       const data = new FormData();
@@ -88,7 +78,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
     }
   }}
 
-  const handleInputChange = (e:any, size:any) => {
+  const handleInputChange = (e, size) => {
     const {value} = e.target;
     setProduct((prevPrice) => ({
       ...prevPrice,
@@ -99,7 +89,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
     }));
   };
 
-  const handleExtraChange = (e:any, name:any) => {
+  const handleExtraChange = (e, name) => {
     const { value } = e.target;
     setProduct(prevProduct => ({
       ...prevProduct,
@@ -115,7 +105,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
   
 
 
-  async function handleProduct(ev:any){
+  async function handleProduct(ev){
     ev.preventDefault();
     const productId = pizza
 
@@ -143,15 +133,15 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
       const imageData = await response.json();
       setProduct(imageData);
       router.push('/adminproduct')
-    } catch (error:any) {
+    } catch (error) {
       console.error(`Fetch error: ${error.message}`);
     }
  }
  
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target )) {
         setIsShowing(false);
       }
     }
@@ -166,7 +156,7 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
   
 
   useEffect(() => {
-    let html = document.querySelector("html") as HTMLHtmlElement;
+    let html = document.querySelector("html") ;
 
     if (html) {
       if (isShowing && html) {
@@ -175,17 +165,17 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
         const focusableElements =
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-        const modal = document.querySelector("#modal") as HTMLElement; // select the modal by its id
+        const modal = document.querySelector("#modal") ; 
 
         const firstFocusableElement =
-          modal.querySelectorAll(focusableElements)[0] as HTMLElement; // get the first element to be focused inside the modal
+          modal.querySelectorAll(focusableElements)[0] ;
 
         const focusableContent = modal.querySelectorAll(focusableElements);
 
         const lastFocusableElement =
-          focusableContent[focusableContent.length - 1] as HTMLElement; // get the last element to be focused inside the modal
+          focusableContent[focusableContent.length - 1]; 
 
-        document.addEventListener("keydown", function (e: KeyboardEvent) {
+        document.addEventListener("keydown", function (e) {
           if (e.keyCode === 27) {
             setIsShowing(false);
           }
@@ -197,16 +187,14 @@ const ModalForm: React.FC<ModalFormProps> = ({pizza}:any) => {
           }
 
           if (e.shiftKey) {
-            // if shift key is pressed for shift + tab combination
             if (document.activeElement === firstFocusableElement) {
-              lastFocusableElement.focus(); // add focus for the last focusable element
+              lastFocusableElement.focus(); 
               e.preventDefault();
             }
           } else {
-            // if tab key is pressed
+        
             if (document.activeElement === lastFocusableElement) {
-              // if focus has reached the last focusable element then focus the first focusable element after pressing tab
-              firstFocusableElement.focus(); // add focus for the first focusable element
+              firstFocusableElement.focus(); 
               e.preventDefault();
             }
           }

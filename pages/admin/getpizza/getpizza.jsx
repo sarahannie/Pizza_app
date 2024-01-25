@@ -27,7 +27,6 @@ const ModalForm = () => {
   })
   const [image, setImage] = useState("");
 
-
  
   const handleInputChange = (e, size) => {
     const {value} = e.target;

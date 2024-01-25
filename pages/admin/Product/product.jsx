@@ -5,15 +5,13 @@ import Image from 'next/image';
 
 import ProductCard from '@/components/productCard';
 import ModalForm from '../getpizza/getpizza';
-import  { useState, useEffect, useContext } from 'react'
-import axios from 'axios';
-import { toast } from 'react-hot-toast';
+import  { useContext } from 'react'
+
 import { Pagination } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { handleTotalFilter } from '@/utils/filterUtil';
 import Filter from '@/components/layout/filter';
 import { ProductContext} from "@/app/context/store";
 
@@ -22,6 +20,7 @@ const Product = () => {
   const {
     pizza,
     page,
+    setPage,
     category,
     itemsPerPage,
     filteredPizzas,

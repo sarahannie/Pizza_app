@@ -18,13 +18,14 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { handleTotalFilter } from "@/utils/filterUtil";
-import { ProductContext} from "@/app/context/store";
+import { ProductContext, CartContext} from "@/app/context/store";
 
 
 export const Navbar = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const {searchTerm,handleInputChange, show,setShow,  cart} = useContext(ProductContext);
+  const {searchTerm,handleInputChange, show,setShow} = useContext(ProductContext);
+  const {cart} = useContext(CartContext)
 
   const logout = async() => {
     try{

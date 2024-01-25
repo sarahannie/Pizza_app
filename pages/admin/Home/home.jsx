@@ -4,38 +4,34 @@ import Image from 'next/image'
 import React from 'react'
 import style from './home.module.css'
 import ModalForm from '../editpizza/editpizza';
-import  useClient  from '@/helper/getProduct';
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { FaPizzaSlice } from 'react-icons/fa'
+import { useContext } from 'react'
+import { ProductContext } from '@/app/context/store';
 
 
 
 const Home = () => {
-  const [pizzaData, setPizzaData] = useState([]);
+  const { pizza, setPizza } = useContext(ProductContext);
   const [deletePizzaId, setDeletePizzaId] = useState(null);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
 
   const handleDelete = (id) => {
-    // Set the facilitator ID to be deleted and open the confirmation modal
     setDeletePizzaId(id);
     setOpenConfirmationModal(true);
   };
 
   const handleCloseConfirmationModal = () => {
-    // Close the confirmation modal
     setOpenConfirmationModal(false);
   };
 
   const confirmDelete = async () => {
     if (deletePizzaId) {
       try {
-        // Send a DELETE request to your API to delete the facilitator
         await axios.delete(`api/user/product/${deletePizzaId}`);
-        // Update the list of facilitators (you might want to handle this more gracefully)
-        setPizzaData(pizzaData.filter((pizza) => pizza._id !== deletePizzaId));
+        setPizza(pizza.filter((pizza) => pizza._id !== deletePizzaId));
         setDeletePizzaId(null);
         setOpenConfirmationModal(false);
         toast.success('Data deleted successfully');
@@ -44,25 +40,6 @@ const Home = () => {
       }
     }
   };
-
-  const getPizza = async () => {
-    try {
-      const response = await axios.get('/api/user/product');
-      setPizzaData(response.data);
-    } catch (error) {
-
-      toast.error("Can't fetch product data. Please try again.");
-    }
-  };
-
-  useEffect(() => {
-    getPizza();
-  }, []);
-
-
-  
-
-
 
   
 
@@ -87,7 +64,7 @@ const Home = () => {
       </tr>
       </thead>
       <tbody>
-      {pizzaData.map((pizza) => (
+      {pizza.map((pizza) => (
           <Trpizza key={pizza.id} pizza={pizza} handleDelete={handleDelete} />
        ))}
     </tbody>

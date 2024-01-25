@@ -3,6 +3,14 @@
     gap: 1rem;
     margin-bottom: 2rem;
     margin-top: 2rem;
+    justify-content: center;
+}
+.image{
+  width:400px;
+  height: 400px;
+}
+.headContainer{
+  margin-left: 5rem;
 }
 
 .header{
@@ -138,32 +146,42 @@
       border-radius: 25px;
       gap: 5px;
     }
+    .image{
+      width:200px;
+      height: 200px;
+      padding-left: 10px;
+      padding-bottom: 20px;
+    }
 
     .container{
       display: flex;
       flex-direction: column;
       gap: 0rem;
+      justify-content: center;
   }
 
   .header{
-    padding-left: 2rem;
+    font-size: 2.5rem;
+  }
+  .headContainer{
+    margin-left: 1rem;
   }
   .star{
     padding-left: 2rem;
   }
   .small{
-    font-size: 0.5rem;
+    font-size: 0.4rem;
     color: #fff;
     background-color: #d43b49;
-    padding: 3px 1rem;
+    padding: 3px 0.5rem;
     border-radius: 13px;
     position: absolute;
     top: 0;
-    left: 2rem;
+    left: 1rem;
   }
 
   .medium{
-    font-size: 0.3rem;
+    font-size: 0.4rem;
     color: #fff;
     background-color: #d43b49;
     padding: 3px 0.5rem;
@@ -171,22 +189,59 @@
     position: absolute;
     top: 0;
     left: 2rem;
+  }
+  .label1{
+    margin-left: 3rem;
   }
   .textbox{
     gap:10px;
   }
   .large{
-    font-size: 0.3rem;
+    font-size: 0.5rem;
     color: #fff;
     background-color: #d43b49;
     padding: 3px 0.5rem;
     border-radius: 13px;
     position: absolute;
     top: 0;
-    left: 6rem;
+    left: 3.5rem;
   }
-
+  .label2{
+    margin-left: 2rem;
+  }
   .sauceText{
     font-size: 1.1rem;
   }
   }
+
+  .contain{
+    display: flex;
+    background-color: white;
+    border: 1px solid #eae6e2;
+    width: fit-content;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    gap: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+}
+
+.icon1{
+    margin-top: 4px;
+    font-size: 1rem;
+}
+@media (max-width: 768px) {
+    .contain{
+        display: flex;
+        background-color: white;
+        border: 1px solid #eae6e2;
+        width: fit-content;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        gap: 2rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    
+    }
+}

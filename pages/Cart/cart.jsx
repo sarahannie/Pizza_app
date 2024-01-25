@@ -4,13 +4,14 @@ import Image from 'next/image'
 import { FaTrash } from 'react-icons/fa'
 import style from './cart.module.css'
 import Link from 'next/link'
-import { ProductContext} from "@/app/context/store";
+import { CartContext} from "@/app/context/store";
 import  { useContext } from 'react'
 import {  FaAngleLeft, FaAngleRight} from 'react-icons/fa';
 const Cart = () => {
-  const {cart, addItemToCart,deleteItemFromCart,} = useContext(ProductContext);
+  const {cart, addItemToCart,deleteItemFromCart,} = useContext(CartContext);
 
   
+  console.log(cart)
   const increaseQty = (cartItem) => {
     const newQty = cartItem?.quantity + 1;
     const item = { ...cartItem, quantity: newQty };
@@ -24,7 +25,7 @@ const Cart = () => {
   };
 
   const subtotal = cart?.cartItems?.reduce(
-    (acc, item) => acc + item.quantity * item.price.small,
+    (acc, item) => acc + item?.quantity * item?.price,
     0
   );
 
@@ -34,7 +35,7 @@ const Cart = () => {
 
 
   
-   
+   console.log(cart?.cartItem?.extra)
 
   
   return (
@@ -64,7 +65,7 @@ const Cart = () => {
       </tr>
       {cart?.cartItems?.map((product, index) => (
         <>
-        <tr key={product.id} className="border-b border-slate-200">
+        <tr key={index} className="border-b border-slate-200">
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
           <div className="flex items-center gap-4">
             <div className="w-30 h-19  rounded-sm">
@@ -80,23 +81,23 @@ const Cart = () => {
         </td>
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
             <div>
-              <h3 className="text-sm font-medium">{product?.extra?.item || product?.extra?.item1}</h3>
+              <h3 className="text-sm font-medium">{product?.extra}</h3>
             </div>
         </td>
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
-          <div>${product?.price?.small|| product?.price?.medium || product?.price?.large}</div>
+          <div>${product?.price}</div>
         </td>
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
         <div className={style.contain}>
         <FaAngleLeft className={style.icon1}  onClick={() => decreaseQty(product)} />
         <div className='mt-2 text-xl'>
-            {product.quantity}
+            {product?.quantity}
         </div>
         <FaAngleRight className={style.icon1} onClick={() => increaseQty(product)} />
        </div>
         </td>
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
-        <div>${ product?.price?.small * product.quantity.toFixed(2)}</div>
+        <div>${ product?.price * product?.quantity?.toFixed(2)}</div>
         </td>
         <td className="h-12 px-6 text-sm transition duration-300 border-slate-200 stroke-slate-500 text-slate-500 ">
           <div className="text-red-500 cursor-pointer">

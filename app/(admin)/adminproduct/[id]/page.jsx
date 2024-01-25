@@ -8,12 +8,12 @@ import axios from "axios";
 
 const ProductPage = ({ params }) => {
   const [product, setProduct] = useState([]);
-  const poductId = params.id
-  console.log("productId", poductId);
+  const productId = params.id
+  // console.log("productId", productId);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`/api/user/product/${poductId}`);
+        const response = await axios.get(`/api/user/product/${productId}`);
         setProduct(response.data);
       } catch (error) {
         console.error('Error fetching product:', error);
@@ -21,9 +21,9 @@ const ProductPage = ({ params }) => {
     };
 
     fetchProduct();
-  }, [poductId]);
+  }, [productId]);
 
-  console.log("productId", product._id);
+  // console.log("productId", product._id);
 
   return <ProductDetail product={product} />;
 };

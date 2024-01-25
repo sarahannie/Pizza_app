@@ -76,8 +76,6 @@ const handlenavbarFilter = (title) => {
     page * itemsPerPage
   );
 
-
-
   const getPizza = async () => {
     try {
       const response = await axios.get(`/api/user/product`);
@@ -90,102 +88,11 @@ const handlenavbarFilter = (title) => {
     }
   };
 
-  const ls = typeof window !== 'undefined' ? window.localStorage : null;
-
-  // useEffect(() => {
-  //   if (ls && ls.getItem('cart')) {
-  //     setCartProducts( JSON.parse( ls.getItem('cart') ) );
-  //   }
-  // }, []);
-
-  // function clearCart() {
-  //   setCartProducts([]);
-  //   saveCartProductsToLocalStorage([]);
-  // }
-
-  // function removeCartProduct(indexToRemove) {
-  //   setCartProducts(prevCartProducts => {
-  //     const newCartProducts = prevCartProducts
-  //       .filter((v,index) => index !== indexToRemove);
-  //     saveCartProductsToLocalStorage(newCartProducts);
-  //     return newCartProducts;
-  //   });
-  //   toast.success('Product removed');
-  // }
-
-  // function saveCartProductsToLocalStorage(cartProducts) {
-  //   if (ls) {
-  //     ls.setItem('cart', JSON.stringify(cartProducts));
-  //   }
-  // }
-
-  // function addToCart(product, size=null, extras=[]) {
-  //   setCartProducts(prevProducts => {
-  //     const cartProduct = {...product, size, extras};
-  //     const newProducts = [...prevProducts, cartProduct];
-  //     saveCartProductsToLocalStorage(newProducts);
-  //     return newProducts;
-  //   });
-  // }
 
 
-  useEffect(() => {
-    setCartToState();
-  }, []);
 
-  const setCartToState = () => {
-    setCart(
-      localStorage.getItem("cart")
-        ? JSON.parse(localStorage.getItem("cart"))
-        : []
-    );
-  };
 
-  const addItemToCart = async ({
-    product,
-    name,
-    price,
-    image,
-    extra,
-    title,
-    description,
-    quantity = 1,
-  }) => {
-    const item = {
-      product,
-      name,
-      price,
-      image,
-      extra,
-      title,
-      description,
-      quantity,
-    };
 
-    const isItemExist = cart?.cartItems?.find(
-      (i) => i.product === item.product
-    );
-
-    let newCartItems;
-
-    if (isItemExist) {
-      newCartItems = cart?.cartItems?.map((i) =>
-        i.product === isItemExist.product ? item : i
-      );
-    } else {
-      newCartItems = [...(cart?.cartItems || []), item];
-    }
-
-    localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
-    setCartToState();
-  };
-
-  const deleteItemFromCart = (id) => {
-    const newCartItems = cart?.cartItems?.filter((i) => i.product !== id);
-
-    localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
-    setCartToState();
-  };
 
   
   
@@ -194,7 +101,9 @@ const handlenavbarFilter = (title) => {
     <ProductContext.Provider
     value={{
     pizza,
+    setPizza,
     page,
+    setPage,
     category,
     filteredPizzas,
     itemsPerPage,
@@ -210,9 +119,7 @@ const handlenavbarFilter = (title) => {
     setFilteredPizzas,
     show,
     setShow,
-    cart,
-    addItemToCart,
-    deleteItemFromCart,
+   
   }}
   >
     {children}
