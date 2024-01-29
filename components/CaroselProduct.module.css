@@ -46,7 +46,9 @@
    .cheeseImgMain{
     -webkit-transition: all 400ms ease;
     transition: all 400ms ease;
-   margin: auto;
+      margin: auto;
+      width: 270px;
+      height: 270px;
    }
    
    .cheeseImgMain:hover{

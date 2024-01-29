@@ -107,7 +107,7 @@ const CaroselProduct = () => {
           <li key={index}>
           <div   className={style.contCheese}>
               <div className={style.cheeseImg}>
-                <Image src={item.image || "/image/pizza-1.png"} width={250} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
+                <Image src={item.image ? item.image : "/image/pizza-1.png"} width={250} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
               </div>
               <div className={style.cheese}>
                 <h2 className={style.cheeseH2}>{item.title}</h2>

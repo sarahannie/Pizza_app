@@ -4,7 +4,9 @@ import React, { useEffect } from "react"
 
 import { FaAngleRight, FaStar } from "react-icons/fa";
 import Link from 'next/link';
-import style from './testimonal.module.css'
+import style from './testimonal.module.css';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 const Testimonal = () => {
     
     
@@ -42,11 +44,9 @@ const Testimonal = () => {
               
               <p className={style.cheeseText}>“Lorem Ipsum is simply dummy text of the print book. It has survived not only five centuries, but also the leap” </p>
               <div className="flex m-l-5 gap-1 flex justify-center mt-4">
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+              <Stack spacing={1} >
+                <Rating name="half-rating" defaultValue={3.5}  precision={0.5} />
+              </Stack>
               </div>
               </div>
 
@@ -62,11 +62,9 @@ const Testimonal = () => {
               
               <p className={style.cheeseText}>“Lorem Ipsum is simply dummy text of the print book. It has survived not only five centuries, but also the leap” </p>
               <div className="flex m-l-5 gap-1 flex justify-center mt-4">
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+              <Stack spacing={1} >
+                <Rating name="half-rating" defaultValue={5}  precision={0.5} />
+              </Stack>
               </div>
               </div>
 
@@ -82,11 +80,9 @@ const Testimonal = () => {
               
               <p className={style.cheeseText}>“Lorem Ipsum is simply dummy text of the print book. It has survived not only five centuries, but also the leap” </p>
               <div className="flex m-l-5 gap-1 flex justify-center mt-4">
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+              <Stack spacing={1} >
+                <Rating name="half-rating" defaultValue={4}  precision={0.5} />
+              </Stack>
               </div>
               </div>
 
@@ -102,11 +98,9 @@ const Testimonal = () => {
               
               <p className={style.cheeseText}>“Lorem Ipsum is simply dummy text of the print book. It has survived not only five centuries, but also the leap” </p>
               <div className="flex m-l-5 gap-1 flex justify-center mt-4">
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+              <Stack spacing={1} >
+                <Rating name="half-rating" defaultValue={4.5}  precision={0.5} />
+              </Stack>
               </div>
               </div>
 
