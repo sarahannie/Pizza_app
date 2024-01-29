@@ -11,6 +11,7 @@ import style from '@/pages/Home/home.module.css';
 import Image from "next/image";
 import { Toaster } from "react-hot-toast";
 import AppContext from "@/components/AppContext";
+import GeneralProvider from "../context/store";
 
 
 export const metadata: Metadata = {
@@ -39,6 +40,7 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head />
 			<body>
+			<GeneralProvider>
 				<AppContext>
 						<div className={`${style.bodyImg} `}>
 						<Image src="/image/header-img.png" width={200} height={20} alt="Vacter Image"/>
@@ -48,6 +50,7 @@ export default function RootLayout({
 								{children}
 								<Footer/>
 				</AppContext>
+			</GeneralProvider>
 			</body>
 		</html>
 	);

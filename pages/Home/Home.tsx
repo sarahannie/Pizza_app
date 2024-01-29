@@ -23,7 +23,7 @@ const Home = () => {
             <h1 className={style.header}>Handmade,  With an Extra  Pinch of <span className={style.headertxt}>Love</span></h1>
             <h3 className={style.headerH3}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h3>
             <Button size="lg" className={` flex bg-[#fbb200] text-white px-[30px] mt-[1.5rem] text-[1rem] align-center text-white hover:bg-[#f22e3e]`}>
-            <Link href="/signup" className="flex gap-2 " >
+            <Link href="/product" className="flex gap-2 " >
             <IoCartOutline className={`  ${style.icon}`}/>
               <span className={style.btnText}>ORDER NOW</span>
             </Link>

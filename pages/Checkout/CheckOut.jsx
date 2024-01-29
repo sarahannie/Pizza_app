@@ -10,6 +10,7 @@ import { CartContext} from "@/app/context/store";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import axios from 'axios'
 
 
 const CheckOut = ({setIsShowing,isShowing}) => {
@@ -19,6 +20,7 @@ const [succeeded, setSucceeded] = useState(false);
 const [orderID, setOrderID] = useState(false);
 const [billingDetails, setBillingDetails] = useState("");
 const [purchases, setPurchases] = useState("");
+const [orders, setOrders] = useState('');
 
   
   const increaseQty = (cartItem) => {
@@ -74,10 +76,6 @@ const onApprove = (data, actions) => {
   return actions.order.capture().then(function (details) {
     const payer = details.payer;
     const purchase = details.purchase_units;
-    
-    console.log('details', details)
-    console.log('payer', purchase)
-    // const phone = details.phone
     setBillingDetails(payer);
     setPurchases(purchase);
     setSucceeded(true);
@@ -85,15 +83,15 @@ const onApprove = (data, actions) => {
     return fetch('/api/paypal', {
       method: 'post',
       body: JSON.stringify({
-        orderID: data.orderID,
+        orderID: orderID,
         billingDetails: payer,
         purchases: purchase
       })
     })
     .then(response => response.json())
     .then(data => {
-      toast.success(`Transaction completed by ${payer?.name?.given_name} ,  orderID ${data.orderID}`);
-      router.push('/paid');
+      toast.success(`Transaction completed by ${payer?.name?.given_name} ,  orderID ${orderID}`);
+      router.push(`/checkout/${orderID}`);
     })
     .catch(error => {
       console.error('Error posting data:', error);
@@ -101,6 +99,14 @@ const onApprove = (data, actions) => {
     });
   });
 };
+
+const order =() =>{
+  axios.get('api/paypal').then((res)=>{
+    setOrders(res.data)
+  })
+}
+
+
 
 
 
@@ -202,6 +208,7 @@ const onApprove = (data, actions) => {
             </PayPalScriptProvider>
                
             </div>
+            <button>Proceed to Shipping</button>
       
             
         </div>
