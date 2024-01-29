@@ -5,8 +5,14 @@ import {  FaStar } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import Link from 'next/link';
 import Image from 'next/image';
+import ProductCard from "./productCard";
+import { ProductContext} from "@/app/context/store";
+import  { useContext } from 'react'
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 
 const CaroselProduct = () => {
+  const { itemsToShow ,  pizza,} = useContext(ProductContext);
     useEffect(() => {
         const slider= new Glide(".glide-04", {
           type: "carousel",
@@ -96,132 +102,33 @@ const CaroselProduct = () => {
         {/*    <!-- Slides --> */}
         <div className="overflow-hidden" data-glide-el="track">
           <ul className="whitespace-no-wrap flex-no-wrap [backface-visibility: hidden] [transform-style: preserve-3d] [touch-action: pan-Y] [will-change: transform] relative flex w-full overflow-hidden p-0">
-            <li>
-              <div className={style.contCheese}>
+          {
+        itemsToShow.map((item, index) => ( 
+          <li key={index}>
+          <div   className={style.contCheese}>
               <div className={style.cheeseImg}>
-                <Image src="/image/pizza-3.png" width={300} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
+                <Image src={item.image} width={250} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
               </div>
               <div className={style.cheese}>
-                <h2 className={style.cheeseH2}>Cheese Pizza</h2>
-                <h2 className={style.cheeseH4}>$45.00</h2>
+                <h2 className={style.cheeseH2}>{item.title}</h2>
+                <h2 className={style.cheeseH4}>${item?.price?.small}</h2>
               </div>
-              <div className="flex m-l-5 gap-1">
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
+              <div className="flex m-l-5 gap-2">
+              <Stack spacing={1} className='mt-2'>
+                <Rating name="half-rating" defaultValue={3.5}  precision={0.5} />
+              </Stack>
               </div>
-              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
+              <div className={style.cheeseText}>{item.description} </div>
               <div>
-              <Link href="#" className={style.btn} >
-             <IoCartOutline fontSize={22} className=""/>
-              ORDER NOW
-            </Link>
-              </div>
-              </div>
-
-            </li>
-            <li>
-            <div className={style.contCheese}>
-              <div className={style.cheeseImg}>
-                <Image src="/image/pizza-1.png" width={300} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
-              </div>
-              <div className={style.cheese}>
-                <h2 className={style.cheeseH2}>Shrime Pizza</h2>
-                <h2 className={style.cheeseH4}>$35.00</h2>
-              </div>
-              <div className="flex m-l-5 gap-1">
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-              </div>
-              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
-              <div>
-              <Link href="#" className={style.btn} >
+              <Link href={`/adminproduct/${item?._id}`} className={style.btn} >
               <IoCartOutline fontSize={22} className=""/>
               ORDER NOW
             </Link>
               </div>
-              </div>
-            </li>
-            <li>
-            <div className={style.contCheese}>
-              <div className={style.cheeseImg}>
-                <Image src="/image/pizza-2.png" width={300} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
-              </div>
-              <div className={style.cheese}>
-                <h2 className={style.cheeseH2}>Seafood Pizza</h2>
-                <h2 className={style.cheeseH4}>$65.00</h2>
-              </div>
-              <div className="flex m-l-5 gap-1">
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-              </div>
-              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
-              <div>
-              <Link href="#" className={style.btn} >
-              <IoCartOutline fontSize={22} className=""/>
-              ORDER NOW
-            </Link>
-              </div>
-              </div>
-            </li>
-            <li>
-            <div className={style.contCheese}>
-              <div className={style.cheeseImg}>
-                <Image src="/image/pizza-4.png" width={300} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
-              </div>
-              <div className={style.cheese}>
-                <h2 className={style.cheeseH2}>Cheese Pizza</h2>
-                <h2 className={style.cheeseH4}>$45.00</h2>
-              </div>
-              <div className="flex m-l-5 gap-1">
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-              </div>
-              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
-              <div>
-              <Link href="#" className={style.btn} >
-              <IoCartOutline fontSize={22} className=""/>
-              ORDER NOW
-            </Link>
-              </div>
-              </div>
-            </li>
-            <li>
-            <div className={style.contCheese}>
-              <div className={style.cheeseImg}>
-                <Image src="/image/pizza-2.png" width={300} height={100} className={style.cheeseImgMain} alt="Vacter Image"/>
-              </div>
-              <div className={style.cheese}>
-                <h2 className={style.cheeseH2}>Saltcheese Pizza</h2>
-                <h2 className={style.cheeseH4}>$95.00</h2>
-              </div>
-              <div className="flex m-l-5 gap-1">
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-                <FaStar className={style.cheeseStar} color="#fbb200" fontSize={15}/>
-              </div>
-              <div className={style.cheeseText}>All the Lorem Ipsum generators on to Internet tend to repeat </div>
-              <div>
-              <Link href="#" className={style.btn} >
-              <IoCartOutline fontSize={22} className=""/>
-              ORDER NOW
-            </Link>
-              </div>
-              </div>
-            </li>
+        </div>
+        </li>
+        ))
+      }
           </ul>
         </div>
        
